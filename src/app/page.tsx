@@ -34,12 +34,12 @@ export default function Home() {
           <div className="mt-10 flex flex-wrap gap-4"><a href="#contact" className="rounded-full bg-[#d5b58f] px-7 py-4 text-sm text-[#151414] transition hover:bg-[#f0d7b5]">Обсудить проект ↗</a><a href="#projects" className="rounded-full border border-white/20 px-7 py-4 text-sm hover:border-white/60">Наш подход ↗</a></div>
           <div id="services" className="mt-16 flex flex-wrap gap-2 text-xs text-white/45">{["Веб-разработка","UX/UI","SEO","Автоматизация"].map(x=><span key={x} className="rounded-full border border-white/15 px-4 py-2">{x}</span>)}</div>
         </div>
-        <div className="relative flex min-h-[460px] items-center justify-center md:min-h-[600px]">
+        <div className="relative flex min-h-[460px] items-center justify-center [perspective:1100px] md:min-h-[600px]">
           <div className="absolute h-[420px] w-[420px] rounded-full bg-[#c8a782]/10 blur-[95px]" />
           <div className="absolute h-[430px] w-[430px] rotate-[-24deg] rounded-full border border-[#c8a782]/15" />
-          <div className="relative w-full max-w-[510px] overflow-hidden rounded-[24px] border border-white/15 bg-gradient-to-br from-[#252429] to-[#111216] shadow-[0_35px_100px_rgba(0,0,0,.6)]">
-            <div className="flex items-center gap-2 border-b border-white/10 px-6 py-4" aria-label="Выбор экрана">
-              {slides.map((s,i)=><button key={s.mark} type="button" aria-label={`Показать экран ${i+1}: ${s.mark}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className={`h-3 w-3 rounded-full transition-all duration-300 ${active===i?"w-8 bg-[#d5b58f]":"bg-white/30 hover:bg-white/70"}`} />)}
+          <div className="relative w-full max-w-[510px] overflow-hidden rounded-[24px] border border-white/20 bg-gradient-to-br from-[#29272b] to-[#111216] shadow-[28px_45px_95px_rgba(0,0,0,.75),-8px_-8px_55px_rgba(213,181,143,.08)] transition-transform duration-700 ease-out [transform:rotateY(-13deg)_rotateX(5deg)_rotateZ(-3deg)] hover:[transform:rotateY(-8deg)_rotateX(3deg)_rotateZ(-1deg)]">
+            <div className="flex items-center gap-1 border-b border-white/10 px-4 py-2" aria-label="Выбор экрана">
+              {slides.map((s,i)=><button key={s.mark} type="button" aria-label={`Показать экран ${i+1}: ${s.mark}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className="group grid h-11 w-11 cursor-pointer place-items-center rounded-full outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#d5b58f]"><span className={`h-3 rounded-full transition-all duration-300 ${active===i?"w-7 bg-[#d5b58f] shadow-[0_0_14px_rgba(213,181,143,.55)]":"w-3 bg-white/35 group-hover:w-5 group-hover:bg-[#e6cba9]"}`} /></button>)}
               <span className="ml-auto text-[10px] tracking-[.2em] text-white/35">KODERA / SHOWCASE</span>
             </div>
             <div key={active} className="relative flex min-h-[390px] flex-col justify-between overflow-hidden p-8 sm:p-11">
