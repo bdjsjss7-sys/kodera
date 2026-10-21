@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const slides = [
   { eyebrow: "01 / WEB EXPERIENCE", title: "Сайты, которые\nзапоминают.", desc: "Выразительный дизайн, быстрая загрузка и продуманная структура.", mark: "WEB" },
@@ -57,16 +58,16 @@ export default function Home() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {[
-              {n:"01",name:"Разработка сайтов",desc:"Корпоративные сайты, лендинги, каталоги и интернет-магазины с продуманной архитектурой.",tags:["Next.js","Адаптивность","Скорость"]},
-              {n:"02",name:"UX/UI-дизайн",desc:"Исследование сценариев, прототипирование и интерфейсы, в которых эстетика работает на удобство.",tags:["Прототипы","Дизайн-система"]},
-              {n:"03",name:"SEO и структура",desc:"Семантика, техническая оптимизация и посадочные страницы под реальные поисковые запросы.",tags:["Аудит","Семантика","Контент"]},
-              {n:"04",name:"Веб-приложения",desc:"Личные кабинеты, интерактивные калькуляторы, панели управления и нестандартные инструменты.",tags:["Интерфейсы","Интеграции"]},
-              {n:"05",name:"Автоматизация",desc:"Связываем формы, CRM и внутренние процессы, чтобы сократить рутину и ускорить обработку заявок.",tags:["CRM","API","Процессы"]},
-              {n:"06",name:"Поддержка и развитие",desc:"Развиваем проект после запуска: обновления, улучшения интерфейса и технический контроль.",tags:["Развитие","Оптимизация"]},
-            ].map(item=><article key={item.n} className="group flex min-h-[310px] flex-col justify-between rounded-[24px] border border-white/10 bg-[#191a1e] p-8 transition duration-300 hover:-translate-y-1 hover:border-[#d5b58f]/50 hover:bg-[#202024]">
+              {n:"01",name:"Разработка сайтов",href:"/services/razrabotka-sajtov",desc:"Корпоративные сайты, лендинги, каталоги и интернет-магазины с продуманной архитектурой.",tags:["Next.js","Адаптивность","Скорость"]},
+              {n:"02",name:"UX/UI-дизайн",href:"/services/ux-ui-dizajn",desc:"Исследование сценариев, прототипирование и интерфейсы, в которых эстетика работает на удобство.",tags:["Прототипы","Дизайн-система"]},
+              {n:"03",name:"SEO и структура",href:"/services/seo",desc:"Семантика, техническая оптимизация и посадочные страницы под реальные поисковые запросы.",tags:["Аудит","Семантика","Контент"]},
+              {n:"04",name:"Веб-приложения",href:"/services/veb-prilozheniya",desc:"Личные кабинеты, интерактивные калькуляторы, панели управления и нестандартные инструменты.",tags:["Интерфейсы","Интеграции"]},
+              {n:"05",name:"Автоматизация",href:"/services/avtomatizaciya",desc:"Связываем формы, CRM и внутренние процессы, чтобы сократить рутину и ускорить обработку заявок.",tags:["CRM","API","Процессы"]},
+              {n:"06",name:"Поддержка и развитие",href:"/services/podderzhka",desc:"Развиваем проект после запуска: обновления, улучшения интерфейса и технический контроль.",tags:["Развитие","Оптимизация"]},
+            ].map(item=><Link href={item.href} key={item.n} className="group flex min-h-[310px] flex-col justify-between rounded-[24px] border border-white/10 bg-[#191a1e] p-8 transition duration-300 hover:-translate-y-1 hover:border-[#d5b58f]/50 hover:bg-[#202024]">
               <div><div className="mb-10 flex items-center justify-between"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{item.n} / SERVICE</span><span className="text-xl text-[#d5b58f] transition group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></div><h3 className="mb-4 text-2xl font-light tracking-[-.04em]">{item.name}</h3><p className="max-w-sm text-sm leading-7 text-white/50">{item.desc}</p></div>
               <div className="mt-8 flex flex-wrap gap-2">{item.tags.map(tag=><span key={tag} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/45">{tag}</span>)}</div>
-            </article>)}
+            </Link>)}
           </div>
         </div>
       </section>
