@@ -37,7 +37,7 @@ export default function Home() {
         <div className="relative flex min-h-[460px] items-center justify-center [perspective:1100px] md:min-h-[600px]">
           <div className="absolute h-[420px] w-[420px] rounded-full bg-[#c8a782]/10 blur-[95px]" />
           <div className="absolute h-[430px] w-[430px] rotate-[-24deg] rounded-full border border-[#c8a782]/15" />
-          <div className="relative w-full max-w-[510px] overflow-hidden rounded-[24px] border border-white/20 bg-gradient-to-br from-[#29272b] to-[#111216] shadow-[28px_45px_95px_rgba(0,0,0,.75),-8px_-8px_55px_rgba(213,181,143,.08)] transition-transform duration-700 ease-out [transform:rotateY(-13deg)_rotateX(5deg)_rotateZ(-3deg)] hover:[transform:rotateY(-8deg)_rotateX(3deg)_rotateZ(-1deg)]">
+          <div className="relative w-full max-w-[510px] overflow-hidden rounded-[24px] border border-white/20 bg-gradient-to-br from-[#29272b] to-[#111216] shadow-[28px_45px_95px_rgba(0,0,0,.75),-8px_-8px_55px_rgba(213,181,143,.08)] transition-transform duration-700 ease-out [transform:rotateY(-13deg)_rotateX(5deg)_rotateZ(-3deg)] hover:[transform:rotateY(-7deg)_rotateX(2deg)_rotateZ(-1deg)] hover:shadow-[30px_50px_110px_rgba(0,0,0,.85),0_0_55px_rgba(213,181,143,.15)]">
             <div className="flex items-center gap-1 border-b border-white/10 px-4 py-2" aria-label="Выбор экрана">
               {slides.map((s,i)=><button key={s.mark} type="button" aria-label={`Показать экран ${i+1}: ${s.mark}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className="group grid h-11 w-11 cursor-pointer place-items-center rounded-full outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#d5b58f]"><span className={`h-3 rounded-full transition-all duration-300 ${active===i?"w-7 bg-[#d5b58f] shadow-[0_0_14px_rgba(213,181,143,.55)]":"w-3 bg-white/35 group-hover:w-5 group-hover:bg-[#e6cba9]"}`} /></button>)}
               <span className="ml-auto text-[10px] tracking-[.2em] text-white/35">KODERA / SHOWCASE</span>
@@ -64,7 +64,7 @@ export default function Home() {
               {n:"04",name:"Веб-приложения",href:"/services/veb-prilozheniya",desc:"Личные кабинеты, интерактивные калькуляторы, панели управления и нестандартные инструменты.",tags:["Интерфейсы","Интеграции"]},
               {n:"05",name:"Автоматизация",href:"/services/avtomatizaciya",desc:"Связываем формы, CRM и внутренние процессы, чтобы сократить рутину и ускорить обработку заявок.",tags:["CRM","API","Процессы"]},
               {n:"06",name:"Поддержка и развитие",href:"/services/podderzhka",desc:"Развиваем проект после запуска: обновления, улучшения интерфейса и технический контроль.",tags:["Развитие","Оптимизация"]},
-            ].map(item=><Link href={item.href} key={item.n} className="group flex min-h-[310px] flex-col justify-between rounded-[24px] border border-white/10 bg-[#191a1e] p-8 transition duration-300 hover:-translate-y-1 hover:border-[#d5b58f]/50 hover:bg-[#202024]">
+            ].map(item=><Link href={item.href} key={item.n} className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#202024,#151619)] p-8 shadow-[0_18px_45px_rgba(0,0,0,.15)] transition duration-500 hover:-translate-y-2 hover:border-[#d5b58f]/60 hover:shadow-[0_28px_65px_rgba(0,0,0,.45),0_0_45px_rgba(213,181,143,.07)]">
               <div><div className="mb-10 flex items-center justify-between"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{item.n} / SERVICE</span><span className="text-xl text-[#d5b58f] transition group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></div><h3 className="mb-4 text-2xl font-light tracking-[-.04em]">{item.name}</h3><p className="max-w-sm text-sm leading-7 text-white/50">{item.desc}</p></div>
               <div className="mt-8 flex flex-wrap gap-2">{item.tags.map(tag=><span key={tag} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/45">{tag}</span>)}</div>
             </Link>)}
@@ -85,9 +85,18 @@ export default function Home() {
           <p className="mt-12 border-t border-white/10 pt-6 text-xs leading-6 text-white/40">Портфолио реальных проектов будет опубликовано после подготовки и согласования материалов.</p>
         </div>
       </section>
+      <section className="border-t border-white/10 py-24 md:py-32" aria-labelledby="value-heading">
+        <div className="mx-auto max-w-[1500px] px-5 md:px-12">
+          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">03 / Что получает бизнес</p>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-end"><h2 id="value-heading" className="text-5xl font-light leading-[1.07] tracking-[-.06em] md:text-7xl">Эстетика —<br/><span className="text-[#d5b58f]">это только начало.</span></h2><p className="max-w-lg text-base leading-8 text-white/55">Сайт должен не только впечатлять с первого экрана, но и помогать посетителю быстро разобраться, довериться компании и сделать следующий шаг.</p></div>
+          <div className="mt-14 grid gap-4 md:grid-cols-3">
+            {[["01","Смысл и структура","Выстраиваем понятный путь от первого знакомства до обращения. У каждого блока — конкретная задача."],["02","Скорость и адаптивность","Проектируем интерфейс для разных экранов, учитываем производительность и удобство взаимодействия."],["03","Основа для развития","Предусматриваем масштабирование разделов, аналитику, поисковую оптимизацию и будущие интеграции."]].map(([n,t,d])=><div key={n} className="group rounded-[28px] border border-white/10 bg-gradient-to-br from-[#202024] to-[#121316] p-8 transition duration-500 hover:-translate-y-1 hover:border-[#d5b58f]/40"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{n} / ПРИНЦИП</span><div className="my-12 h-px bg-gradient-to-r from-[#d5b58f]/60 to-transparent"/><h3 className="text-2xl font-light">{t}</h3><p className="mt-5 text-sm leading-8 text-white/50">{d}</p></div>)}
+          </div>
+        </div>
+      </section>
       <section id="about" className="border-t border-white/10 bg-[#111215] py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-5 md:px-12">
-          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">03 / Подход</p>
+          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">04 / Подход</p>
           <h2 className="mb-14 max-w-3xl text-5xl font-light leading-[1.08] tracking-[-.06em] md:text-7xl">Сложное делаем <span className="text-[#d5b58f]">понятным.</span></h2>
           <div className="grid gap-0 border-t border-white/15 md:grid-cols-4">
             {[
@@ -101,7 +110,7 @@ export default function Home() {
       </section>
       <section id="faq" className="border-t border-white/10 py-24 md:py-32">
         <div className="mx-auto grid max-w-[1500px] gap-12 px-5 md:px-12 lg:grid-cols-[.8fr_1.2fr]">
-          <div><p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">04 / Вопросы</p><h2 className="text-5xl font-light tracking-[-.06em] md:text-6xl">Прежде чем<br/>начать.</h2></div>
+          <div><p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">05 / Вопросы</p><h2 className="text-5xl font-light tracking-[-.06em] md:text-6xl">Прежде чем<br/>начать.</h2></div>
           <div className="border-t border-white/15">{[
             ["Сколько стоит разработка сайта?","Стоимость зависит от структуры, дизайна, интеграций и объёма работ. Оценку готовим после обсуждения задачи. Для России и Беларуси условия рассчитываются отдельно."],
             ["Можно ли начать с небольшого проекта?","Да. Можно начать с посадочной страницы или прототипа, а затем постепенно расширять функциональность."],
@@ -112,9 +121,9 @@ export default function Home() {
       </section>
       <footer id="contact" className="border-t border-white/10 bg-[#19191b]">
         <div className="mx-auto max-w-[1500px] px-5 py-24 md:px-12 md:py-32">
-          <p className="mb-6 text-xs uppercase tracking-[.3em] text-[#d5b58f]">05 / Следующий шаг</p>
+          <p className="mb-6 text-xs uppercase tracking-[.3em] text-[#d5b58f]">06 / Следующий шаг</p>
           <h2 className="max-w-5xl text-[clamp(3.5rem,8vw,8rem)] font-light leading-[.95] tracking-[-.075em]">Создадим что-то <span className="text-[#d5b58f]">значимое.</span></h2>
-          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Расскажите о своей идее, целях и сроках. Скоро здесь появятся согласованные способы связи и форма заявки.</p>
+          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Расскажите о своей идее, целях и сроках. Подготовим структуру, определим приоритеты и предложим подходящий формат реализации. Контактные данные и форма заявки будут добавлены после согласования.</p>
           <div className="mt-20 flex flex-wrap items-end justify-between gap-8 border-t border-white/15 pt-8"><div><strong className="text-2xl font-light tracking-[.24em]">KODERA</strong><p className="mt-2 text-[10px] tracking-[.3em] text-[#d5b58f]">DIGITAL STUDIO</p></div><div className="flex flex-wrap gap-6 text-sm text-white/50"><a href="#services" className="hover:text-white">Услуги</a><a href="#about" className="hover:text-white">Подход</a><a href="#faq" className="hover:text-white">Вопросы</a><a href="#" className="hover:text-white">Наверх ↑</a></div><span className="text-xs text-white/35">Россия · Беларусь</span></div>
         </div>
       </footer>
