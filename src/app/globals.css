@@ -2,3 +2,7 @@
 :root { color-scheme: dark; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: #0d0e11; }
+
+::selection { background: #d5b58f; color: #101114; }
+:focus-visible { outline: 2px solid #d5b58f; outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
