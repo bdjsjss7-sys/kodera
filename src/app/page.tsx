@@ -16,9 +16,8 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-[#0d0e11] text-[#f5f2ed]">
       <header className="border-b border-white/10">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-5 py-6 md:px-12">
-          <a href="/" className="flex items-center gap-3" aria-label="KODERA — главная">
-            <span className="grid h-11 w-11 place-items-center rounded-xl border border-[#c9ae8d]/50 bg-gradient-to-br from-[#39383a] to-[#111215] text-2xl font-semibold text-[#e7d3b7]">K</span>
-            <span className="flex flex-col"><strong className="text-xl font-light tracking-[.23em]">KODERA</strong><small className="mt-1 text-[8px] tracking-[.38em] text-[#c9ae8d]">DIGITAL STUDIO</small></span>
+          <a href="/" className="group flex flex-col items-start leading-none" aria-label="KODERA — главная">
+            <strong className="text-[25px] font-light tracking-[.24em] text-[#f1ece7] [text-shadow:0_1px_0_rgba(255,255,255,.24),0_5px_18px_rgba(213,181,143,.22)] transition duration-500 group-hover:[text-shadow:0_1px_0_rgba(255,255,255,.4),0_7px_25px_rgba(213,181,143,.5)]">KODERA</strong><small className="mt-2 text-[8px] tracking-[.4em] text-[#c9ae8d]">DIGITAL STUDIO</small>
           </a>
           <nav className="hidden gap-9 text-sm text-white/65 lg:flex" aria-label="Главное меню">
             <a href="#services" className="hover:text-white">Услуги</a><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
@@ -42,10 +41,10 @@ export default function Home() {
               {slides.map((s,i)=><button key={s.mark} type="button" aria-label={`Показать экран ${i+1}: ${s.mark}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className="group grid h-11 w-11 cursor-pointer place-items-center rounded-full outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#d5b58f]"><span className={`h-3 rounded-full transition-all duration-300 ${active===i?"w-7 bg-[#d5b58f] shadow-[0_0_14px_rgba(213,181,143,.55)]":"w-3 bg-white/35 group-hover:w-5 group-hover:bg-[#e6cba9]"}`} /></button>)}
               <span className="ml-auto text-[10px] tracking-[.2em] text-white/35">KODERA / SHOWCASE</span>
             </div>
-            <div key={active} className="relative flex min-h-[390px] flex-col justify-between overflow-hidden p-8 sm:p-11">
+            <div key={active} className="relative flex h-[430px] flex-col justify-between overflow-hidden p-8 sm:h-[450px] sm:p-11">
               <div className="pointer-events-none absolute -bottom-28 -right-24 grid h-80 w-80 rotate-[-25deg] place-items-center rounded-[75px] border border-[#d5b58f]/30 bg-gradient-to-br from-[#b99b78]/25 to-transparent text-[110px] font-bold text-[#d5b58f]/20">{slide.mark}</div>
-              <div className="relative"><p className="text-[10px] tracking-[.3em] text-[#d5b58f]">{slide.eyebrow}</p><h2 className="mt-12 whitespace-pre-line text-[clamp(2.2rem,4vw,4rem)] leading-[1.05] tracking-[-.055em]">{slide.title}</h2><p className="mt-6 max-w-xs text-sm leading-7 text-white/50">{slide.desc}</p></div>
-              <div className="relative mt-16 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-white/45"><span>0{active+1} / 03</span><button type="button" onClick={()=>setActive((active+1)%slides.length)} className="text-[#e4c8a5] hover:text-white">Следующий экран ↗</button></div>
+              <div className="relative"><p className="text-[10px] tracking-[.3em] text-[#d5b58f]">{slide.eyebrow}</p><h2 className="mt-10 min-h-[112px] whitespace-pre-line text-[clamp(2rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-.055em] sm:min-h-[120px]">{slide.title}</h2><p className="mt-5 max-w-xs text-sm leading-7 text-white/50">{slide.desc}</p></div>
+              <div className="relative mt-5 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-white/45"><span>0{active+1} / 03</span><button type="button" onClick={()=>setActive((active+1)%slides.length)} className="text-[#e4c8a5] hover:text-white">Следующий экран ↗</button></div>
             </div>
           </div>
         </div>
