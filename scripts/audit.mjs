@@ -131,5 +131,25 @@ for(const [label,source,needles] of [
 ]){for(const needle of needles){if(!source.includes(needle))problems.push("UI check failed: "+label+" / "+needle);}}
 if(!existsSync(join(root,"src/components/ArticleActions.tsx")))problems.push("Missing article sharing tools.");
 
+const showcaseConcepts=loadTsArray("src/lib/showcases.ts","showcases");
+if(showcaseConcepts.length!==6)problems.push("Expected six distinct portfolio concepts.");
+for(const s of showcaseConcepts){
+ if(!s.slug||!s.name||!s.problem||!s.idea||!s.audience||!s.note||!s.features?.length)problems.push("Incomplete concept case: "+s.slug);
+ for(const device of ["desktop","mobile"]){
+  const asset="public/art/works/"+s.slug+"-"+device+".svg";
+  if(!existsSync(join(root,asset)))problems.push("Missing concept device artwork: "+asset);
+ }
+}
+for(const rel of ["src/app/works/page.tsx","src/app/works/[slug]/page.tsx","src/app/explore/page.tsx","src/components/ShowcasePreview.tsx","src/components/ShowcaseExplorer.tsx","src/components/SearchExplorer.tsx","src/components/SiteSearchOverlay.tsx","src/components/MegaNavigation.tsx","src/lib/siteCatalog.ts"])if(!existsSync(join(root,rel)))problems.push("Missing portfolio or navigation page: "+rel);
+const layoutSource=readFileSync(join(root,"src/app/layout.tsx"),"utf8");
+const homeSource=readFileSync(join(root,"src/app/page.tsx"),"utf8");
+const navSource=readFileSync(join(root,"src/components/MobileNavigation.tsx"),"utf8");
+const mobileDockSource=readFileSync(join(root,"src/components/MobileSiteDock.tsx"),"utf8");
+const sitemapShowcaseSource=readFileSync(join(root,"src/app/sitemap.ts"),"utf8");
+if(!layoutSource.includes("<SiteSearchOverlay"))problems.push("Sitewide search not mounted.");
+if(!homeSource.includes("<MegaNavigation/>")||!homeSource.includes('id="works"'))problems.push("Home navigation or visible work samples missing.");
+if(!navSource.includes("/works")||!mobileDockSource.includes("/works"))problems.push("Work samples inaccessible in mobile menus.");
+if(!sitemapShowcaseSource.includes("showcases.map"))problems.push("Portfolio missing from sitemap.");
+
 console.log("KODERA audit: "+(solutions.length+newPages.length)+" commercial directions, "+(articles.length+newArticles.length)+" journal articles; "+(newPages.length+newArticles.length+solutions.length+articles.length+6)+" tailored visual assets.");
 if(problems.length){for(const x of problems)console.error("FAIL:",x);process.exitCode=1;}else console.log("PASS: Content structure and required routes found.");
