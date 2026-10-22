@@ -1,12 +1,173 @@
-import Link from "next/link";import EditorialVisual from "@/components/EditorialVisual";
 import type {Metadata} from "next";
-export const metadata:Metadata={title:"Как мы работаем — этапы разработки сайта | KODERA",description:"Путь проекта от исследования и архитектуры до дизайна, разработки, тестирования, запуска и поддержки.",alternates:{canonical:"/process"}};
-const steps=[
-{title:"01 / Исследование",lead:"Определяем задачу, аудиторию и критерии результата.",items:["Интервью о продукте и целях","Анализ текущего сайта и конкурентов","Карта ключевых пользовательских сценариев","Список ограничений и зависимостей"],result:"Карта задач, границы проекта и согласованные критерии успеха."},
-{title:"02 / Архитектура",lead:"Создаём понятную структуру до начала визуального дизайна.",items:["Карта страниц и поисковых намерений","Прототипы ключевых шаблонов","Структура данных и интеграций","Требования к мобильным сценариям"],result:"Согласованная архитектура, позволяющая оценить объём работ."},
-{title:"03 / Дизайн",lead:"Строим визуальную систему вокруг содержания и действий.",items:["Типографика, сетка и цветовая система","Компоненты, состояния и интерактивность","Адаптация под мобильные экраны","Проверка доступности и понятности"],result:"Макеты и правила, пригодные для последовательной реализации."},
-{title:"04 / Разработка",lead:"Собираем быстрый, поддерживаемый и безопасный продукт.",items:["Компоненты и маршруты","Формы, валидация и интеграции","Управление контентом и SEO-метаданные","Обработка ошибок и контроль доступов"],result:"Рабочая версия с проверяемыми сценариями."},
-{title:"05 / Проверка",lead:"Тестируем не только внешний вид, но и реальные действия.",items:["Кроссбраузерные и мобильные проверки","Клавиатура, контраст и семантика","Производительность и индексация","Проверка заявок и аналитических событий"],result:"Перечень пройденных проверок и исправленных замечаний."},
-{title:"06 / Запуск и развитие",lead:"Публикуем проект и контролируем его состояние.",items:["Домен, окружение и резервирование","Проверка ссылок и перенаправлений","Наблюдение за ошибками и заявками","План последующих улучшений"],result:"Опубликованный продукт с понятным планом сопровождения."}
+import Link from "next/link";
+import MegaNavigation from "@/components/MegaNavigation";
+import MobileNavigation from "@/components/MobileNavigation";
+import s from "./process.module.css";
+
+export const metadata:Metadata={
+ title:"Процесс работы — от задачи до запуска | KODERA",
+ description:"Система работы KODERA: исследование, архитектура, дизайн, разработка, контроль качества, запуск и развитие цифрового продукта.",
+ alternates:{canonical:"/process"},
+ openGraph:{title:"Процесс KODERA — управляемый путь к цифровому продукту",description:"Понятные этапы, результаты и точки принятия решений от первого разговора до запуска."}
+};
+
+const phases=[
+ {
+  number:"01",name:"Погружение",label:"CONTEXT",
+  title:"Сначала определяем, что действительно нужно решить.",
+  text:"Собираем контекст продукта, бизнеса и аудитории. Фиксируем ограничения, риски и критерии, по которым позже можно оценить результат.",
+  tasks:["Цели и приоритеты","Аудитория и сценарии","Контекст рынка","Границы проекта"],
+  result:"Бриф, карта задачи и согласованные ориентиры",
+  decision:"Подтверждаем направление"
+ },
+ {
+  number:"02",name:"Архитектура",label:"LOGIC",
+  title:"Превращаем сложность в ясную структуру.",
+  text:"Проектируем маршруты пользователя, состав страниц, содержание и связи с внешними системами до начала визуальной работы.",
+  tasks:["Карта страниц","Смысловая иерархия","Прототипы","Интеграции и данные"],
+  result:"Архитектура продукта и прототипы ключевых экранов",
+  decision:"Согласовываем логику"
+ },
+ {
+  number:"03",name:"Арт-направление",label:"CHARACTER",
+  title:"Находим характер, который невозможно перепутать.",
+  text:"Формируем визуальный язык проекта: типографику, ритм, цвет, изображение, движение и правила адаптации для разных экранов.",
+  tasks:["Визуальная концепция","Дизайн-система","Ключевые экраны","Мобильная композиция"],
+  result:"Утверждённое направление и система компонентов",
+  decision:"Выбираем точный образ"
+ },
+ {
+  number:"04",name:"Разработка",label:"ENGINE",
+  title:"Собираем дизайн в работающую систему.",
+  text:"Создаём интерфейс, маршруты, формы и интеграции. Сразу учитываем скорость, доступность, поисковую структуру и дальнейшее развитие.",
+  tasks:["Компоненты и страницы","Формы и интеграции","CMS и данные","Техническое SEO"],
+  result:"Рабочая версия продукта на тестовом окружении",
+  decision:"Проверяем сценарии"
+ },
+ {
+  number:"05",name:"Контроль",label:"QUALITY",
+  title:"Проверяем опыт целиком, а не отдельный экран.",
+  text:"Проходим критические сценарии на компьютере и телефоне, проверяем содержание, состояния, ссылки, формы и техническую готовность.",
+  tasks:["Адаптивность","Контент и ссылки","Скорость и индексация","Формы и события"],
+  result:"Проверенная версия и закрытый список замечаний",
+  decision:"Принимаем готовность"
+ },
+ {
+  number:"06",name:"Запуск",label:"RELEASE",
+  title:"Публикуем, наблюдаем и развиваем.",
+  text:"Переносим продукт в рабочее окружение, проверяем ключевые действия после публикации и формируем следующие приоритеты развития.",
+  tasks:["Домен и окружение","Финальная проверка","Наблюдение за ошибками","План развития"],
+  result:"Запущенный продукт и понятная следующая итерация",
+  decision:"Фиксируем следующий шаг"
+ }
 ];
-export default function Process(){return <main className="min-h-screen bg-[#0d0e11] text-[#f5f2ed]"><header className="border-b border-white/10"><nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-8"><Link href="/" className="text-2xl tracking-[.25em]">KODERA</Link><Link href="/solutions" className="text-sm text-[#d5b58f]">Услуги ↗</Link></nav></header><section className="mx-auto max-w-7xl px-6 py-24 md:py-32"><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">ПОДХОД / ПРОЦЕСС</p><h1 className="mt-8 max-w-5xl text-5xl font-light tracking-[-.06em] md:text-8xl">От идеи до запуска.<span className="block text-[#d5b58f]">Без хаоса.</span></h1><p className="mt-8 max-w-3xl text-lg leading-9 text-white/60">Каждый этап имеет понятную цель, набор работ и результат, который можно проверить. Состав этапов адаптируется под сложность проекта.</p><EditorialVisual variant="service" className="mt-12 h-[280px] md:h-[370px]"/><div className="mt-20 space-y-5">{steps.map((s,i)=><section key={s.title} className="grid gap-10 rounded-3xl border border-white/10 bg-[#191a1e] p-8 md:grid-cols-2 md:p-12"><div><p className="text-xs tracking-[.2em] text-[#d5b58f]">{s.title}</p><h2 className="mt-6 text-3xl font-light leading-tight md:text-5xl">{s.lead}</h2><p className="mt-8 text-sm leading-8 text-white/50"><span className="text-[#d5b58f]">Результат: </span>{s.result}</p></div><div><h3 className="text-sm uppercase tracking-[.2em] text-white/40">Что входит</h3><ul className="mt-6 divide-y divide-white/10">{s.items.map(x=><li key={x} className="py-5 text-base text-white/75">↗ &nbsp; {x}</li>)}</ul></div></section>)}</div><div className="mt-20 border-t border-white/10 pt-14"><h2 className="text-4xl font-light">Планируете проект?</h2><p className="mt-5 max-w-2xl leading-8 text-white/55">Начните с описания задачи, аудитории и обязательных функций. Необязательно заранее знать технологию или точную структуру.</p><div className="mt-9 flex flex-wrap gap-4"><Link href="/solutions" className="rounded-full bg-[#d5b58f] px-8 py-4 text-[#141414]">Выбрать направление ↗</Link><Link href="/blog/tehnicheskoe-zadanie-na-sayt" className="rounded-full border border-white/20 px-8 py-4">Как подготовить ТЗ ↗</Link></div></div></section></main>}
+
+const checkpoints=[
+ ["01","Направление","Задача, приоритеты и критерии результата"],
+ ["02","Структура","Маршруты, содержание и объём продукта"],
+ ["03","Характер","Визуальная система и ключевые экраны"],
+ ["04","Готовность","Сценарии, качество и условия запуска"]
+];
+
+const factors=[
+ ["Масштаб","Количество уникальных страниц, состояний и пользовательских маршрутов."],
+ ["Содержание","Готовность текстов, изображений, данных и материалов со стороны проекта."],
+ ["Интеграции","CRM, платежи, каталоги, личные кабинеты и внешние сервисы."],
+ ["Решения","Скорость обратной связи и число участников согласования."]
+];
+
+export default function ProcessPage(){
+ return <main className={s.root}>
+  <header className={s.header}><div className={s.headerInner}>
+   <Link href="/" className={s.brand} aria-label="KODERA — главная"><span>KODERA</span><small>DIGITAL STUDIO</small></Link>
+   <MegaNavigation/>
+   <div className={s.headerActions}><div className={s.markets}><Link href="/ru">RU</Link><span>/</span><Link href="/by">BY</Link></div><Link href="/contact" className={s.headerCta}>Начать проект ↗</Link><MobileNavigation/></div>
+  </div></header>
+
+  <section className={s.hero}>
+   <div className={s.heroGrid}>
+    <div className={s.heroCopy}>
+     <p className={s.eyebrow}>KODERA / PROJECT SYSTEM</p>
+     <h1>Проект движется<br/><em>по системе.</em></h1>
+     <p className={s.heroLead}>От первого вопроса до запуска каждый этап имеет цель, результат и точку принятия решения. Так сложный проект остаётся управляемым.</p>
+     <div className={s.heroActions}><Link href="#route">Смотреть маршрут ↓</Link><Link href="/contact">Обсудить задачу ↗</Link></div>
+    </div>
+    <div className={s.heroSystem} aria-hidden="true">
+     <div className={s.orbit}><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><i/></div>
+     <div className={s.systemCenter}><small>PROJECT</small><strong>06</strong><span>связанных<br/>этапов</span></div>
+     <p>CONTEXT → STRUCTURE → CHARACTER → ENGINE → QUALITY → RELEASE</p>
+    </div>
+   </div>
+   <div className={s.heroFoot}><span>Стратегия</span><i/><span>UX / UI</span><i/><span>Разработка</span><i/><span>Запуск</span></div>
+  </section>
+
+  <section className={s.route} id="route">
+   <div className={s.routeHead}>
+    <p className={s.eyebrow}>01 / МАРШРУТ ПРОЕКТА</p>
+    <h2>Шесть этапов.<br/><em>Одна логика движения.</em></h2>
+    <p>Состав работ меняется под задачу, но принцип остаётся: следующий этап начинается с понятным контекстом и согласованным результатом предыдущего.</p>
+   </div>
+   <div className={s.phaseList}>
+    {phases.map((phase,index)=><article className={s.phase} key={phase.number}>
+     <div className={s.phaseRail}><span>{phase.number}</span><i/><small>{phase.label}</small></div>
+     <div className={s.phaseMain}>
+      <div className={s.phaseTitle}><p>{phase.name}</p><h3>{phase.title}</h3></div>
+      <p className={s.phaseText}>{phase.text}</p>
+      <ul>{phase.tasks.map(item=><li key={item}>{item}</li>)}</ul>
+      <div className={s.phaseResult}><small>РЕЗУЛЬТАТ ЭТАПА</small><p>{phase.result}</p></div>
+      <div className={s.phaseDecision}><span>{String(index+1).padStart(2,"0")} / CHECKPOINT</span><b>{phase.decision}</b><i>↗</i></div>
+     </div>
+    </article>)}
+   </div>
+  </section>
+
+  <section className={s.handoffs}>
+   <div className={s.handoffIntro}>
+    <p className={s.eyebrow}>02 / СВЯЗЬ ЭТАПОВ</p>
+    <h2>Решения не теряются<br/><em>между людьми.</em></h2>
+    <p>Каждый важный выбор превращается в понятный артефакт: документ, схему, макет или работающую версию. Следующий этап опирается на него.</p>
+   </div>
+   <div className={s.flow}>
+    <div><small>ВХОД</small><strong>Контекст</strong><p>Задача, данные и ограничения</p></div>
+    <i>→</i>
+    <div><small>РАБОТА</small><strong>Решение</strong><p>Исследование, проектирование и сборка</p></div>
+    <i>→</i>
+    <div><small>ВЫХОД</small><strong>Артефакт</strong><p>Проверяемый результат этапа</p></div>
+   </div>
+  </section>
+
+  <section className={s.collaboration}>
+   <div className={s.collabTitle}><p className={s.eyebrow}>03 / СОГЛАСОВАНИЯ</p><h2>Вы участвуете там,<br/>где важны <em>решения.</em></h2></div>
+   <div className={s.checkpoints}>{checkpoints.map(([number,title,text])=><article key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div><i>↗</i></article>)}</div>
+   <p className={s.collabNote}>Промежуточные материалы показываются с контекстом: что проверяем, почему это важно и какое решение требуется. Это сокращает случайные правки и сохраняет темп проекта.</p>
+  </section>
+
+  <section className={s.control}>
+   <div className={s.controlPanel}>
+    <header><span>KODERA / RELEASE CONTROL</span><small>STATUS: IN REVIEW</small></header>
+    <div className={s.controlBody}>
+     <div className={s.controlIndex}><small>QUALITY GATE</small><strong>05</strong><span>областей контроля</span></div>
+     <div className={s.controlRows}>
+      {["Содержание и иерархия","Адаптивность и состояния","Формы и интеграции","Скорость и индексация","Критические сценарии"].map((item,index)=><div key={item}><span>0{index+1}</span><b>{item}</b><i>{index<4?"ПРОВЕРЕНО":"К ЗАПУСКУ"}</i></div>)}
+     </div>
+    </div>
+   </div>
+   <div className={s.controlCopy}><p className={s.eyebrow}>04 / QUALITY GATE</p><h2>Запуск — это<br/><em>решение, а не дата.</em></h2><p>Проект готов к публикации, когда пройдены согласованные проверки и работают ключевые пользовательские действия. Календарь не заменяет готовность.</p></div>
+  </section>
+
+  <section className={s.timing}>
+   <div className={s.timingHead}><p className={s.eyebrow}>05 / СРОКИ</p><h2>Срок зависит<br/>от устройства проекта.</h2><p>Корректную оценку можно дать после определения состава страниц, функций, материалов и интеграций. На темп сильнее всего влияют четыре фактора.</p></div>
+   <div className={s.factorGrid}>{factors.map(([title,text],index)=><article key={title}><span>0{index+1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+   <div className={s.timingAction}><p>Нужен ориентир до детальной оценки?</p><Link href="/pricing#project-calculator">Рассчитать масштаб проекта ↗</Link></div>
+  </section>
+
+  <section className={s.next}>
+   <p className={s.eyebrow}>СЛЕДУЮЩАЯ ТОЧКА</p>
+   <h2>Начнём с задачи.<br/><em>Маршрут построим вместе.</em></h2>
+   <p>Опишите продукт, аудиторию и желаемый результат. Мы определим состав первого этапа и подготовим понятный следующий шаг.</p>
+   <div><Link href="/contact">Обсудить проект ↗</Link><Link href="/services">Выбрать направление</Link></div>
+  </section>
+
+  <footer className={s.footer}><Link href="/" className={s.brand}><span>KODERA</span><small>DIGITAL STUDIO</small></Link><nav><Link href="/studio">Студия</Link><Link href="/services">Услуги</Link><Link href="/works">Работы</Link><Link href="/pricing">Стоимость</Link></nav><span>Россия · Беларусь</span></footer>
+ </main>
+}
