@@ -3,6 +3,7 @@ import Link from "next/link";
 import MegaNavigation from "@/components/MegaNavigation";
 import MobileNavigation from "@/components/MobileNavigation";
 import ScopeCalculator from "@/components/ScopeCalculator";
+import BrandLogo from "@/components/BrandLogo";
 import s from "./pricing.module.css";
 
 export const metadata:Metadata={
@@ -37,7 +38,7 @@ const faq=[
 export default function PricingPage(){
  return <main className={s.root}>
   <header className={s.header}><div className={s.headerInner}>
-   <Link href="/" className={s.brand} aria-label="KODERA — главная"><span>KODERA</span><small>DIGITAL STUDIO</small></Link>
+   <BrandLogo/>
    <MegaNavigation/>
    <div className={s.headerActions}><div className={s.markets}><Link href="/ru">RU</Link><span>/</span><Link href="/by">BY</Link></div><Link href="/contact" className={s.headerCta}>Начать проект ↗</Link><MobileNavigation/></div>
   </div></header>
@@ -101,6 +102,6 @@ export default function PricingPage(){
    <p className={s.eyebrow}>ТОЧНАЯ ОЦЕНКА</p><h2>Цифра становится точной,<br/><em>когда понятна задача.</em></h2><p>Отправьте конфигурацию из калькулятора или кратко опишите проект. Мы уточним неизвестные параметры и подготовим следующий конкретный шаг.</p><div><Link href="/contact">Получить оценку ↗</Link><Link href="/works">Посмотреть работы</Link></div>
   </section>
 
-  <footer className={s.footer}><Link href="/" className={s.brand}><span>KODERA</span><small>DIGITAL STUDIO</small></Link><nav><Link href="/studio">Студия</Link><Link href="/services">Услуги</Link><Link href="/works">Работы</Link><Link href="/process">Процесс</Link></nav><span>Россия · Беларусь</span></footer>
+  <footer className={s.footer}><BrandLogo/><nav><Link href="/studio">Студия</Link><Link href="/services">Услуги</Link><Link href="/works">Работы</Link><Link href="/process">Процесс</Link></nav><span>Россия · Беларусь</span></footer>
  </main>
 }

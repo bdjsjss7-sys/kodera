@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import MegaNavigation from '@/components/MegaNavigation';
 import MobileNavigation from '@/components/MobileNavigation';
+import BrandLogo from '@/components/BrandLogo';
 import s from './studio.module.css';
 
 export const metadata:Metadata={
@@ -47,7 +48,7 @@ const principles=[
 export default function StudioPage(){
  return <main className={s.root}>
   <header className={s.header}><div className={s.headerInner}>
-   <Link href="/" className={s.brand} aria-label="KODERA — главная"><span>KODERA</span><small>DIGITAL STUDIO</small></Link>
+   <BrandLogo/>
    <MegaNavigation/>
    <div className={s.headerActions}><div className={s.markets}><Link href="/ru">RU</Link><span>/</span><Link href="/by">BY</Link></div><Link href="/contact" className={s.headerCta}>Начать проект ↗</Link><MobileNavigation/></div>
   </div></header>
@@ -76,6 +77,6 @@ export default function StudioPage(){
 
   <section className={s.next}><p className={s.eyebrow}>СЛЕДУЮЩИЙ ПРОЕКТ</p><h2>Создадим систему<br/><em>с вашим характером.</em></h2><p>Расскажите о задаче, продукте или текущем сайте. Определим подходящий состав работ и следующий конкретный шаг.</p><div><Link href="/contact">Обсудить проект ↗</Link><Link href="/pricing#project-calculator">Рассчитать масштаб</Link></div></section>
 
-  <footer className={s.footer}><Link href="/" className={s.brand}><span>KODERA</span><small>DIGITAL STUDIO</small></Link><nav><Link href="/services">Услуги</Link><Link href="/works">Работы</Link><Link href="/process">Процесс</Link><Link href="/pricing">Стоимость</Link></nav><span>Россия · Беларусь</span></footer>
+  <footer className={s.footer}><BrandLogo/><nav><Link href="/services">Услуги</Link><Link href="/works">Работы</Link><Link href="/process">Процесс</Link><Link href="/pricing">Стоимость</Link></nav><span>Россия · Беларусь</span></footer>
  </main>
 }

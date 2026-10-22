@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import Link from 'next/link';
 import MegaNavigation from '@/components/MegaNavigation';
 import MobileNavigation from '@/components/MobileNavigation';
+import BrandLogo from '@/components/BrandLogo';
 import {services} from '@/lib/services';
 import s from './services.module.css';
 
@@ -47,7 +48,7 @@ export default function ServicesPage(){
  return <main className={s.root}>
   <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema)}}/>
   <header className={s.header}><div className={s.headerInner}>
-   <Link href="/" aria-label="KODERA — главная" className={s.brand}><span>KODERA</span><small>DIGITAL STUDIO</small></Link>
+   <BrandLogo/>
    <MegaNavigation/>
    <div className={s.headerActions}><div className={s.markets}><Link href="/ru">RU</Link><span>/</span><Link href="/by">BY</Link></div><Link href="/contact" className={s.headerCta}>Начать проект ↗</Link><MobileNavigation/></div>
   </div></header>
@@ -82,6 +83,6 @@ export default function ServicesPage(){
 
   <section className={s.cta}><p className={s.eyebrow}>СЛЕДУЮЩИЙ ШАГ</p><h2>Соберём подходящий<br/><em>состав проекта.</em></h2><p>Расскажите, что нужно запустить, изменить или связать. Мы определим необходимые направления и последовательность работы.</p><div><Link href="/contact">Обсудить задачу ↗</Link><Link href="/pricing#project-calculator">Открыть калькулятор</Link></div></section>
 
-  <footer className={s.footer}><Link href="/" className={s.brand}><span>KODERA</span><small>DIGITAL STUDIO</small></Link><div><Link href="/works">Работы</Link><Link href="/solutions">Решения</Link><Link href="/process">Процесс</Link><Link href="/pricing">Стоимость</Link></div><span>Россия · Беларусь</span></footer>
+  <footer className={s.footer}><BrandLogo/><div><Link href="/works">Работы</Link><Link href="/solutions">Решения</Link><Link href="/process">Процесс</Link><Link href="/pricing">Стоимость</Link></div><span>Россия · Беларусь</span></footer>
  </main>
 }

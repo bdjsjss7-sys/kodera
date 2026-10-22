@@ -19,6 +19,17 @@ body { margin: 0; background: #0d0e11; }
 }
 details > summary::-webkit-details-marker { display: none; }
 
+/* Logo 04: restrained metallic wordmark from the approved identity board. */
+.brand-logo {display:inline-flex;flex-direction:column;align-items:center;flex:0 0 auto;min-width:max-content;line-height:1;text-decoration:none;}
+.brand-logo__word {padding-left:.31em;font-family:"Helvetica Neue",Arial,sans-serif;font-size:23px;font-weight:300;line-height:1;letter-spacing:.31em;color:transparent;background:linear-gradient(112deg,#8b8e92 0%,#f6f6f3 14%,#a4a6a8 30%,#fff 48%,#85898d 66%,#f0f0ee 82%,#a3a6aa 100%);background-size:180% 100%;background-position:36% 50%;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 1px 0 rgba(255,255,255,.08));}
+.brand-logo__descriptor {margin-top:8px;padding-left:.36em;font-size:7px;font-weight:400;line-height:1;letter-spacing:.36em;color:#d9d8d5;}
+.brand-logo__rule {width:15px;height:1px;margin-top:7px;background:linear-gradient(90deg,transparent,#d5b58f 28%,#bfc1c3 72%,transparent);opacity:.9;transition:width .35s ease,opacity .35s ease;}
+.brand-logo:hover .brand-logo__rule {width:28px;opacity:1;}
+.brand-logo--compact .brand-logo__word {font-size:20px;}
+.brand-logo--compact .brand-logo__descriptor {margin-top:6px;font-size:6px;}
+.brand-logo--compact .brand-logo__rule {margin-top:5px;}
+@media(max-width:480px){.brand-logo__word{font-size:20px;letter-spacing:.27em;padding-left:.27em}.brand-logo__descriptor{font-size:6px;letter-spacing:.32em;padding-left:.32em}}
+
 
 /* Cinematic hero: explicit layout guarantees independent of Tailwind class discovery. */
 .kodera-hero {
