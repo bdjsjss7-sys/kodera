@@ -8,18 +8,18 @@ type ProjectId="landing"|"corporate"|"shop"|"app";
 type Level="focused"|"advanced";
 
 const projects=[
- {id:"landing" as ProjectId,name:"Лендинг",description:"Один основной сценарий и точка конверсии.",defaults:1,ru:55000,by:950,perRu:5500,perBy:95},
- {id:"corporate" as ProjectId,name:"Корпоративный сайт",description:"Услуги, компания, экспертиза и поисковые страницы.",defaults:5,ru:95000,by:1700,perRu:6500,perBy:120},
- {id:"shop" as ProjectId,name:"Интернет-магазин",description:"Каталог, товарные сценарии, корзина и заказ.",defaults:15,ru:185000,by:3300,perRu:3800,perBy:70},
- {id:"app" as ProjectId,name:"Веб-сервис",description:"Роли, личные кабинеты, данные и бизнес-логика.",defaults:6,ru:270000,by:4900,perRu:11000,perBy:190}
+ {id:"landing" as ProjectId,name:"Лендинг",description:"Один основной сценарий и точка конверсии.",defaults:1,ru:40000,by:700,perRu:4000,perBy:70},
+ {id:"corporate" as ProjectId,name:"Корпоративный сайт",description:"Услуги, компания, экспертиза и поисковые страницы.",defaults:5,ru:70000,by:1250,perRu:4800,perBy:90},
+ {id:"shop" as ProjectId,name:"Интернет-магазин",description:"Каталог, товарные сценарии, корзина и заказ.",defaults:15,ru:135000,by:2400,perRu:2800,perBy:50},
+ {id:"app" as ProjectId,name:"Веб-сервис",description:"Роли, личные кабинеты, данные и бизнес-логика.",defaults:6,ru:195000,by:3600,perRu:8000,perBy:140}
 ] as const;
 
 const options=[
- {id:"design",label:"Расширенная дизайн-система",note:"Больше уникальных компонентов и состояний",ru:28000,by:500},
- {id:"cms",label:"CMS и управление контентом",note:"Самостоятельное редактирование материалов",ru:16000,by:290},
- {id:"seo",label:"Расширенная SEO-архитектура",note:"Семантика и структура посадочных страниц",ru:22000,by:400},
- {id:"crm",label:"CRM или внешние интеграции",note:"Передача заявок, статусов или данных",ru:30000,by:550},
- {id:"content",label:"Подготовка содержания",note:"Редактура, тексты и помощь с материалами",ru:18000,by:330},
+ {id:"design",label:"Расширенная дизайн-система",note:"Больше уникальных компонентов и состояний",ru:15000,by:260},
+ {id:"cms",label:"CMS и управление контентом",note:"Самостоятельное редактирование материалов",ru:12000,by:210},
+ {id:"seo",label:"Расширенная SEO-архитектура",note:"Семантика и структура посадочных страниц",ru:16000,by:290},
+ {id:"crm",label:"CRM или внешние интеграции",note:"Передача заявок, статусов или данных",ru:22000,by:400},
+ {id:"content",label:"Подготовка содержания",note:"Редактура, тексты и помощь с материалами",ru:13000,by:240},
  {id:"motion",label:"Продвинутая анимация",note:"Сценарные переходы и выразительная динамика",ru:20000,by:360}
 ] as const;
 
