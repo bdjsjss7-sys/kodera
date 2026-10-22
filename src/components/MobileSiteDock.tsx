@@ -2,7 +2,7 @@
 import {useEffect,useState} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-const destinations=[["/","Главная"],["/solutions","Каталог решений"],["/pricing","Стоимость"],["/process","Этапы работы"],["/blog","Журнал"],["/ru","Россия"],["/by","Беларусь"],["/contact","Обсудить проект"]] as const;
+const destinations=[["/","Главная"],["/explore","Поиск по сайту"],["/works","Примеры работ"],["/solutions","Каталог решений"],["/pricing#project-calculator","Калькулятор стоимости"],["/process","Этапы работы"],["/blog","Журнал"],["/ru","Россия"],["/by","Беларусь"],["/contact","Обсудить проект"]] as const;
 export default function MobileSiteDock(){
  const [open,setOpen]=useState(false);const pathname=usePathname();
  useEffect(()=>{setOpen(false)},[pathname]);
