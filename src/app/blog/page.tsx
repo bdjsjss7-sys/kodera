@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type {Metadata} from "next";
-import {articles} from "@/lib/articles";
+import {expandedArticles as articles} from "@/lib/expandedArticles";
 import ArticleExplorer from "@/components/ArticleExplorer";
 import EditorialVisual from "@/components/EditorialVisual";
 export const metadata:Metadata={title:"Журнал KODERA — разработка сайтов, SEO, UX и цифровые продукты",description:"Практические руководства о разработке сайтов, SEO, UX, стоимости, безопасности, аналитике и запуске веб-сервисов.",alternates:{canonical:"/blog"}};
