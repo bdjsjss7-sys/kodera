@@ -61,7 +61,7 @@ for(const [label,source,needles] of [
  ["Article presentation",article,["ArticleArtwork","ArticleActions","generateMetadata"]],
  ["Article art direction",articleVisual,["EditorialVisual","categoryArt"]],
  ["Calculator live details",calculator,["detail.addons","aria-live","scope-pages","Сбросить параметры"]],
- ["Service leads",service,["/contact","/pricing","related","services.filter"]],
+ ["Service leads",service,["/contact","/pricing","СМЕЖНАЯ ЭКСПЕРТИЗА","services.filter"]],
  ["Catalog navigation",solutionExplorer,["sort===","onChange","filtered.map"]],
  ["Visual fallback",editorialVisual,["onError","art.fallback"]]
 ]){for(const needle of needles){if(!source.includes(needle))problems.push("UI check failed: "+label+" / "+needle);}}
