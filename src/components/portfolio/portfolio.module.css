@@ -17,3 +17,5 @@
 .stagearchitecture{background:radial-gradient(ellipse at 70% 30%,#a6a99a,#454a43 55%,#1b201e)}.stageclinic{background:radial-gradient(ellipse at 65% 30%,#b5d3bc,#5e7c6e 60%,#233d32)}.stagefestival{background:radial-gradient(ellipse at 60% 35%,#a43726,#352329 60%,#131521)}
 
 .portfolioFilters{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 22px}.portfolioFilters button{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff1c;background:transparent;color:#aaa69e;border-radius:24px;padding:10px 15px;font-size:11px}.portfolioFilters button span{font-size:9px;opacity:.55}.portfolioFilters button[aria-pressed=true]{background:#e5bf8d;border-color:#e5bf8d;color:#211b14}@media(max-width:650px){.portfolioFilters{flex-wrap:nowrap;overflow-x:auto;padding-bottom:16px}.portfolioFilters button{flex:none;font-size:10px;padding:9px 12px}}
+
+.stagevanta{background:radial-gradient(ellipse at 65% 30%,#705637,#24252a 55%,#08090b)}
