@@ -6,7 +6,11 @@ import {applicationsA} from "@/lib/articleApplicationsA";
 import {applicationsB} from "@/lib/articleApplicationsB";
 import {applicationsC} from "@/lib/articleApplicationsC";
 export type EditorialSection={heading:string;paragraphs:readonly string[]};
-const rawGuidance:Record<string,readonly (readonly string[])[]>={...Object.fromEntries(Object.entries({...guidesA,...guidesB,...guidesC}).map(([slug,sections])=>[slug,[...sections,...(applicationsA as Record<string,readonly (readonly string[])[]>)[slug]||[],...(applicationsB as Record<string,readonly (readonly string[])[]>)[slug]||[],...(applicationsC as Record<string,readonly (readonly string[])[]>)[slug]||[]]]))};
+const deepGuidance:Record<string,readonly (readonly string[])[]>={...guidesA,...guidesB,...guidesC};
+const practicalGuidance:Record<string,readonly (readonly string[])[]>={...applicationsA,...applicationsB,...applicationsC};
+const rawGuidance:Record<string,readonly (readonly string[])[]>=Object.fromEntries(
+ Object.entries(deepGuidance).map(([slug,sections])=>[slug,[...sections,...(practicalGuidance[slug]||[])]])
+);
 const guidance:Record<string,EditorialSection[]>=Object.fromEntries(Object.entries(rawGuidance).map(([slug,sections])=>[slug,sections.map(([heading,...paragraphs])=>({heading,paragraphs}))]));
 function countWords(s:string){return (s.trim().match(/[\p{L}\p{N}]+(?:[-–—'][\p{L}\p{N}]+)*/gu)||[]).length;}
 export function estimateReadingMinutes(sections:readonly EditorialSection[],title=""){
