@@ -1,13 +1,17 @@
 "use client";
+import MasterArtwork from "@/components/portfolio/MasterArtwork";
+import {getMasterProject} from "@/lib/masterProjects";
 import {useState} from "react";
 import {projectPhotos} from "@/lib/portfolioPhotography";
 type Work={slug:string;name:string;category:string;sector:string;kind:string;pitch:string;short:string;level:string;accent:string};
 type Props={work:Work;scene?:number;compact?:boolean;mobile?:boolean};
 const darkCategories=new Set(["ecommerce","saas","landing","industrial","finance","media","creative"]);
-function usePalette(work:Work){const bright=!darkCategories.has(work.category)||["Старт","Бизнес"].includes(work.level)&&work.category==="creative";return {base:bright?"#f7f5f0":"#111317",ink:bright?"#181c1e":"#f9f5ed",muted:bright?"#555b58":"#c4c4c7",panel:bright?"#ffffff":"#1b2026",accent:work.accent||"#d5b58f",bright};}
+function getPalette(work:Work){const bright=!darkCategories.has(work.category)||["Старт","Бизнес"].includes(work.level)&&work.category==="creative";return {base:bright?"#f7f5f0":"#111317",ink:bright?"#181c1e":"#f9f5ed",muted:bright?"#555b58":"#c4c4c7",panel:bright?"#ffffff":"#1b2026",accent:work.accent||"#d5b58f",bright};}
 function Picture({src,alt,style,className,fallback}:{src:string;alt:string;style?:React.CSSProperties;className?:string;fallback:string}){const [error,setError]=useState(false);return <img src={error?fallback:src} alt={alt} loading="lazy" onError={()=>setError(true)} className={className||"h-full w-full object-cover"} style={style}/>;}
 export default function PortfolioArtwork({work,scene=0,compact=false,mobile=false}:Props){
- const t=usePalette(work);const photos=projectPhotos(work.category,work.slug);const legacy=new Set(["atelier-audio","nord-clinic","form-architecture","flux-workspace","terra-stay","vector-industry"]).has(work.slug);
+ const master=getMasterProject(work.slug);
+ if(master)return <MasterArtwork project={master} scene={scene} mobile={mobile}/>;
+ const t=getPalette(work);const photos=projectPhotos(work.category,work.slug);const legacy=new Set(["atelier-audio","nord-clinic","form-architecture","flux-workspace","terra-stay","vector-industry"]).has(work.slug);
  const fb=`/art/${legacy?"works":"portfolio"}/${work.slug}-${mobile?"mobile":"desktop"}.svg`;
  const label=work.category==="saas"?"РАБОЧЕЕ ПРОСТРАНСТВО":work.category==="ecommerce"?"НОВАЯ КОЛЛЕКЦИЯ":work.category==="healthcare"?"ЗАПИСЬ И УСЛУГИ":work.category==="real-estate"?"АРХИТЕКТУРА И ЖИЗНЬ":work.category==="media"?"ИСТОРИИ И ИДЕИ":work.category==="landing"?"СОБЫТИЕ / ПРОДУКТ":work.category==="hospitality"?"ВПЕЧАТЛЕНИЯ":work.category==="industrial"?"ИНЖЕНЕРНЫЕ РЕШЕНИЯ":"ИССЛЕДУЙТЕ ВОЗМОЖНОСТИ";
  const product=work.category==="ecommerce"||work.category==="hospitality"||work.category==="real-estate";
