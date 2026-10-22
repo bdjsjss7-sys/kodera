@@ -23,7 +23,7 @@ export default function Home() {
           <nav className="hidden gap-9 text-sm text-white/65 lg:flex" aria-label="Главное меню">
             <a href="#services" className="hover:text-white">Услуги</a><Link href="/pricing" className="hover:text-white">Стоимость</Link><Link href="/process" className="hover:text-white">Подход</Link><Link href="/blog" className="hover:text-white">Журнал</Link><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
           </nav>
-          <div className="flex items-center gap-4"><span className="text-xs text-white/50">RU / BY</span><a href="#contact" className="rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
+          <div className="flex items-center gap-4"><div className="flex gap-3 text-xs text-[#d5b58f]"><Link href="/ru" aria-label="Услуги для России">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Услуги для Беларуси">BY</Link></div><a href="#contact" className="rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
         </div>
       </header>
       <section className="relative mx-auto grid min-h-[760px] max-w-[1500px] items-center gap-12 px-5 py-20 md:px-12 lg:grid-cols-2">
