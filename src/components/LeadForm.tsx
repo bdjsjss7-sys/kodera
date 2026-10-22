@@ -1,8 +1,9 @@
 "use client";
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import Link from "next/link";
 type Props={initialMarket?:"ru"|"by";initialService?:string;initialMessage?:string;compact?:boolean};
 export default function LeadForm({initialMarket="ru",initialService="",initialMessage="",compact=false}:Props){
+ useEffect(()=>{const params=new URLSearchParams(window.location.search);if(params.get("market")==="by")setMarket("by");const fromService=params.get("service");if(fromService)setService(fromService);const brief=params.get("brief");if(brief)setMessage(brief.slice(0,3500));},[]);
  const [name,setName]=useState("");const [contact,setContact]=useState("");const [market,setMarket]=useState<"ru"|"by">(initialMarket);const [service,setService]=useState(initialService);const [budget,setBudget]=useState("");const [message,setMessage]=useState(initialMessage);const [consent,setConsent]=useState(false);const [website,setWebsite]=useState("");const [status,setStatus]=useState<"idle"|"sending"|"success"|"error">("idle");const [feedback,setFeedback]=useState("");
  async function submit(e:React.FormEvent<HTMLFormElement>){e.preventDefault();setStatus("sending");setFeedback("");try{const res=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name,contact,market,service,budget,message,consent,website,source:typeof window!=="undefined"?window.location.pathname:"/"})});const data=await res.json() as {ok?:boolean;error?:string};if(!res.ok||!data.ok)throw Error(data.error||"Не удалось отправить заявку.");setStatus("success");setFeedback("Заявка успешно отправлена. Спасибо!");setName("");setContact("");setMessage("");setConsent(false);}catch(err){setStatus("error");setFeedback(err instanceof Error?err.message:"Не удалось отправить заявку.");}}
  const field="w-full rounded-2xl border border-white/15 bg-[#101114] px-5 py-4 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[#d5b58f]";
