@@ -34,6 +34,7 @@ if(!enrichedSource.includes("estimateReadingMinutes"))problems.push("Dynamic rea
 
 const newPages=loadTsArray("src/lib/newServicePages.ts","newServicePages");
 const newArticles=loadTsArray("src/lib/newArticles.ts","newArticles");
+const newFieldNotes=loadGuide("src/lib/newArticleFieldNotes.ts","newArticleFieldNotes");
 if(newPages.length!==56)problems.push("Expected 56 new commercial landings, found "+newPages.length);
 if(newArticles.length!==24)problems.push("Expected 24 new articles, found "+newArticles.length);
 const sectionCounts={};
@@ -62,8 +63,9 @@ for(const a of newArticles){
  const art="public/art/blog/"+a.slug+".svg";
  if(!existsSync(join(root,art)))problems.push("Missing new article cover: "+art);
  if(a.sections.length<10)problems.push("New article missing chapter depth: "+a.slug);
- const words=countWords([a.title,...a.sections.flatMap(s=>[s.heading,...s.paragraphs])].join(" "));
- if(words<750)problems.push("New article insufficient: "+a.slug+" / "+words+" words");
+ if(!newFieldNotes[a.slug]?.length)problems.push("Missing unique article case study: "+a.slug);
+ const words=countWords([a.title,...a.sections.flatMap(s=>[s.heading,...s.paragraphs]),...(newFieldNotes[a.slug]||[]).flatMap(s=>[s.heading,...s.paragraphs])].join(" "));
+ if(words<900)problems.push("New article insufficient: "+a.slug+" / "+words+" words");
 }
 for(const s of solutions)if(!existsSync(join(root,"public/art/legacy/solutions/"+s.slug+".svg")))problems.push("Missing original solution artwork: "+s.slug);
 for(const a of articles)if(!existsSync(join(root,"public/art/legacy/blog/"+a.slug+".svg")))problems.push("Missing original blog artwork: "+a.slug);
