@@ -18,14 +18,16 @@ function loadGuide(rel,name){
  return JSON.parse(src.slice(start+prefix.length,end));
 }
 const guideData={...loadGuide("src/lib/articleGuidesA.ts","guidesA"),...loadGuide("src/lib/articleGuidesB.ts","guidesB"),...loadGuide("src/lib/articleGuidesC.ts","guidesC")};
+const applicationData={...loadGuide("src/lib/articleApplicationsA.ts","applicationsA"),...loadGuide("src/lib/articleApplicationsB.ts","applicationsB"),...loadGuide("src/lib/articleApplicationsC.ts","applicationsC")};
 const countWords=s=>s.trim().split(/\s+/).filter(Boolean).length;
 for(const a of articles){
  const deep=guideData[a.slug];
- if(!deep||deep.length<5){problems.push("Insufficient deep guide: "+a.slug);continue;}
- const all=a.sections.flatMap(s=>[s.heading,...s.paragraphs]).join(" ")+" "+deep.flat().join(" ");
- if(countWords(all)<500)problems.push("Article still too short: "+a.slug+" ("+countWords(all)+" words)");
+ const handsOn=applicationData[a.slug];
+ if(!deep||deep.length<5||!handsOn||handsOn.length<2){problems.push("Missing in-depth practical chapters: "+a.slug);continue;}
+ const all=a.sections.flatMap(s=>[s.heading,...s.paragraphs]).join(" ")+" "+deep.flat().join(" ")+" "+handsOn.flat().join(" ");
+ if(countWords(all)<700)problems.push("Article still too short: "+a.slug+" ("+countWords(all)+" words)");
 }
-if(Object.keys(guideData).length!==articles.length)problems.push("Guide and article counts disagree.");
+if(Object.keys(guideData).length!==articles.length||Object.keys(applicationData).length!==articles.length)problems.push("Guide and article counts disagree.");
 const enrichedSource=readFileSync(join(root,"src/lib/expandedArticles.ts"),"utf8");
 if(!enrichedSource.includes("estimateReadingMinutes"))problems.push("Dynamic reading-time calculator missing.");
 
