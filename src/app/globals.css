@@ -79,3 +79,18 @@ details > summary::-webkit-details-marker { display: none; }
  .kodera-hero-tablet {transform:rotateY(-3deg) rotateX(1deg) rotateZ(-1deg);}
 }
 @media(prefers-reduced-motion:reduce) { .kodera-hero-tablet {transition:none;transform:none;} .kodera-hero-tablet:hover {transform:none;} }
+
+/* Consistent editorial interactions and responsive image framing. */
+article img, figure img { backface-visibility: hidden; }
+article [id^="part-"] { scroll-margin-top: 28px; }
+@media (hover:hover) {
+ article a, article button { -webkit-tap-highlight-color: transparent; }
+}
+@media print {
+ :root { color-scheme: light; }
+ body, article, main { color: #111 !important; background: #fff !important; }
+ article p, article h1, article h2, article h3 { color: #111 !important; }
+ article section { break-inside: avoid-page; }
+ header, nav, footer, button, figure, aside, .kodera-hero { display: none !important; }
+ article a { color: #111 !important; text-decoration: underline; }
+}
