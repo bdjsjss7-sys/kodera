@@ -17,3 +17,50 @@ body { margin: 0; background: #0d0e11; }
   .kodera-reveal { animation: none !important; }
 }
 details > summary::-webkit-details-marker { display: none; }
+
+
+/* Cinematic hero: explicit layout guarantees independent of Tailwind class discovery. */
+.kodera-hero { position:relative; isolation:isolate; overflow:hidden; color:#f5f2ed; background:#0c0c0f; }
+.kodera-hero-backdrop { position:absolute; inset:0; z-index:-1; pointer-events:none; }
+.kodera-hero-backdrop > span, .kodera-hero-backdrop > img { position:absolute; inset:0; }
+.kodera-hero-backdrop img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.24; filter:blur(2px); }
+.kodera-hero-backdrop > div:last-child { position:absolute; inset:0; background:linear-gradient(90deg,rgba(9,9,11,.93),rgba(12,12,14,.83) 42%,rgba(13,12,12,.76) 75%,rgba(9,9,11,.89)); }
+.kodera-hero-grid { width:min(100%,1500px); margin:0 auto; display:grid; grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr); align-items:center; gap:clamp(32px,4vw,64px); padding:80px 48px 56px; }
+.kodera-hero-copy,.kodera-hero-showcase { min-width:0; position:relative; }
+.kodera-hero-copy > p:first-child {font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#d5b58f;}
+.kodera-hero-title { font-size:clamp(54px,6.4vw,104px) !important; font-weight:300; line-height:.98; letter-spacing:-.075em; margin:38px 0 0; color:#f5f2ed; }
+.kodera-hero-title span { color:#e5bf94; }
+.kodera-hero-intro { font-size:16px !important; line-height:2; max-width:530px; color:rgba(255,255,255,.72); margin-top:30px; }
+.kodera-hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:12px; margin-top:36px; }
+.kodera-hero-actions a {display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:13px 26px; border-radius:999px;font-size:14px;text-decoration:none;}
+.kodera-hero-actions a:first-child { background:#e0bc90;color:#161311; }
+.kodera-hero-actions a:nth-child(2) {border:1px solid rgba(255,255,255,.27);color:#f5f2ed;background:rgba(0,0,0,.18);}
+.kodera-hero-stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:52px;padding-top:26px;border-top:1px solid rgba(213,181,143,.25);}
+.kodera-hero-stats p:first-child {font-size:36px;line-height:1.1;font-weight:300;color:#e4c199;}
+.kodera-hero-stats p:nth-child(2) {font-size:12px;margin-top:8px;color:rgba(255,255,255,.6);}
+.kodera-hero-showcase > div:first-child {display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.kodera-hero-showcase > div:first-child p {font-size:11px;letter-spacing:.2em;color:#e1bc90;}
+.kodera-hero-tabs {display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
+.kodera-hero-tabs button {border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:11px 16px;font-size:12px;cursor:pointer;transition:background .2s,border-color .2s;}
+.kodera-hero-tabs button[aria-pressed="true"] {background:#e1bc90!important;color:#14110f!important;border-color:#e1bc90;}
+.kodera-hero-device {margin-top:28px;min-width:0;perspective:1300px;}
+.kodera-hero-tablet {overflow:hidden;border:1px solid rgba(225,188,144,.65);border-radius:27px;background:#121113;box-shadow:25px 40px 90px #000a,0 0 45px #bd8a5040;transform:rotateY(-8deg) rotateX(3deg) rotateZ(-2deg);transition:transform .7s ease;}
+.kodera-hero-tablet:hover {transform:rotateY(-3deg) rotateX(1deg);}
+.kodera-hero-cards {position:relative;z-index:1;width:min(100%,1500px);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:0 48px 70px;}
+.kodera-hero-cards > a {min-width:0;}
+@media(max-width:1100px) {
+ .kodera-hero-grid {grid-template-columns:1fr;gap:50px;padding:65px 28px 48px;}
+ .kodera-hero-title {font-size:clamp(54px,9vw,94px)!important;}
+ .kodera-hero-showcase {max-width:770px;width:100%;margin:0 auto;}
+ .kodera-hero-cards {padding:0 28px 56px;}
+}
+@media(max-width:720px) {
+ .kodera-hero-grid {padding:52px 20px 42px;gap:46px;}
+ .kodera-hero-title {font-size:clamp(44px,11.7vw,75px)!important;}
+ .kodera-hero-intro {font-size:15px!important;line-height:1.8;}
+ .kodera-hero-stats {gap:8px;}
+ .kodera-hero-stats p:first-child {font-size:28px;}
+ .kodera-hero-cards {grid-template-columns:1fr;padding:0 20px 45px;gap:12px;}
+ .kodera-hero-tablet {transform:rotateY(-3deg) rotateX(1deg) rotateZ(-1deg);}
+}
+@media(prefers-reduced-motion:reduce) { .kodera-hero-tablet {transition:none;transform:none;} .kodera-hero-tablet:hover {transform:none;} }
