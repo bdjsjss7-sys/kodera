@@ -31,6 +31,47 @@ if(Object.keys(guideData).length!==articles.length||Object.keys(applicationData)
 const enrichedSource=readFileSync(join(root,"src/lib/expandedArticles.ts"),"utf8");
 if(!enrichedSource.includes("estimateReadingMinutes"))problems.push("Dynamic reading-time calculator missing.");
 
+
+const newPages=loadTsArray("src/lib/newServicePages.ts","newServicePages");
+const newArticles=loadTsArray("src/lib/newArticles.ts","newArticles");
+if(newPages.length!==56)problems.push("Expected 56 new commercial landings, found "+newPages.length);
+if(newArticles.length!==24)problems.push("Expected 24 new articles, found "+newArticles.length);
+const sectionCounts={};
+const knownSlugs=new Set(solutions.map(s=>s.slug));
+const seenNew=new Set();
+for(const x of newPages){
+ const key=x.group+"/"+x.slug;
+ sectionCounts[x.group]=(sectionCounts[x.group]||0)+1;
+ if(seenNew.has(key))problems.push("Duplicate new commercial page: "+key);
+ seenNew.add(key);
+ if(knownSlugs.has(x.slug))problems.push("Commercial slug duplicates an original solution: "+x.slug);
+ const art="public/art/new/"+key+".svg";
+ if(!existsSync(join(root,art)))problems.push("Missing custom landing artwork: "+art);
+ if(!x.title||!x.subtitle||!x.audience||!x.scenarios||!x.integrations||!x.risks||!x.delivery)problems.push("Thin landing specification: "+key);
+ if(!existsSync(join(root,"src/app/"+x.group+"/[slug]/page.tsx")))problems.push("Missing new landing route: "+x.group);
+}
+for(const [group,count] of [["website-types",12],["industries",20],["technologies",12],["seo",12]]){
+ if(sectionCounts[group]!==count)problems.push("Bad catalog count: "+group+" / "+sectionCounts[group]);
+ if(!existsSync(join(root,"src/app/"+group+"/page.tsx")))problems.push("Missing catalog overview: "+group);
+}
+const oldArticleSlugs=new Set(articles.map(a=>a.slug));
+const seenNewArticles=new Set();
+for(const a of newArticles){
+ if(oldArticleSlugs.has(a.slug)||seenNewArticles.has(a.slug))problems.push("Duplicate journal slug: "+a.slug);
+ seenNewArticles.add(a.slug);
+ const art="public/art/blog/"+a.slug+".svg";
+ if(!existsSync(join(root,art)))problems.push("Missing new article cover: "+art);
+ if(a.sections.length<10)problems.push("New article missing chapter depth: "+a.slug);
+ const words=countWords([a.title,...a.sections.flatMap(s=>[s.heading,...s.paragraphs])].join(" "));
+ if(words<750)problems.push("New article insufficient: "+a.slug+" / "+words+" words");
+}
+for(const s of solutions)if(!existsSync(join(root,"public/art/legacy/solutions/"+s.slug+".svg")))problems.push("Missing original solution artwork: "+s.slug);
+for(const a of articles)if(!existsSync(join(root,"public/art/legacy/blog/"+a.slug+".svg")))problems.push("Missing original blog artwork: "+a.slug);
+for(const s of ["razrabotka-sajtov","ux-ui-dizajn","seo","veb-prilozheniya","avtomatizaciya","podderzhka"])
+ if(!existsSync(join(root,"public/art/legacy/services/"+s+".svg")))problems.push("Missing core service artwork: "+s);
+const sitemapSrc=readFileSync(join(root,"src/app/sitemap.ts"),"utf8");
+if(!sitemapSrc.includes("newServicePages")||!sitemapSrc.includes("expandedArticles"))problems.push("Sitemap missing new website and journal routes.");
+
 const seen=new Set();
 for(const s of solutions){
  if(seen.has(s.slug))problems.push("Duplicate solution slug: "+s.slug);seen.add(s.slug);
@@ -88,5 +129,5 @@ for(const [label,source,needles] of [
 ]){for(const needle of needles){if(!source.includes(needle))problems.push("UI check failed: "+label+" / "+needle);}}
 if(!existsSync(join(root,"src/components/ArticleActions.tsx")))problems.push("Missing article sharing tools.");
 
-console.log("KODERA audit: "+solutions.length+" solutions, "+articles.length+" articles");
+console.log("KODERA audit: "+(solutions.length+newPages.length)+" commercial directions, "+(articles.length+newArticles.length)+" journal articles; "+(newPages.length+newArticles.length+solutions.length+articles.length+6)+" tailored visual assets.");
 if(problems.length){for(const x of problems)console.error("FAIL:",x);process.exitCode=1;}else console.log("PASS: Content structure and required routes found.");
