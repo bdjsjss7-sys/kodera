@@ -19,6 +19,7 @@ const groups:{id:Group;name:string;eyebrow:string;description:string;links:{labe
  {label:"Поиск по всему сайту",href:"/explore",detail:"Услуги, статьи и примеры"},
  {label:"Оставить бриф",href:"/contact",detail:"Начать обсуждение задачи"}]},
  {id:"studio",name:"Студия",eyebrow:"03 / СОТРУДНИЧЕСТВО",description:"Прозрачный путь от первого обсуждения к техническому заданию и созданию продукта.",links:[
+ {label:"О студии",href:"/studio",detail:"Подход, принципы и контроль качества"},
  {label:"Калькулятор",href:"/pricing#project-calculator",detail:"Параметры, масштаб и оценка"},
  {label:"Россия",href:"/ru",detail:"Региональное предложение"},
  {label:"Беларусь",href:"/by",detail:"Региональное предложение"},
