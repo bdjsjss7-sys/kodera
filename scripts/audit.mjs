@@ -22,10 +22,10 @@ const articleSlugs=new Set();for(const a of articles){if(articleSlugs.has(a.slug
 for(const rel of ["src/app/page.tsx","src/app/solutions/page.tsx","src/app/solutions/[slug]/page.tsx","src/app/blog/page.tsx","src/app/blog/[slug]/page.tsx","src/app/ru/page.tsx","src/app/by/page.tsx","src/app/pricing/page.tsx","src/app/process/page.tsx","src/app/contact/page.tsx","src/app/privacy/page.tsx","src/app/sitemap.ts","src/app/robots.ts","src/components/MobileNavigation.tsx","src/components/SolutionDepth.tsx"]){if(!existsSync(join(root,rel)))problems.push("Missing file: "+rel);}
 
 const home=readFileSync(join(root,"src/app/page.tsx"),"utf8");
-const homeInteractions=readFileSync(join(root,"src/components/HomeExperiences.tsx"),"utf8");
+const homeInteractions=readFileSync(join(root,"src/components/CinematicHero.tsx"),"utf8");
 const comparison=readFileSync(join(root,"src/components/InterfaceComparison.tsx"),"utf8");
 for(const [label,source,marker] of [
- ["Hero demo",home,"<HomeShowcase/>"],
+ ["Hero demo",home,"<CinematicHero/>"],
  ["Project picker",home,"<ProjectSelector/>"],
  ["Interactive process",home,"<InteractiveProcess/>"],
  ["UX comparison",home,"<InterfaceComparison/>"],
@@ -33,8 +33,10 @@ for(const [label,source,marker] of [
  ["Mobile navigation",home,"<MobileNavigation/>"],
  ["Region selector",home,"/ru"],
  ["SEO and blog crosslinks",home,"/blog"],
- ["Four interactive modes",homeInteractions,'key:"growth"'],
- ["Comparison component",comparison,"aria-pressed"]
+ ["Four interactive modes",homeInteractions,'id:"seo"'],
+ ["Comparison component",comparison,"aria-pressed"],
+ ["Hero image sources",homeInteractions,"visualAssets.headphones"],
+ ["Hero interaction",homeInteractions,"onMouseEnter={()=>setMode(t.id)}"]
 ]){if(!source.includes(marker))problems.push("Homepage check failed: "+label);}
 
 
