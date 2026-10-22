@@ -1,4 +1,5 @@
 import {articles} from "@/lib/articles";
+import {newArticles} from "@/lib/newArticles";
 import {guidesA} from "@/lib/articleGuidesA";
 import {guidesB} from "@/lib/articleGuidesB";
 import {guidesC} from "@/lib/articleGuidesC";
@@ -17,7 +18,7 @@ export function estimateReadingMinutes(sections:readonly EditorialSection[],titl
  const all=[title,...sections.flatMap(s=>[s.heading,...s.paragraphs])].join(" ");
  return Math.max(1,Math.ceil(countWords(all)/170));
 }
-export const expandedArticles=articles.map(a=>{
+export const expandedArticles=[...articles,...newArticles].map(a=>{
  const sections:EditorialSection[]=[...a.sections,...(guidance[a.slug]||[])];
  return {...a,sections,readingMinutes:estimateReadingMinutes(sections,a.title)};
 });
