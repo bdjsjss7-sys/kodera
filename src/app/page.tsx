@@ -4,6 +4,7 @@ import type {Metadata} from "next";
 import {services} from "@/lib/services";
 import {expandedArticles as articles} from "@/lib/expandedArticles";
 import MobileNavigation from "@/components/MobileNavigation";
+import MegaNavigation from "@/components/MegaNavigation";
 import {ProjectSelector,InteractiveProcess} from "@/components/HomeExperiences";
 import CinematicHero from "@/components/CinematicHero";
 import InterfaceComparison from "@/components/InterfaceComparison";
@@ -22,8 +23,8 @@ export default function Home(){
  return <main className="min-h-screen overflow-x-clip bg-[#0d0e11] text-[#f5f2ed]">
  <header className="relative z-40 border-b border-white/10 bg-[#0d0e11]/95"><div className="mx-auto flex max-w-[1500px] items-center justify-between gap-5 px-5 py-6 md:px-12">
  <Link href="/" aria-label="KODERA — главная" className="flex shrink-0 flex-col leading-none"><span className="text-[24px] font-light tracking-[.25em] text-[#f1ece7]">KODERA</span><span className="mt-2 text-[8px] tracking-[.38em] text-[#c9ae8d]">DIGITAL STUDIO</span></Link>
- <nav aria-label="Основное меню" className="hidden items-center gap-6 text-[13px] text-white/65 xl:flex"><a href="#services" className="hover:text-[#d5b58f]">Услуги</a><a href="#selector" className="hover:text-[#d5b58f]">Подобрать сайт</a><a href="#process" className="hover:text-[#d5b58f]">Процесс</a><Link href="/pricing" className="hover:text-[#d5b58f]">Стоимость</Link><Link href="/blog" className="hover:text-[#d5b58f]">Журнал</Link><a href="#contact" className="hover:text-[#d5b58f]">Контакты</a></nav>
- <div className="flex items-center gap-4"><div className="hidden items-center gap-2 text-xs text-[#d5b58f] sm:flex"><Link href="/ru" aria-label="Версия для России" className="hover:text-white">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Версия для Беларуси" className="hover:text-white">BY</Link></div><Link href="/contact" className="hidden rounded-full border border-[#d5b58f]/60 px-5 py-3 text-xs text-[#d5b58f] transition hover:bg-[#d5b58f] hover:text-[#111] sm:inline-flex">Начать проект ↗</Link><MobileNavigation/></div>
+ <MegaNavigation/>
+ <div className="flex items-center gap-4"><div className="hidden items-center gap-2 text-xs text-[#d5b58f] 2xl:flex"><Link href="/ru" aria-label="Версия для России" className="hover:text-white">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Версия для Беларуси" className="hover:text-white">BY</Link></div><Link href="/contact" className="hidden rounded-full border border-[#d5b58f]/60 px-5 py-3 text-xs text-[#d5b58f] transition hover:bg-[#d5b58f] hover:text-[#111] 2xl:inline-flex">Начать проект ↗</Link><MobileNavigation/></div>
  </div></header>
  <CinematicHero/>
  
