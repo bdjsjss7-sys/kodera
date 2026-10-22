@@ -21,7 +21,7 @@ export default function Home() {
             <strong className="text-[25px] font-light tracking-[.24em] text-[#f1ece7] [text-shadow:0_1px_0_rgba(255,255,255,.24),0_5px_18px_rgba(213,181,143,.22)] transition duration-500 group-hover:[text-shadow:0_1px_0_rgba(255,255,255,.4),0_7px_25px_rgba(213,181,143,.5)]">KODERA</strong><small className="mt-2 text-[8px] tracking-[.4em] text-[#c9ae8d]">DIGITAL STUDIO</small>
           </a>
           <nav className="hidden gap-9 text-sm text-white/65 lg:flex" aria-label="Главное меню">
-            <a href="#services" className="hover:text-white">Услуги</a><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
+            <a href="#services" className="hover:text-white">Услуги</a><Link href="/pricing" className="hover:text-white">Стоимость</Link><Link href="/process" className="hover:text-white">Подход</Link><Link href="/blog" className="hover:text-white">Журнал</Link><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
           </nav>
           <div className="flex items-center gap-4"><span className="text-xs text-white/50">RU / BY</span><a href="#contact" className="rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
         </div>
