@@ -1,5 +1,6 @@
 import {articles} from "@/lib/articles";
 import {newArticles} from "@/lib/newArticles";
+import {newArticleFieldNotes} from "@/lib/newArticleFieldNotes";
 import {guidesA} from "@/lib/articleGuidesA";
 import {guidesB} from "@/lib/articleGuidesB";
 import {guidesC} from "@/lib/articleGuidesC";
@@ -19,7 +20,8 @@ export function estimateReadingMinutes(sections:readonly EditorialSection[],titl
  return Math.max(1,Math.ceil(countWords(all)/170));
 }
 const newSlugs=new Set(newArticles.map(a=>a.slug as string));
+const fieldNotes:Record<string,readonly EditorialSection[]>={...newArticleFieldNotes};
 export const expandedArticles=[...articles,...newArticles].map(a=>{
- const sections:EditorialSection[]=[...a.sections,...(guidance[a.slug]||[])];
+ const sections:EditorialSection[]=[...a.sections,...(guidance[a.slug]||[]),...(fieldNotes[a.slug]||[])];
  return {...a,sections,readingMinutes:estimateReadingMinutes(sections,a.title),cover:newSlugs.has(a.slug)?`/art/blog/${a.slug}.svg`:undefined};
 });
