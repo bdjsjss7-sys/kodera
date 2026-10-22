@@ -1,6 +1,7 @@
 "use client";
 import {useState} from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const demos=[
  {key:"website",tab:"WEB / 01",name:"Коммерческий сайт",headline:"Превращаем сложное\nв очевидное.",description:"Сильная подача услуг, понятный путь к заявке и архитектура роста.",metric:"01 / STRUCTURE",accent:"Архитектура + доверие",links:[["Услуги","/solutions/corporate-website"],["Стоимость","/pricing"]]},
@@ -25,11 +26,8 @@ function BrowserDemo({active,onSelect}:{active:number;onSelect:(index:number)=>v
  <div key={active} className="kodera-reveal relative flex h-[425px] min-h-0 flex-col justify-between overflow-hidden p-7 sm:h-[450px] sm:p-9">
  <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full bg-[#d5b58f]/[.08] blur-3xl"/>
  <div className="relative"><p className="text-[10px] tracking-[.23em] text-[#d5b58f]">{x.eyebrow}</p><h3 className="mt-7 whitespace-pre-line text-[clamp(1.85rem,3vw,2.7rem)] font-light leading-[1.1] tracking-[-.05em]">{x.title}</h3><p className="mt-4 max-w-sm text-sm leading-7 text-white/55">{x.body}</p></div>
- <div className="relative flex h-[120px] items-end gap-4 sm:h-[140px]">
- {active===0&&<><div className="flex h-full flex-[1.3] items-center justify-center rounded-2xl border border-[#d5b58f]/30 bg-gradient-to-br from-[#6b5643] to-[#29272b]"><div className="h-20 w-20 rotate-[-17deg] rounded-[24px] border border-[#e4c9a5]/55 bg-[#d5b58f]/25"/></div><div className="flex h-full flex-1 flex-col justify-center gap-3 rounded-2xl border border-white/10 bg-white/[.04] p-5"><div className="h-2 w-full rounded-full bg-white/25"/><div className="h-2 w-2/3 rounded-full bg-white/15"/><div className="mt-2 h-6 w-1/2 rounded-full bg-[#d5b58f]/85"/></div></>}
- {active===1&&[0,1,2].map((i)=><div key={i} className="flex h-full flex-1 flex-col justify-between rounded-xl border border-white/10 bg-gradient-to-br from-[#333038] to-[#1f2024] p-3"><div className="grid flex-1 place-items-center rounded-lg bg-[#a88d6d]/[.12]"><div className={`h-[65%] w-[35%] rounded-[18px] border border-[#d5b58f]/50 bg-[#d5b58f]/30 ${i===1?"rotate-12":i===2?"-rotate-12":""}`}/></div><div className="mt-2 h-1.5 w-3/4 rounded-full bg-white/25"/></div>)}
- {active===2&&<div className="grid h-full w-full grid-cols-3 gap-3">{[["08","Задачи"],["03","Проекты"],["24","События"]].map(([v,label])=><div key={label} className="flex flex-col justify-between rounded-2xl border border-white/10 bg-white/[.04] p-4"><span className="text-3xl font-light text-[#d5b58f]">{v}</span><span className="text-[11px] text-white/50">{label}</span></div>)}</div>}
- {active===3&&<div className="flex h-full w-full items-end gap-2 rounded-xl border border-white/10 bg-white/[.03] px-4 pt-3 pb-3">{[28,44,35,56,49,74,60,85,76,96].map((n,i)=><div key={i} style={{height:n+"%"}} className="flex-1 rounded-t-sm bg-gradient-to-t from-[#806b52] to-[#e0bc8d]"/>)}</div>}
+ <div className="relative h-[120px] overflow-hidden rounded-2xl border border-[#d5b58f]/20 bg-[#17181c] sm:h-[140px]">
+ <Image src={(["/art/web-experience.svg","/art/commerce-experience.svg","/art/service-experience.svg","/art/data-experience.svg"] as const)[active]} alt={["Иллюстрация интерфейса сайта","Иллюстрация товарного каталога","Иллюстрация кабинета веб-сервиса","Иллюстрация аналитической панели"][active]} fill sizes="(max-width: 768px) 90vw, 550px" className="object-cover object-center" priority unoptimized/>
  </div>
  <div className="relative flex justify-between gap-3 border-t border-white/10 pt-4 text-[11px] text-[#d5b58f]"><span>0{active+1} / 04</span><span>{x.stat}</span></div>
  </div></div></div>;
