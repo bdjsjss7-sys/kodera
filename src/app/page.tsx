@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import LeadForm from "@/components/LeadForm";
 
 const slides = [
   { eyebrow: "01 / WEB EXPERIENCE", title: "Сайты, которые\nзапоминают.", desc: "Выразительный дизайн, быстрая загрузка и продуманная структура.", mark: "WEB" },
@@ -123,8 +124,8 @@ export default function Home() {
         <div className="mx-auto max-w-[1500px] px-5 py-24 md:px-12 md:py-32">
           <p className="mb-6 text-xs uppercase tracking-[.3em] text-[#d5b58f]">06 / Следующий шаг</p>
           <h2 className="max-w-5xl text-[clamp(3.5rem,8vw,8rem)] font-light leading-[.95] tracking-[-.075em]">Создадим что-то <span className="text-[#d5b58f]">значимое.</span></h2>
-          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Расскажите о своей идее, целях и сроках. Подготовим структуру, определим приоритеты и предложим подходящий формат реализации. Контактные данные и форма заявки будут добавлены после согласования.</p>
-          <div className="mt-20 flex flex-wrap items-end justify-between gap-8 border-t border-white/15 pt-8"><div><strong className="text-2xl font-light tracking-[.24em]">KODERA</strong><p className="mt-2 text-[10px] tracking-[.3em] text-[#d5b58f]">DIGITAL STUDIO</p></div><div className="flex flex-wrap gap-6 text-sm text-white/50"><a href="#services" className="hover:text-white">Услуги</a><a href="#about" className="hover:text-white">Подход</a><a href="#faq" className="hover:text-white">Вопросы</a><a href="#" className="hover:text-white">Наверх ↑</a></div><span className="text-xs text-white/35">Россия · Беларусь</span></div>
+          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Расскажите о своей идее, целях и сроках. Подготовим структуру, определим приоритеты и предложим подходящий формат реализации. Оставьте описание проекта в форме ниже. Если серверная доставка ещё не настроена, форма сообщит об этом и не будет имитировать успешную отправку.</p>
+          <div className="mt-12 max-w-4xl"><LeadForm compact/></div><div className="mt-20 flex flex-wrap items-end justify-between gap-8 border-t border-white/15 pt-8"><div><strong className="text-2xl font-light tracking-[.24em]">KODERA</strong><p className="mt-2 text-[10px] tracking-[.3em] text-[#d5b58f]">DIGITAL STUDIO</p></div><div className="flex flex-wrap gap-6 text-sm text-white/50"><a href="#services" className="hover:text-white">Услуги</a><a href="#about" className="hover:text-white">Подход</a><a href="#faq" className="hover:text-white">Вопросы</a><a href="#" className="hover:text-white">Наверх ↑</a></div><span className="text-xs text-white/35">Россия · Беларусь</span></div>
         </div>
       </footer>
     </main>
