@@ -5,6 +5,7 @@ import {expandedArticles} from "@/lib/expandedArticles";
 import {portfolioWorks} from "@/lib/portfolioWorks";
 export type SearchEntry={title:string;description:string;category:string;href:string;keywords:string};
 export const siteEntries:SearchEntry[]=[
+ {title:"Все услуги KODERA",description:"Разработка сайтов, UX/UI, SEO, веб-приложения, автоматизация и поддержка",category:"Услуги",href:"/services",keywords:"услуги разработка дизайн seo приложение автоматизация поддержка"},
  {title:"Калькулятор стоимости",description:"Оценить состав проекта и условную трудоёмкость",category:"Инструменты",href:"/pricing#project-calculator",keywords:"цена стоимость рассчитать бюджет калькулятор смета"},
  {title:"Подобрать тип сайта",description:"Интерактивный подбор решения по задаче",category:"Инструменты",href:"/#selector",keywords:"подбор какой сайт выбрать тип нужен"},
  {title:"Работы и примеры интерфейсов",description:"Шесть интерактивных демонстрационных концептов",category:"Примеры",href:"/works",keywords:"работы кейсы портфолио примеры проекты дизайн"},

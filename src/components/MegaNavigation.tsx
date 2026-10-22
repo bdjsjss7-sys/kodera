@@ -4,6 +4,7 @@ import Link from "next/link";
 type Group="services"|"knowledge"|"studio";
 const groups:{id:Group;name:string;eyebrow:string;description:string;links:{label:string;href:string;detail:string}[]}[]=[
  {id:"services",name:"Услуги",eyebrow:"01 / РЕШЕНИЯ",description:"Все форматы сайтов, отраслевые предложения и сложные цифровые продукты — по понятным направлениям.",links:[
+ {label:"Все услуги",href:"/services",detail:"6 основных направлений KODERA"},
  {label:"Виды сайтов",href:"/website-types",detail:"Лендинги, каталоги, магазины, порталы"},
  {label:"По отраслям",href:"/industries",detail:"20 направлений бизнеса"},
  {label:"Технологии",href:"/technologies",detail:"Next.js, React, SaaS, CRM"},
