@@ -8,19 +8,19 @@ type ProjectId="landing"|"corporate"|"shop"|"app";
 type Level="focused"|"advanced";
 
 const projects=[
- {id:"landing" as ProjectId,name:"Лендинг",description:"Один основной сценарий и точка конверсии.",defaults:1,ru:40000,by:700,perRu:4000,perBy:70},
- {id:"corporate" as ProjectId,name:"Корпоративный сайт",description:"Услуги, компания, экспертиза и поисковые страницы.",defaults:5,ru:70000,by:1250,perRu:4800,perBy:90},
- {id:"shop" as ProjectId,name:"Интернет-магазин",description:"Каталог, товарные сценарии, корзина и заказ.",defaults:15,ru:135000,by:2400,perRu:2800,perBy:50},
- {id:"app" as ProjectId,name:"Веб-сервис",description:"Роли, личные кабинеты, данные и бизнес-логика.",defaults:6,ru:195000,by:3600,perRu:8000,perBy:140}
+ {id:"landing" as ProjectId,name:"Лендинг",description:"Один основной сценарий и точка конверсии.",defaults:1,ru:28000,by:530,perRu:2800,perBy:50},
+ {id:"corporate" as ProjectId,name:"Корпоративный сайт",description:"Услуги, компания, экспертиза и поисковые страницы.",defaults:5,ru:49000,by:940,perRu:3400,perBy:70},
+ {id:"shop" as ProjectId,name:"Интернет-магазин",description:"Каталог, товарные сценарии, корзина и заказ.",defaults:15,ru:95000,by:1800,perRu:2000,perBy:40},
+ {id:"app" as ProjectId,name:"Веб-сервис",description:"Роли, личные кабинеты, данные и бизнес-логика.",defaults:6,ru:137000,by:2700,perRu:5600,perBy:110}
 ] as const;
 
 const options=[
- {id:"design",label:"Расширенная дизайн-система",note:"Больше уникальных компонентов и состояний",ru:15000,by:260},
- {id:"cms",label:"CMS и управление контентом",note:"Самостоятельное редактирование материалов",ru:12000,by:210},
- {id:"seo",label:"Расширенная SEO-архитектура",note:"Семантика и структура посадочных страниц",ru:16000,by:290},
- {id:"crm",label:"CRM или внешние интеграции",note:"Передача заявок, статусов или данных",ru:22000,by:400},
- {id:"content",label:"Подготовка содержания",note:"Редактура, тексты и помощь с материалами",ru:13000,by:240},
- {id:"motion",label:"Продвинутая анимация",note:"Сценарные переходы и выразительная динамика",ru:20000,by:360}
+ {id:"design",label:"Расширенная дизайн-система",note:"Больше уникальных компонентов и состояний",ru:10500,by:200},
+ {id:"cms",label:"CMS и управление контентом",note:"Самостоятельное редактирование материалов",ru:8500,by:160},
+ {id:"seo",label:"Расширенная SEO-архитектура",note:"Семантика и структура посадочных страниц",ru:11000,by:220},
+ {id:"crm",label:"CRM или внешние интеграции",note:"Передача заявок, статусов или данных",ru:15500,by:300},
+ {id:"content",label:"Подготовка содержания",note:"Редактура, тексты и помощь с материалами",ru:9000,by:180},
+ {id:"motion",label:"Продвинутая анимация",note:"Сценарные переходы и выразительная динамика",ru:14000,by:270}
 ] as const;
 
 export default function ScopeCalculator(){
