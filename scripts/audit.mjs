@@ -12,12 +12,13 @@ const solutions=loadTsArray("src/lib/solutions.ts","solutions");
 const articles=loadTsArray("src/lib/articles.ts","articles");
 function loadGuide(rel,name){
  const src=readFileSync(join(root,rel),"utf8");
- const match=src.match(new RegExp("export const "+name+" = (\\\\{[\\\\s\\\\S]*?\\\\}) as const;"));
- if(!match)throw Error("Could not read guide "+name);
- return JSON.parse(match[1]);
+ const prefix="export const "+name+" = ";
+ const start=src.indexOf(prefix),end=src.lastIndexOf(" as const;");
+ if(start<0||end<=start)throw Error("Could not read guide "+name);
+ return JSON.parse(src.slice(start+prefix.length,end));
 }
 const guideData={...loadGuide("src/lib/articleGuidesA.ts","guidesA"),...loadGuide("src/lib/articleGuidesB.ts","guidesB"),...loadGuide("src/lib/articleGuidesC.ts","guidesC")};
-const countWords=s=>(s.match(/[\\p{L}\\p{N}]+(?:[-–—'][\\p{L}\\p{N}]+)*/gu)||[]).length;
+const countWords=s=>s.trim().split(/\s+/).filter(Boolean).length;
 for(const a of articles){
  const deep=guideData[a.slug];
  if(!deep||deep.length<5){problems.push("Insufficient deep guide: "+a.slug);continue;}
