@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type {Metadata} from "next";
 import {services} from "@/lib/services";
-import {articles} from "@/lib/articles";
+import {expandedArticles as articles} from "@/lib/expandedArticles";
 import MobileNavigation from "@/components/MobileNavigation";
 import {ProjectSelector,InteractiveProcess} from "@/components/HomeExperiences";
 import CinematicHero from "@/components/CinematicHero";
