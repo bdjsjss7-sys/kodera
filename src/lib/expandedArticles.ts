@@ -3,7 +3,8 @@ import {guidesA} from "@/lib/articleGuidesA";
 import {guidesB} from "@/lib/articleGuidesB";
 import {guidesC} from "@/lib/articleGuidesC";
 export type EditorialSection={heading:string;paragraphs:readonly string[]};
-const guidance:Record<string,readonly EditorialSection[]>={...guidesA,...guidesB,...guidesC};
+const rawGuidance:Record<string,readonly (readonly string[])[]>={...guidesA,...guidesB,...guidesC};
+const guidance:Record<string,EditorialSection[]>=Object.fromEntries(Object.entries(rawGuidance).map(([slug,sections])=>[slug,sections.map(([heading,...paragraphs])=>({heading,paragraphs}))]));
 function countWords(s:string){return (s.trim().match(/[\p{L}\p{N}]+(?:[-–—'][\p{L}\p{N}]+)*/gu)||[]).length;}
 export function estimateReadingMinutes(sections:readonly EditorialSection[],title=""){
  const all=[title,...sections.flatMap(s=>[s.heading,...s.paragraphs])].join(" ");
