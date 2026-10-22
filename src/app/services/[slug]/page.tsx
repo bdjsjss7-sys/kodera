@@ -143,7 +143,7 @@ import EditorialVisual, {type ArtworkVariant} from "@/components/EditorialVisual
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { services } from "@/lib/services";
-const serviceArt:Record<string,ArtworkVariant>={"razrabotka-sajtov":"web","ux-ui-dizajn":"sculpture","seo":"data","veb-prilozheniya":"data","avtomatizaciya":"data","podderzhka":"web"};
+const serviceArt:Record<string,ArtworkVariant>={"razrabotka-sajtov":"web","ux-ui-dizajn":"sculpture","seo":"data","veb-prilozheniya":"service","avtomatizaciya":"service","podderzhka":"web"};
 type Props={params:Promise<{slug:string}>};
 export function generateStaticParams(){return services.map(({slug})=>({slug}));}
 export async function generateMetadata({params}:Props):Promise<Metadata>{const {slug}=await params;const s=services.find(x=>x.slug===slug);return {title:s?`${s.title} — KODERA`:"Услуга не найдена — KODERA",description:s?.intro};}
