@@ -2,6 +2,7 @@ import Image from "next/image";
 const artworks={
  sculpture:{src:"/art/sculpture.svg",alt:"Абстрактная бронзовая скульптура: архитектура, свет и выразительная форма",caption:"ФОРМА / АРХИТЕКТУРА"},
  web:{src:"/art/web-experience.svg",alt:"Авторская иллюстрация премиального интерфейса корпоративного сайта на тёмном экране",caption:"WEB / DIGITAL EXPERIENCE"},
+ service:{src:"/art/service-experience.svg",alt:"Авторская иллюстрация интерфейса цифрового продукта: рабочая панель, задачи и состояния",caption:"PRODUCT / DIGITAL WORKSPACE"},
  commerce:{src:"/art/commerce-experience.svg",alt:"Авторская предметная композиция из трёх дизайнерских объектов в карточках интернет-магазина",caption:"COMMERCE / PRODUCT EXPERIENCE"},
  data:{src:"/art/data-experience.svg",alt:"Авторская визуализация интерфейса аналитики с бронзовыми графиками",caption:"DATA / PRODUCT INTELLIGENCE"}
 } as const;
