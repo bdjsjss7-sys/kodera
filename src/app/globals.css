@@ -21,11 +21,25 @@ details > summary::-webkit-details-marker { display: none; }
 
 
 /* Cinematic hero: explicit layout guarantees independent of Tailwind class discovery. */
-.kodera-hero { position:relative; isolation:isolate; overflow:hidden; color:#f5f2ed; background:#0c0c0f; }
-.kodera-hero-backdrop { position:absolute; inset:0; z-index:-1; pointer-events:none; }
-.kodera-hero-backdrop > span, .kodera-hero-backdrop > img { position:absolute; inset:0; }
-.kodera-hero-backdrop img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.24; filter:blur(2px); }
-.kodera-hero-backdrop > div:last-child { position:absolute; inset:0; background:linear-gradient(90deg,rgba(9,9,11,.93),rgba(12,12,14,.83) 42%,rgba(13,12,12,.76) 75%,rgba(9,9,11,.89)); }
+.kodera-hero {
+ position:relative; isolation:isolate; overflow:hidden; color:#f5f2ed;
+ background:
+  radial-gradient(ellipse 60% 54% at 78% 32%, rgba(164,110,63,.105) 0%, rgba(52,35,29,.075) 42%,transparent 78%),
+  radial-gradient(ellipse 45% 48% at 13% 87%, rgba(117,72,44,.075),transparent 80%),
+  linear-gradient(125deg,#090a0d 0%,#0d0d11 52%,#0b0a0d 100%);
+}
+.kodera-hero-backdrop {
+ position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:
+  radial-gradient(ellipse 35% 38% at 82% 42%,rgba(210,158,101,.095),transparent 73%),
+  linear-gradient(115deg,transparent 42%,rgba(198,143,90,.023) 58%,transparent 72%);
+}
+.kodera-hero-backdrop::after {
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.045) 62%,rgba(0,0,0,.13) 100%);
+}
+.kodera-hero-grid {z-index:1;}
+
 .kodera-hero-grid { width:min(100%,1500px); margin:0 auto; display:grid; grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr); align-items:center; gap:clamp(32px,4vw,64px); padding:80px 48px 56px; }
 .kodera-hero-copy,.kodera-hero-showcase { min-width:0; position:relative; }
 .kodera-hero-copy > p:first-child {font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#d5b58f;}
