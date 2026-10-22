@@ -53,7 +53,7 @@ export default function StudioPage(){
   </div></header>
 
   <section className={s.hero}>
-   <div className={s.heroCopy}><p className={s.eyebrow}>KODERA / DIGITAL STUDIO</p><h1>Идея получает<br/><em>форму. Формат — силу.</em></h1><p>Создаём сайты и цифровые продукты как цельную систему: от первого вопроса и структуры до интерфейса, кода, поисковой готовности и развития.</p><div><Link href="/works">Смотреть работы ↗</Link><Link href="/services">Изучить услуги</Link></div></div>
+   <div className={s.heroCopy}><p className={s.eyebrow}>KODERA / DIGITAL STUDIO</p><h1>Идея получает<br/><em>форму и силу.</em></h1><p>Создаём сайты и цифровые продукты как цельную систему: от первого вопроса и структуры до интерфейса, кода, поисковой готовности и развития.</p><div><Link href="/works">Смотреть работы ↗</Link><Link href="/services">Изучить услуги</Link></div></div>
    <div className={s.heroVisual}><div className={s.visualFrame}><Image src="/art/studio/studio-sculpture.png" alt="Абстрактная скульптура из стекла и металла — визуальный образ KODERA" fill priority sizes="(max-width: 900px) 100vw, 50vw"/><span>FORM / SYSTEM / LIGHT</span><small>VISUAL STUDY 01</small></div><div className={s.visualNote}><span>01</span><p>Дизайн начинается не с декора.<br/>Он начинается с точного вопроса.</p></div></div>
    <div className={s.heroMeta}><span>Стратегия</span><span>UX/UI</span><span>Разработка</span><span>SEO</span><span>Россия · Беларусь</span></div>
   </section>
