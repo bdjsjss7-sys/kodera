@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import LeadForm from "@/components/LeadForm";
+import MobileNavigation from "@/components/MobileNavigation";
 
 const slides = [
   { eyebrow: "01 / WEB EXPERIENCE", title: "Сайты, которые\nзапоминают.", desc: "Выразительный дизайн, быстрая загрузка и продуманная структура.", mark: "WEB" },
@@ -16,7 +17,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#0d0e11] text-[#f5f2ed]">
-      <header className="border-b border-white/10">
+      <header className="relative z-40 border-b border-white/10">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-5 py-6 md:px-12">
           <a href="/" className="group flex flex-col items-start leading-none" aria-label="KODERA — главная">
             <strong className="text-[25px] font-light tracking-[.24em] text-[#f1ece7] [text-shadow:0_1px_0_rgba(255,255,255,.24),0_5px_18px_rgba(213,181,143,.22)] transition duration-500 group-hover:[text-shadow:0_1px_0_rgba(255,255,255,.4),0_7px_25px_rgba(213,181,143,.5)]">KODERA</strong><small className="mt-2 text-[8px] tracking-[.4em] text-[#c9ae8d]">DIGITAL STUDIO</small>
@@ -24,7 +25,7 @@ export default function Home() {
           <nav className="hidden gap-9 text-sm text-white/65 lg:flex" aria-label="Главное меню">
             <a href="#services" className="hover:text-white">Услуги</a><Link href="/pricing" className="hover:text-white">Стоимость</Link><Link href="/process" className="hover:text-white">Подход</Link><Link href="/blog" className="hover:text-white">Журнал</Link><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
           </nav>
-          <div className="flex items-center gap-4"><div className="flex gap-3 text-xs text-[#d5b58f]"><Link href="/ru" aria-label="Услуги для России">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Услуги для Беларуси">BY</Link></div><a href="#contact" className="rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
+          <div className="flex items-center gap-4"><MobileNavigation/><div className="hidden gap-3 text-xs text-[#d5b58f] sm:flex"><Link href="/ru" aria-label="Услуги для России">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Услуги для Беларуси">BY</Link></div><a href="#contact" className="hidden rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs sm:inline-flex text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
         </div>
       </header>
       <section className="relative mx-auto grid min-h-[760px] max-w-[1500px] items-center gap-12 px-5 py-20 md:px-12 lg:grid-cols-2">
