@@ -48,5 +48,24 @@ for(const rel of ["src/app/page.tsx","src/app/services/[slug]/page.tsx","src/app
  if(!source.includes("EditorialVisual")&&!source.includes('/art/'))problems.push("Page missing visual integration: "+rel);
 }
 
+
+const editorialVisual=readFileSync(join(root,"src/components/EditorialVisual.tsx"),"utf8");
+const articleVisual=readFileSync(join(root,"src/components/ArticleArtwork.tsx"),"utf8");
+const explorer=readFileSync(join(root,"src/components/ArticleExplorer.tsx"),"utf8");
+const article=readFileSync(join(root,"src/app/blog/[slug]/page.tsx"),"utf8");
+const calculator=readFileSync(join(root,"src/components/ScopeCalculator.tsx"),"utf8");
+const service=readFileSync(join(root,"src/app/services/[slug]/page.tsx"),"utf8");
+const solutionExplorer=readFileSync(join(root,"src/components/SolutionExplorer.tsx"),"utf8");
+for(const [label,source,needles] of [
+ ["Journal cards",explorer,["ArticleArtwork","aria-pressed","filtered.map"]],
+ ["Article presentation",article,["ArticleArtwork","ArticleActions","generateMetadata"]],
+ ["Article art direction",articleVisual,["EditorialVisual","categoryArt"]],
+ ["Calculator live details",calculator,["detail.addons","aria-live","scope-pages","Сбросить параметры"]],
+ ["Service leads",service,["/contact","/pricing","related","services.filter"]],
+ ["Catalog navigation",solutionExplorer,["sort===","onChange","filtered.map"]],
+ ["Visual fallback",editorialVisual,["onError","art.fallback"]]
+]){for(const needle of needles){if(!source.includes(needle))problems.push("UI check failed: "+label+" / "+needle);}}
+if(!existsSync(join(root,"src/components/ArticleActions.tsx")))problems.push("Missing article sharing tools.");
+
 console.log("KODERA audit: "+solutions.length+" solutions, "+articles.length+" articles");
 if(problems.length){for(const x of problems)console.error("FAIL:",x);process.exitCode=1;}else console.log("PASS: Content structure and required routes found.");
