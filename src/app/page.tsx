@@ -71,7 +71,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="projects" className="relative overflow-hidden border-t border-white/10 py-24 md:py-32">
+      <section className="border-t border-white/10 py-20"><div className="mx-auto max-w-[1500px] px-5 md:px-12"><p className="text-xs uppercase tracking-[.3em] text-[#d5b58f]">Направления / Решения</p><h2 className="mt-5 text-4xl font-light tracking-[-.05em] md:text-6xl">Решения под конкретные задачи.</h2><p className="mt-6 max-w-2xl leading-8 text-white/55">От сайтов и интерфейсов до аналитики, интеграций и технической оптимизации. Изучите подробные направления работы.</p><Link href="/solutions" className="mt-8 inline-flex rounded-full border border-[#d5b58f]/60 px-7 py-4 text-[#d5b58f] transition hover:bg-[#d5b58f] hover:text-black">Смотреть все направления ↗</Link></div></section><section id="projects" className="relative overflow-hidden border-t border-white/10 py-24 md:py-32">
         <div className="mx-auto max-w-[1500px] px-5 md:px-12">
           <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">02 / Возможности</p>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
