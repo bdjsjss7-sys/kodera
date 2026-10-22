@@ -66,3 +66,9 @@
 .timingAction{border-color:#ffffff22}
 .timingAction p{color:#ffffff70}
 .timingAction a{border-color:#d7ae7870;color:#d7ae78}
+
+
+/* Keep orbit labels upright while the system ring rotates. */
+.orbit span{animation:counterRotate 80s linear infinite}
+@keyframes counterRotate{to{transform:rotate(-360deg)}}
+@media(prefers-reduced-motion:reduce){.orbit span{animation:none}}
