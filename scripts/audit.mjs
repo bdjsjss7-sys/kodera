@@ -10,6 +10,24 @@ function loadTsArray(rel,name){
 }
 const solutions=loadTsArray("src/lib/solutions.ts","solutions");
 const articles=loadTsArray("src/lib/articles.ts","articles");
+function loadGuide(rel,name){
+ const src=readFileSync(join(root,rel),"utf8");
+ const match=src.match(new RegExp("export const "+name+" = (\\\\{[\\\\s\\\\S]*?\\\\}) as const;"));
+ if(!match)throw Error("Could not read guide "+name);
+ return JSON.parse(match[1]);
+}
+const guideData={...loadGuide("src/lib/articleGuidesA.ts","guidesA"),...loadGuide("src/lib/articleGuidesB.ts","guidesB"),...loadGuide("src/lib/articleGuidesC.ts","guidesC")};
+const countWords=s=>(s.match(/[\\p{L}\\p{N}]+(?:[-–—'][\\p{L}\\p{N}]+)*/gu)||[]).length;
+for(const a of articles){
+ const deep=guideData[a.slug];
+ if(!deep||deep.length<5){problems.push("Insufficient deep guide: "+a.slug);continue;}
+ const all=a.sections.flatMap(s=>[s.heading,...s.paragraphs]).join(" ")+" "+deep.flat().join(" ");
+ if(countWords(all)<500)problems.push("Article still too short: "+a.slug+" ("+countWords(all)+" words)");
+}
+if(Object.keys(guideData).length!==articles.length)problems.push("Guide and article counts disagree.");
+const enrichedSource=readFileSync(join(root,"src/lib/expandedArticles.ts"),"utf8");
+if(!enrichedSource.includes("estimateReadingMinutes"))problems.push("Dynamic reading-time calculator missing.");
+
 const seen=new Set();
 for(const s of solutions){
  if(seen.has(s.slug))problems.push("Duplicate solution slug: "+s.slug);seen.add(s.slug);
