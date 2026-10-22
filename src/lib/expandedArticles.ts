@@ -18,7 +18,8 @@ export function estimateReadingMinutes(sections:readonly EditorialSection[],titl
  const all=[title,...sections.flatMap(s=>[s.heading,...s.paragraphs])].join(" ");
  return Math.max(1,Math.ceil(countWords(all)/170));
 }
+const newSlugs=new Set(newArticles.map(a=>a.slug as string));
 export const expandedArticles=[...articles,...newArticles].map(a=>{
  const sections:EditorialSection[]=[...a.sections,...(guidance[a.slug]||[])];
- return {...a,sections,readingMinutes:estimateReadingMinutes(sections,a.title)};
+ return {...a,sections,readingMinutes:estimateReadingMinutes(sections,a.title),cover:newSlugs.has(a.slug)?`/art/blog/${a.slug}.svg`:undefined};
 });
