@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import Link from "next/link";
-const menu=[{href:"/solutions",label:"Услуги и решения"},{href:"/website-types",label:"Виды сайтов"},{href:"/industries",label:"Решения по отраслям"},{href:"/technologies",label:"Технологии"},{href:"/seo",label:"SEO и развитие"},{href:"/pricing",label:"Стоимость"},{href:"/process",label:"Этапы работы"},{href:"/blog",label:"Журнал"},{href:"/ru",label:"Россия"},{href:"/by",label:"Беларусь"},{href:"/contact",label:"Обсудить проект"}];
+const menu=[{href:"/explore",label:"Поиск по сайту"},{href:"/works",label:"Примеры работ"},{href:"/solutions",label:"100 услуг и направлений"},{href:"/website-types",label:"Виды сайтов"},{href:"/industries",label:"Решения по отраслям"},{href:"/technologies",label:"Технологии"},{href:"/seo",label:"SEO и развитие"},{href:"/pricing#project-calculator",label:"Калькулятор стоимости"},{href:"/process",label:"Этапы работы"},{href:"/blog",label:"Журнал"},{href:"/ru",label:"Россия"},{href:"/by",label:"Беларусь"},{href:"/contact",label:"Обсудить проект"}];
 export default function MobileNavigation(){
  const [open,setOpen]=useState(false);
  useEffect(()=>{if(!open)return;const onKey=(e:KeyboardEvent)=>{if(e.key==="Escape")setOpen(false)};window.addEventListener("keydown",onKey);return()=>window.removeEventListener("keydown",onKey)},[open]);
