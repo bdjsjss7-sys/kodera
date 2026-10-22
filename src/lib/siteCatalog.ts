@@ -2,7 +2,7 @@ import {services} from "@/lib/services";
 import {solutions} from "@/lib/solutions";
 import {newServicePages} from "@/lib/newServicePages";
 import {expandedArticles} from "@/lib/expandedArticles";
-import {showcases} from "@/lib/showcases";
+import {portfolioWorks} from "@/lib/portfolioWorks";
 export type SearchEntry={title:string;description:string;category:string;href:string;keywords:string};
 export const siteEntries:SearchEntry[]=[
  {title:"Калькулятор стоимости",description:"Оценить состав проекта и условную трудоёмкость",category:"Инструменты",href:"/pricing#project-calculator",keywords:"цена стоимость рассчитать бюджет калькулятор смета"},
@@ -16,5 +16,5 @@ export const siteEntries:SearchEntry[]=[
  ...solutions.map(s=>({title:s.title,description:s.subtitle,category:"Решения",href:`/solutions/${s.slug}`,keywords:s.category+" "+s.detail.slice(0,120)})),
  ...newServicePages.map(s=>({title:s.title,description:s.subtitle,category:s.category,href:`/${s.group}/${s.slug}`,keywords:s.audience+" "+s.scenarios})),
  ...expandedArticles.map(s=>({title:s.title,description:s.description,category:"Журнал",href:`/blog/${s.slug}`,keywords:s.category+" "+s.description})),
- ...showcases.map(s=>({title:s.name,description:s.short,category:"Примеры",href:`/works/${s.slug}`,keywords:s.sector+" "+s.kind+" "+s.tags.join(" ")}))
+ ...portfolioWorks.map(s=>({title:s.name,description:s.short,category:"Примеры",href:`/works/${s.slug}`,keywords:s.sector+" "+s.kind+" "+s.tags.join(" ")}))
 ];
