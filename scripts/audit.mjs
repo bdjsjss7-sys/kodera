@@ -37,5 +37,14 @@ for(const [label,source,marker] of [
  ["Comparison component",comparison,"aria-pressed"]
 ]){if(!source.includes(marker))problems.push("Homepage check failed: "+label);}
 
+
+// Verify committed illustration assets and their use in rendered pages.
+const visuals=["sculpture","web-experience","commerce-experience","service-experience","data-experience"];
+for(const name of visuals){if(!existsSync(join(root,"public/art/"+name+".svg")))problems.push("Missing visual: "+name);}
+for(const rel of ["src/app/page.tsx","src/app/services/[slug]/page.tsx","src/app/solutions/[slug]/page.tsx","src/app/ru/page.tsx","src/app/by/page.tsx"]){
+ const source=readFileSync(join(root,rel),"utf8");
+ if(!source.includes("EditorialVisual")&&!source.includes('/art/'))problems.push("Page missing visual integration: "+rel);
+}
+
 console.log("KODERA audit: "+solutions.length+" solutions, "+articles.length+" articles");
 if(problems.length){for(const x of problems)console.error("FAIL:",x);process.exitCode=1;}else console.log("PASS: Content structure and required routes found.");
