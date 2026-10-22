@@ -59,9 +59,10 @@ export default function ScopeCalculator(){
  const reset=()=>{setMarket("ru");setProjectId("corporate");setScreens(10);setLevel("focused");setSelected(["design","cms"]);setStatus("")};
  const maxScreens=projectId==="landing"?12:projectId==="corporate"?60:projectId==="shop"?200:80;
  const optionTotal=estimate.min-estimate.baseMin-estimate.structureMin;
+ const detail={addons:optionTotal};
  const whole=Math.max(estimate.min,1);
  return <section id="project-calculator" className={s.calculator}>
-  <header className={s.calcHeader}><div><p>INTERACTIVE ESTIMATE / 01</p><h3>Параметры проекта</h3></div><button type="button" onClick={reset}>Сбросить ↺</button></header>
+  <header className={s.calcHeader}><div><p>INTERACTIVE ESTIMATE / 01</p><h3>Параметры проекта</h3></div><button type="button" onClick={reset}>Сбросить параметры ↺</button></header>
   <div className={s.calcGrid}>
    <div className={s.controls}>
     <fieldset><legend><span>01</span>Рынок и валюта</legend><div className={s.marketSwitch}>
@@ -69,7 +70,7 @@ export default function ScopeCalculator(){
      <button type="button" aria-pressed={market==="by"} onClick={()=>setMarket("by")}><span>BY</span><div><b>Беларусь</b><small>Белорусские рубли</small></div><i>BYN</i></button>
     </div></fieldset>
     <fieldset><legend><span>02</span>Формат продукта</legend><div className={s.projectGrid}>{projects.map((item,index)=><button type="button" key={item.id} aria-pressed={projectId===item.id} onClick={()=>setProject(item.id)}><small>0{index+1}</small><b>{item.name}</b><span>{item.description}</span></button>)}</div></fieldset>
-    <fieldset><legend><span>03</span>Масштаб</legend><div className={s.rangeHead}><label htmlFor="project-screens">Страницы или основные экраны</label><output htmlFor="project-screens">{screens}</output></div><input id="project-screens" type="range" min="1" max={maxScreens} value={screens} onChange={event=>setScreens(Number(event.target.value))}/><div className={s.rangeScale}><span>1</span><span>{maxScreens}</span></div></fieldset>
+    <fieldset><legend><span>03</span>Масштаб</legend><div className={s.rangeHead}><label htmlFor="scope-pages">Страницы или основные экраны</label><output htmlFor="scope-pages">{screens}</output></div><input id="scope-pages" type="range" min="1" max={maxScreens} value={screens} onChange={event=>setScreens(Number(event.target.value))}/><div className={s.rangeScale}><span>1</span><span>{maxScreens}</span></div></fieldset>
     <fieldset><legend><span>04</span>Уровень проработки</legend><div className={s.levelSwitch}>
      <button type="button" aria-pressed={level==="focused"} onClick={()=>setLevel("focused")}><b>Сфокусированный</b><span>Главные сценарии и сдержанный набор компонентов</span></button>
      <button type="button" aria-pressed={level==="advanced"} onClick={()=>setLevel("advanced")}><b>Расширенный</b><span>Больше уникальных состояний, деталей и вариативности</span></button>
@@ -84,7 +85,7 @@ export default function ScopeCalculator(){
     <div className={s.breakdown}>
      <div><p><span>Базовый формат</span><b>{format(estimate.baseMin)}+</b></p><i><span style={{width:Math.min(100,estimate.baseMin/whole*100)+"%"}}/></i></div>
      <div><p><span>Дополнительный масштаб</span><b>{format(estimate.structureMin)}</b></p><i><span style={{width:Math.min(100,estimate.structureMin/whole*100)+"%"}}/></i></div>
-     <div><p><span>Опции и уровень</span><b>{format(Math.max(0,optionTotal))}</b></p><i><span style={{width:Math.min(100,Math.max(0,optionTotal)/whole*100)+"%"}}/></i></div>
+     <div><p><span>Опции и уровень</span><b>{format(Math.max(0,detail.addons))}</b></p><i><span style={{width:Math.min(100,Math.max(0,detail.addons)/whole*100)+"%"}}/></i></div>
     </div>
     <div className={s.summary}><div><small>ПРОДУКТ</small><b>{project.name}</b></div><div><small>МАСШТАБ</small><b>{screens} экранов</b></div><div><small>ОПЦИИ</small><b>{selected.length}</b></div><div><small>УРОВЕНЬ</small><b>{level==="focused"?"Focus":"Advanced"}</b></div></div>
     <p className={s.disclaimer}>Расчёт показывает порядок бюджета и не является публичной офертой. Точная стоимость фиксируется после уточнения требований и состава результата.</p>
