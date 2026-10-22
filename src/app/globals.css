@@ -6,3 +6,14 @@ body { margin: 0; background: #0d0e11; }
 ::selection { background: #d5b58f; color: #101114; }
 :focus-visible { outline: 2px solid #d5b58f; outline-offset: 4px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* KODERA interaction language: restrained entrances, clear focus, reduced-motion safe. */
+@keyframes kodera-appear {
+  from { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.kodera-reveal { animation: kodera-appear 420ms cubic-bezier(.18,.7,.25,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .kodera-reveal { animation: none !important; }
+}
+details > summary::-webkit-details-marker { display: none; }
