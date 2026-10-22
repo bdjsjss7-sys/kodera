@@ -27,7 +27,7 @@ function BrowserDemo({active,onSelect}:{active:number;onSelect:(index:number)=>v
  </div>
  <div className="flex items-center justify-between gap-3 border-t border-white/10 bg-[#151417] px-5 py-4 text-[10px] text-[#d5b58f]"><span>0{active+1} / 04</span><span>{names[active]} / CONCEPT DEMO</span></div>
  </div>
- <p className="mt-5 text-center text-[10px] tracking-[.19em] text-[#a78c6b]/80">DRAG YOUR ATTENTION / NOT YOUR BROWSER</p>
+ <p className="mt-5 text-center text-[10px] tracking-[.19em] text-[#a78c6b]/80">ИНТЕРАКТИВНЫЙ КОНЦЕПТ / НАВЕДИТЕ НА ТОЧКИ</p>
  </div>;
 }
 
@@ -39,7 +39,7 @@ export function HomeShowcase(){
  <div id="experience" className="min-w-0"><div className="mb-5 flex flex-wrap items-center justify-between gap-3"><p className="text-xs tracking-[.17em] text-[#d5b58f]">ИНТЕРАКТИВНЫЙ КОНЦЕПТ</p><span className="text-xs text-white/40">0{active+1} / 04</span></div>
  <div className="mb-5 flex flex-wrap items-center gap-2" role="group" aria-label="Выбор концепции">{labels.map((label,i)=><button key={label} type="button" aria-label={`Показать концепцию: ${label}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className={`flex h-11 items-center gap-2 rounded-full border px-3 text-xs transition ${active===i?"border-[#d5b58f] bg-[#d5b58f]/15 text-[#e5c6a3]":"border-white/15 text-white/55 hover:border-[#d5b58f]/70"}`}><span className={`h-2.5 rounded-full transition-all ${active===i?"w-5 bg-[#d5b58f]":"w-2.5 bg-white/35"}`}/><span>{label}</span></button>)}</div>
  <BrowserDemo active={active} onSelect={setActive}/>
- <p className="mt-6 text-xs leading-6 text-white/45">Интерактивные примеры возможных решений, не реальные проекты клиентов. Наведите курсор на точки внутри планшета или на кнопки выше. Можно также нажать на нужный вариант.</p>
+ <p className="mt-6 text-xs leading-6 text-white/45">Четыре интерактивных концепта для демонстрации подхода KODERA. Это не портфолио выполненных заказов. Переключайте экраны точками или кнопками.</p>
  <div className="mt-4 flex flex-wrap items-center gap-2"><Link href={demos[active].links[0][1]} className="rounded-full border border-[#d5b58f]/40 px-5 py-3 text-xs text-[#d5b58f]">Подробнее: {labels[active]} ↗</Link><button type="button" onClick={()=>setActive(v=>(v+1)%4)} className="ml-auto rounded-full border border-white/20 px-5 py-3 text-xs text-white/70 hover:border-white/50">Следующий пример →</button></div></div>
  </div><div className="relative mx-auto grid max-w-[1500px] gap-3 px-5 pb-12 md:grid-cols-3 md:px-12 md:pb-16">
  {[
