@@ -11,3 +11,29 @@
 .price .from{color:#d3ad7b;font-family:Georgia,serif;font-size:24px;font-style:italic}
 .price strong{font-size:clamp(48px,4.4vw,70px);line-height:1;color:#f5f1ea}
 .price small{font-size:14px}
+
+
+/* Optional client budget: compare intent with the calculated scope without changing price. */
+.controls legend em{margin-left:8px;color:#ffffff35;font-size:7px;font-style:normal;letter-spacing:.12em}
+.budgetIntro{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.budgetIntro p{margin:0;color:#ffffff5f;font-size:11px;line-height:1.6}
+.budgetIntro button{flex:none;border:0;background:transparent;color:#ffffff45;font-size:9px;cursor:pointer}
+.budgetIntro button[data-active=true]{color:#d3ad7b}
+.budgetPresets{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
+.budgetPresets button{min-height:48px;padding:10px;border:1px solid #ffffff1c;background:#121316;color:#ffffff80;font-size:10px;cursor:pointer;transition:.2s}
+.budgetPresets button:hover,.budgetPresets button[data-active=true]{border-color:#d3ad7b;background:#d3ad7b0c;color:#d3ad7b}
+.customBudget{margin-top:10px;padding:14px 16px;border:1px solid #ffffff1c;background:#121316;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.customBudget>span{color:#ffffff75;font-size:11px}
+.customBudget>div{display:flex;align-items:center;gap:9px}
+.customBudget input{width:150px;border:0;border-bottom:1px solid #ffffff28;background:transparent;padding:8px 3px;color:#f4f0ea;font-size:18px;text-align:right;outline:none}
+.customBudget input:focus{border-color:#d3ad7b}
+.customBudget input::-webkit-inner-spin-button{appearance:none}
+.customBudget i{color:#d3ad7b;font-size:11px;font-style:normal}
+.budgetOk,.budgetGap{margin-top:22px;padding:18px;border:1px solid;display:grid;grid-template-columns:32px 1fr;gap:13px}
+.budgetOk{border-color:#78aa8660;background:#78aa860a}.budgetGap{border-color:#d3ad7b66;background:#d3ad7b09}
+.budgetOk>span,.budgetGap>span{width:29px;height:29px;border-radius:50%;display:grid;place-items:center;font-size:11px}
+.budgetOk>span{background:#78aa8620;color:#8fc39b}.budgetGap>span{background:#d3ad7b18;color:#d3ad7b}
+.budgetOk small,.budgetGap small{display:block;color:#ffffff48;font-size:7px;letter-spacing:.12em;line-height:1.5}
+.budgetOk b,.budgetGap b{display:block;margin-top:7px;font-size:13px;font-weight:400}
+.budgetOk p,.budgetGap p{margin:7px 0 0;color:#ffffff58;font-size:9px;line-height:1.55}
+@media(max-width:600px){.budgetIntro{align-items:flex-start;flex-direction:column}.budgetPresets{grid-template-columns:1fr 1fr}.customBudget{align-items:flex-start;flex-direction:column}.customBudget>div,.customBudget input{width:100%}}
