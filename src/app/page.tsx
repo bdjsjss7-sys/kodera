@@ -1,134 +1,38 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import LeadForm from "@/components/LeadForm";
+import type {Metadata} from "next";
+import {services} from "@/lib/services";
+import {articles} from "@/lib/articles";
 import MobileNavigation from "@/components/MobileNavigation";
-
-const slides = [
-  { eyebrow: "01 / WEB EXPERIENCE", title: "Сайты, которые\nзапоминают.", desc: "Выразительный дизайн, быстрая загрузка и продуманная структура.", mark: "WEB" },
-  { eyebrow: "02 / DIGITAL PRODUCTS", title: "Идеи, которые\nработают.", desc: "Интерфейсы, сервисы и цифровые продукты под задачи бизнеса.", mark: "UX" },
-  { eyebrow: "03 / GROWTH SYSTEMS", title: "Рост, который\nможно измерить.", desc: "SEO, аналитика и автоматизация как единая система развития.", mark: "SEO" },
-];
-
-export default function Home() {
-  const [active, setActive] = useState(0);
-  const slide = slides[active];
-
-  return (
-    <main className="min-h-screen overflow-hidden bg-[#0d0e11] text-[#f5f2ed]">
-      <header className="relative z-40 border-b border-white/10">
-        <div className="mx-auto flex max-w-[1500px] items-center justify-between gap-4 px-5 py-6 md:px-12">
-          <a href="/" className="group flex flex-col items-start leading-none" aria-label="KODERA — главная">
-            <strong className="text-[25px] font-light tracking-[.24em] text-[#f1ece7] [text-shadow:0_1px_0_rgba(255,255,255,.24),0_5px_18px_rgba(213,181,143,.22)] transition duration-500 group-hover:[text-shadow:0_1px_0_rgba(255,255,255,.4),0_7px_25px_rgba(213,181,143,.5)]">KODERA</strong><small className="mt-2 text-[8px] tracking-[.4em] text-[#c9ae8d]">DIGITAL STUDIO</small>
-          </a>
-          <nav className="hidden gap-9 text-sm text-white/65 lg:flex" aria-label="Главное меню">
-            <a href="#services" className="hover:text-white">Услуги</a><Link href="/pricing" className="hover:text-white">Стоимость</Link><Link href="/process" className="hover:text-white">Подход</Link><Link href="/blog" className="hover:text-white">Журнал</Link><a href="#projects" className="hover:text-white">Проекты</a><a href="#about" className="hover:text-white">О студии</a><a href="#contact" className="hover:text-white">Контакты</a>
-          </nav>
-          <div className="flex items-center gap-4"><MobileNavigation/><div className="hidden gap-3 text-xs text-[#d5b58f] sm:flex"><Link href="/ru" aria-label="Услуги для России">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Услуги для Беларуси">BY</Link></div><a href="#contact" className="hidden rounded-full border border-[#c9ae8d]/60 px-4 py-3 text-xs sm:inline-flex text-[#e6cba9] transition hover:bg-[#c9ae8d] hover:text-[#111]">Обсудить проект ↗</a></div>
-        </div>
-      </header>
-      <section className="relative mx-auto grid min-h-[760px] max-w-[1500px] items-center gap-12 px-5 py-20 md:px-12 lg:grid-cols-2">
-        <div className="relative z-10">
-          <p className="mb-9 text-xs uppercase tracking-[.26em] text-[#d5b58f]">Студия цифровых решений · Россия и Беларусь</p>
-          <h1 className="text-[clamp(3.5rem,6.6vw,7.8rem)] font-normal leading-[.98] tracking-[-.075em]">Создаём<br />цифровое<br /><span className="bg-gradient-to-r from-[#f0dbc0] via-[#c29e78] to-[#e9cfad] bg-clip-text text-transparent">будущее.</span></h1>
-          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Проектируем и разрабатываем цифровые продукты с характером. Сильная эстетика, понятная логика и внимание к деталям.</p>
-          <div className="mt-10 flex flex-wrap gap-4"><a href="#contact" className="rounded-full bg-[#d5b58f] px-7 py-4 text-sm text-[#151414] transition hover:bg-[#f0d7b5]">Обсудить проект ↗</a><a href="#about" className="rounded-full border border-white/20 px-7 py-4 text-sm hover:border-white/60">Наш подход ↗</a></div>
-          <div className="mt-16 flex flex-wrap gap-2 text-xs text-white/45">{["Веб-разработка","UX/UI","SEO","Автоматизация"].map(x=><span key={x} className="rounded-full border border-white/15 px-4 py-2">{x}</span>)}</div>
-        </div>
-        <div className="relative flex min-h-[460px] items-center justify-center [perspective:1100px] md:min-h-[600px]">
-          <div className="absolute h-[420px] w-[420px] rounded-full bg-[#c8a782]/10 blur-[95px]" />
-          <div className="absolute h-[430px] w-[430px] rotate-[-24deg] rounded-full border border-[#c8a782]/15" />
-          <div className="relative w-full max-w-[510px] overflow-hidden rounded-[24px] border border-white/20 bg-gradient-to-br from-[#29272b] to-[#111216] shadow-[28px_45px_95px_rgba(0,0,0,.75),-8px_-8px_55px_rgba(213,181,143,.08)] transition-transform duration-700 ease-out [transform:rotateY(-13deg)_rotateX(5deg)_rotateZ(-3deg)] hover:[transform:rotateY(-7deg)_rotateX(2deg)_rotateZ(-1deg)] hover:shadow-[30px_50px_110px_rgba(0,0,0,.85),0_0_55px_rgba(213,181,143,.15)]">
-            <div className="flex items-center gap-1 border-b border-white/10 px-4 py-2" aria-label="Выбор экрана">
-              {slides.map((s,i)=><button key={s.mark} type="button" aria-label={`Показать экран ${i+1}: ${s.mark}`} aria-pressed={active===i} onMouseEnter={()=>setActive(i)} onFocus={()=>setActive(i)} onClick={()=>setActive(i)} className="group grid h-11 w-11 cursor-pointer place-items-center rounded-full outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-[#d5b58f]"><span className={`h-3 rounded-full transition-all duration-300 ${active===i?"w-7 bg-[#d5b58f] shadow-[0_0_14px_rgba(213,181,143,.55)]":"w-3 bg-white/35 group-hover:w-5 group-hover:bg-[#e6cba9]"}`} /></button>)}
-              <span className="ml-auto text-[10px] tracking-[.2em] text-white/35">KODERA / SHOWCASE</span>
-            </div>
-            <div key={active} className="relative flex h-[430px] flex-col justify-between overflow-hidden p-8 sm:h-[450px] sm:p-11">
-              <div className="pointer-events-none absolute -bottom-28 -right-24 grid h-80 w-80 rotate-[-25deg] place-items-center rounded-[75px] border border-[#d5b58f]/30 bg-gradient-to-br from-[#b99b78]/25 to-transparent text-[110px] font-bold text-[#d5b58f]/20">{slide.mark}</div>
-              <div className="relative"><p className="text-[10px] tracking-[.3em] text-[#d5b58f]">{slide.eyebrow}</p><h2 className="mt-10 min-h-[112px] whitespace-pre-line text-[clamp(2rem,3.2vw,3.2rem)] leading-[1.08] tracking-[-.055em] sm:min-h-[120px]">{slide.title}</h2><p className="mt-5 max-w-xs text-sm leading-7 text-white/50">{slide.desc}</p></div>
-              <div className="relative mt-5 flex items-center justify-between border-t border-white/10 pt-5 text-xs text-white/45"><span>0{active+1} / 03</span><button type="button" onClick={()=>setActive((active+1)%slides.length)} className="text-[#e4c8a5] hover:text-white">Следующий экран ↗</button></div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="services" className="border-t border-white/10 bg-[#111215] py-24 md:py-32">
-        <div className="mx-auto max-w-[1500px] px-5 md:px-12">
-          <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <div><p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">01 / Экспертиза</p><h2 className="max-w-3xl text-5xl font-light leading-[1.05] tracking-[-.06em] md:text-7xl">От идеи до <span className="text-[#d5b58f]">результата.</span></h2></div>
-            <p className="max-w-sm text-sm leading-7 text-white/50">Создаём цифровую основу бизнеса: от выразительного сайта до сложного сервиса и системы привлечения клиентов.</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              {n:"01",name:"Разработка сайтов",href:"/services/razrabotka-sajtov",desc:"Корпоративные сайты, лендинги, каталоги и интернет-магазины с продуманной архитектурой.",tags:["Next.js","Адаптивность","Скорость"]},
-              {n:"02",name:"UX/UI-дизайн",href:"/services/ux-ui-dizajn",desc:"Исследование сценариев, прототипирование и интерфейсы, в которых эстетика работает на удобство.",tags:["Прототипы","Дизайн-система"]},
-              {n:"03",name:"SEO и структура",href:"/services/seo",desc:"Семантика, техническая оптимизация и посадочные страницы под реальные поисковые запросы.",tags:["Аудит","Семантика","Контент"]},
-              {n:"04",name:"Веб-приложения",href:"/services/veb-prilozheniya",desc:"Личные кабинеты, интерактивные калькуляторы, панели управления и нестандартные инструменты.",tags:["Интерфейсы","Интеграции"]},
-              {n:"05",name:"Автоматизация",href:"/services/avtomatizaciya",desc:"Связываем формы, CRM и внутренние процессы, чтобы сократить рутину и ускорить обработку заявок.",tags:["CRM","API","Процессы"]},
-              {n:"06",name:"Поддержка и развитие",href:"/services/podderzhka",desc:"Развиваем проект после запуска: обновления, улучшения интерфейса и технический контроль.",tags:["Развитие","Оптимизация"]},
-            ].map(item=><Link href={item.href} key={item.n} className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden rounded-[24px] border border-white/10 bg-[linear-gradient(145deg,#202024,#151619)] p-8 shadow-[0_18px_45px_rgba(0,0,0,.15)] transition duration-500 hover:-translate-y-2 hover:border-[#d5b58f]/60 hover:shadow-[0_28px_65px_rgba(0,0,0,.45),0_0_45px_rgba(213,181,143,.07)]">
-              <div><div className="mb-10 flex items-center justify-between"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{item.n} / SERVICE</span><span className="text-xl text-[#d5b58f] transition group-hover:translate-x-1 group-hover:-translate-y-1">↗</span></div><h3 className="mb-4 text-2xl font-light tracking-[-.04em]">{item.name}</h3><p className="max-w-sm text-sm leading-7 text-white/50">{item.desc}</p></div>
-              <div className="mt-8 flex flex-wrap gap-2">{item.tags.map(tag=><span key={tag} className="rounded-full border border-white/10 px-3 py-1 text-[11px] text-white/45">{tag}</span>)}</div>
-            </Link>)}
-          </div>
-        </div>
-      </section>
-      <section className="border-t border-white/10 py-20"><div className="mx-auto max-w-[1500px] px-5 md:px-12"><p className="text-xs uppercase tracking-[.3em] text-[#d5b58f]">Направления / Решения</p><h2 className="mt-5 text-4xl font-light tracking-[-.05em] md:text-6xl">Решения под конкретные задачи.</h2><p className="mt-6 max-w-2xl leading-8 text-white/55">От сайтов и интерфейсов до аналитики, интеграций и технической оптимизации. Изучите подробные направления работы.</p><Link href="/solutions" className="mt-8 inline-flex rounded-full border border-[#d5b58f]/60 px-7 py-4 text-[#d5b58f] transition hover:bg-[#d5b58f] hover:text-black">Смотреть все направления ↗</Link></div></section><section id="projects" className="relative overflow-hidden border-t border-white/10 py-24 md:py-32">
-        <div className="mx-auto max-w-[1500px] px-5 md:px-12">
-          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">02 / Возможности</p>
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div><h2 className="text-5xl font-light leading-[1.08] tracking-[-.06em] md:text-7xl">Не просто сайт.<br/><span className="text-[#d5b58f]">Инструмент роста.</span></h2><p className="mt-8 max-w-lg text-base leading-8 text-white/55">Продумываем структуру, визуальную систему и техническую реализацию как единый продукт. Каждый элемент должен решать конкретную задачу.</p><a href="#contact" className="mt-10 inline-flex rounded-full border border-[#d5b58f]/60 px-7 py-4 text-sm text-[#e8cba6] transition hover:bg-[#d5b58f] hover:text-[#111]">Обсудить задачу ↗</a></div>
-            <div className="relative grid min-h-[360px] place-items-center overflow-hidden rounded-[32px] border border-white/10 bg-[radial-gradient(ellipse_at_60%_40%,#40362e_0%,#202024_42%,#141518_75%)] p-8">
-              <div className="absolute h-64 w-64 rotate-45 rounded-[50px] border border-[#d5b58f]/30 bg-gradient-to-br from-[#d5b58f]/20 to-transparent shadow-[30px_40px_80px_rgba(0,0,0,.45)]" />
-              <div className="absolute h-44 w-44 -rotate-12 rounded-[35px] border border-white/15 bg-[#252326]/80 backdrop-blur-sm" />
-              <div className="relative text-center"><p className="text-[10px] tracking-[.4em] text-[#d5b58f]">KODERA / DIGITAL THINKING</p><p className="mt-5 text-4xl font-light tracking-[-.06em] sm:text-5xl">Форма × Функция</p><p className="mt-4 text-sm text-white/50">Дизайн, технологии, смысл.</p></div>
-            </div>
-          </div>
-          <p className="mt-12 border-t border-white/10 pt-6 text-xs leading-6 text-white/40">Портфолио реальных проектов будет опубликовано после подготовки и согласования материалов.</p>
-        </div>
-      </section>
-      <section className="border-t border-white/10 py-24 md:py-32" aria-labelledby="value-heading">
-        <div className="mx-auto max-w-[1500px] px-5 md:px-12">
-          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">03 / Что получает бизнес</p>
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-end"><h2 id="value-heading" className="text-5xl font-light leading-[1.07] tracking-[-.06em] md:text-7xl">Эстетика —<br/><span className="text-[#d5b58f]">это только начало.</span></h2><p className="max-w-lg text-base leading-8 text-white/55">Сайт должен не только впечатлять с первого экрана, но и помогать посетителю быстро разобраться, довериться компании и сделать следующий шаг.</p></div>
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
-            {[["01","Смысл и структура","Выстраиваем понятный путь от первого знакомства до обращения. У каждого блока — конкретная задача."],["02","Скорость и адаптивность","Проектируем интерфейс для разных экранов, учитываем производительность и удобство взаимодействия."],["03","Основа для развития","Предусматриваем масштабирование разделов, аналитику, поисковую оптимизацию и будущие интеграции."]].map(([n,t,d])=><div key={n} className="group rounded-[28px] border border-white/10 bg-gradient-to-br from-[#202024] to-[#121316] p-8 transition duration-500 hover:-translate-y-1 hover:border-[#d5b58f]/40"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{n} / ПРИНЦИП</span><div className="my-12 h-px bg-gradient-to-r from-[#d5b58f]/60 to-transparent"/><h3 className="text-2xl font-light">{t}</h3><p className="mt-5 text-sm leading-8 text-white/50">{d}</p></div>)}
-          </div>
-        </div>
-      </section>
-      <section id="about" className="border-t border-white/10 bg-[#111215] py-24 md:py-32">
-        <div className="mx-auto max-w-[1500px] px-5 md:px-12">
-          <p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">04 / Подход</p>
-          <h2 className="mb-14 max-w-3xl text-5xl font-light leading-[1.08] tracking-[-.06em] md:text-7xl">Сложное делаем <span className="text-[#d5b58f]">понятным.</span></h2>
-          <div className="grid gap-0 border-t border-white/15 md:grid-cols-4">
-            {[
-              ["01","Погружение","Изучаем бизнес, аудиторию, цели и ограничения проекта."],
-              ["02","Стратегия","Определяем структуру, пользовательские сценарии и приоритеты."],
-              ["03","Реализация","Создаём дизайн, пишем код и проверяем ключевые сценарии."],
-              ["04","Запуск","Тестируем, публикуем и планируем дальнейшее развитие."],
-            ].map(([num,name,desc])=><div key={num} className="border-b border-white/15 py-8 md:border-r md:px-6 md:first:pl-0 md:last:border-r-0"><span className="text-xs tracking-[.25em] text-[#d5b58f]">{num}</span><h3 className="mt-10 text-2xl font-light">{name}</h3><p className="mt-4 text-sm leading-7 text-white/50">{desc}</p></div>)}
-          </div>
-        </div>
-      </section>
-      <section id="faq" className="border-t border-white/10 py-24 md:py-32">
-        <div className="mx-auto grid max-w-[1500px] gap-12 px-5 md:px-12 lg:grid-cols-[.8fr_1.2fr]">
-          <div><p className="mb-5 text-xs uppercase tracking-[.3em] text-[#d5b58f]">05 / Вопросы</p><h2 className="text-5xl font-light tracking-[-.06em] md:text-6xl">Прежде чем<br/>начать.</h2></div>
-          <div className="border-t border-white/15">{[
-            ["Сколько стоит разработка сайта?","Стоимость зависит от структуры, дизайна, интеграций и объёма работ. Оценку готовим после обсуждения задачи. Для России и Беларуси условия рассчитываются отдельно."],
-            ["Можно ли начать с небольшого проекта?","Да. Можно начать с посадочной страницы или прототипа, а затем постепенно расширять функциональность."],
-            ["Будет ли сайт удобен на телефоне?","Адаптивный интерфейс закладываем на этапе проектирования и проверяем на разных размерах экранов."],
-            ["Что происходит после запуска?","По согласованию продолжаем техническую поддержку, обновление контента и развитие функциональности."],
-          ].map(([q,a])=><details key={q} className="group border-b border-white/15 py-6"><summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-light marker:hidden"><span>{q}</span><span className="text-2xl text-[#d5b58f] transition group-open:rotate-45">+</span></summary><p className="max-w-xl pt-5 text-sm leading-8 text-white/55">{a}</p></details>)}</div>
-        </div>
-      </section>
-      <footer id="contact" className="border-t border-white/10 bg-[#19191b]">
-        <div className="mx-auto max-w-[1500px] px-5 py-24 md:px-12 md:py-32">
-          <p className="mb-6 text-xs uppercase tracking-[.3em] text-[#d5b58f]">06 / Следующий шаг</p>
-          <h2 className="max-w-5xl text-[clamp(3.5rem,8vw,8rem)] font-light leading-[.95] tracking-[-.075em]">Создадим что-то <span className="text-[#d5b58f]">значимое.</span></h2>
-          <p className="mt-9 max-w-lg text-base leading-8 text-white/55">Расскажите о своей идее, целях и сроках. Подготовим структуру, определим приоритеты и предложим подходящий формат реализации. Оставьте описание проекта в форме ниже. Если серверная доставка ещё не настроена, форма сообщит об этом и не будет имитировать успешную отправку.</p>
-          <div className="mt-12 max-w-4xl"><LeadForm compact/></div><div className="mt-20 flex flex-wrap items-end justify-between gap-8 border-t border-white/15 pt-8"><div><strong className="text-2xl font-light tracking-[.24em]">KODERA</strong><p className="mt-2 text-[10px] tracking-[.3em] text-[#d5b58f]">DIGITAL STUDIO</p></div><div className="flex flex-wrap gap-6 text-sm text-white/50"><a href="#services" className="hover:text-white">Услуги</a><a href="#about" className="hover:text-white">Подход</a><a href="#faq" className="hover:text-white">Вопросы</a><a href="#" className="hover:text-white">Наверх ↑</a></div><span className="text-xs text-white/35">Россия · Беларусь</span></div>
-        </div>
-      </footer>
-    </main>
-  );
+import {HomeShowcase,ProjectSelector,InteractiveProcess} from "@/components/HomeExperiences";
+import InterfaceComparison from "@/components/InterfaceComparison";
+import LeadForm from "@/components/LeadForm";
+export const metadata:Metadata={title:"KODERA — премиальная разработка сайтов и цифровых продуктов",description:"KODERA — студия разработки сайтов, дизайна интерфейсов, SEO и веб-сервисов для России и Беларуси. Интерактивные демонстрации и подбор решений.",alternates:{canonical:"/"}};
+const questions=[
+ ["Какие сайты вы разрабатываете?","Лендинги, корпоративные сайты, каталоги, интернет-магазины и веб-сервисы. Начинаем с задачи бизнеса, а не с готового шаблона."],
+ ["Сколько стоит разработка?","Бюджет зависит от структуры, количества уникальных экранов, интеграций и объёма контента. Для России и Беларуси коммерческие предложения согласуются отдельно."],
+ ["Можно ли начать с прототипа или MVP?","Да. Можно сначала проверить ключевой сценарий, разработать прототип или ограниченный первый релиз, сохранив возможность развития."],
+ ["Как устроены этапы работы?","Исследование, архитектура, дизайн, разработка и тестирование. Границы каждого этапа и критерии приёмки фиксируются до реализации."],
+ ["Что с SEO и мобильной версией?","Структуру, доступность, скорость и основные SEO-настройки учитываем с начала проекта. Адаптивный интерфейс проверяем для разных размеров экрана."],
+ ["Можно ли развивать существующий сайт?","Да. Начинаем с аудита, оцениваем риски переноса, сохранение важных URL, техническое состояние и реальные возможности улучшения."]
+] as const;
+export default function Home(){
+ const featured=articles.slice(0,3);
+ return <main className="min-h-screen overflow-x-clip bg-[#0d0e11] text-[#f5f2ed]">
+ <header className="relative z-40 border-b border-white/10 bg-[#0d0e11]/95"><div className="mx-auto flex max-w-[1500px] items-center justify-between gap-5 px-5 py-6 md:px-12">
+ <Link href="/" aria-label="KODERA — главная" className="flex shrink-0 flex-col leading-none"><span className="text-[24px] font-light tracking-[.25em] text-[#f1ece7]">KODERA</span><span className="mt-2 text-[8px] tracking-[.38em] text-[#c9ae8d]">DIGITAL STUDIO</span></Link>
+ <nav aria-label="Основное меню" className="hidden items-center gap-6 text-[13px] text-white/65 xl:flex"><a href="#services" className="hover:text-[#d5b58f]">Услуги</a><a href="#selector" className="hover:text-[#d5b58f]">Подобрать сайт</a><a href="#process" className="hover:text-[#d5b58f]">Процесс</a><Link href="/pricing" className="hover:text-[#d5b58f]">Стоимость</Link><Link href="/blog" className="hover:text-[#d5b58f]">Журнал</Link><a href="#contact" className="hover:text-[#d5b58f]">Контакты</a></nav>
+ <div className="flex items-center gap-4"><div className="hidden items-center gap-2 text-xs text-[#d5b58f] sm:flex"><Link href="/ru" aria-label="Версия для России" className="hover:text-white">RU</Link><span className="text-white/30">/</span><Link href="/by" aria-label="Версия для Беларуси" className="hover:text-white">BY</Link></div><Link href="/contact" className="hidden rounded-full border border-[#d5b58f]/60 px-5 py-3 text-xs text-[#d5b58f] transition hover:bg-[#d5b58f] hover:text-[#111] sm:inline-flex">Начать проект ↗</Link><MobileNavigation/></div>
+ </div></header>
+ <HomeShowcase/>
+ <section className="border-b border-white/10 bg-[#16171a]"><div className="mx-auto grid max-w-[1500px] gap-7 px-5 py-8 md:grid-cols-3 md:gap-10 md:px-12">{[["01","Не шаблон, а архитектура","Структура и сценарии под задачу."],["02","Дизайн, который помогает","Визуальная система и читаемость."],["03","Основа для развития","Производительность, SEO и интеграции."]].map(([n,title,desc])=><div key={n} className="flex gap-4"><span className="text-xs text-[#d5b58f]">{n}</span><div><p className="text-sm text-white/90">{title}</p><p className="mt-2 text-xs leading-6 text-white/45">{desc}</p></div></div>)}</div></section>
+ <section id="services" className="scroll-mt-8 py-20 md:py-28"><div className="mx-auto max-w-[1500px] px-5 md:px-12"><div className="grid gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-end"><div><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">01 / ЧТО МЫ ДЕЛАЕМ</p><h2 className="mt-7 max-w-4xl text-4xl font-light leading-[1.04] tracking-[-.06em] md:text-7xl">Экспертиза, которую <span className="text-[#d5b58f]">видно в деталях.</span></h2></div><p className="max-w-lg text-base leading-9 text-white/55">Делаем цифровую основу бизнеса: от первого коммерческого сайта до сложных продуктов, интеграций и систем роста.</p></div><div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{services.map((s,i)=><Link key={s.slug} href={`/services/${s.slug}`} className="group relative flex min-h-[310px] flex-col justify-between overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(145deg,#222327,#151619)] p-8 transition duration-500 hover:-translate-y-2 hover:border-[#d5b58f]/60 hover:shadow-[0_28px_65px_rgba(0,0,0,.35)]"><div><div className="flex items-center justify-between text-xs tracking-[.18em] text-[#d5b58f]"><span>0{i+1} / DIRECTION</span><span className="text-2xl transition group-hover:-translate-y-1 group-hover:translate-x-1">↗</span></div><h3 className="mt-12 max-w-xs text-3xl font-light leading-tight tracking-[-.04em]">{s.title}</h3><p className="mt-5 max-w-sm text-sm leading-8 text-white/55">{s.short}</p></div><div className="mt-9 flex flex-wrap gap-2">{s.formats.slice(0,3).map(tag=><span key={tag} className="rounded-full border border-white/10 px-3 py-2 text-[11px] text-white/45">{tag}</span>)}</div></Link>)}</div><div className="mt-10 flex justify-end"><Link href="/solutions" className="rounded-full border border-[#d5b58f]/45 px-7 py-4 text-sm text-[#d5b58f] transition hover:bg-[#d5b58f]/10">Все 44 направления ↗</Link></div></div></section>
+ <ProjectSelector/>
+ <section className="border-t border-white/10 py-20 md:py-28"><div className="mx-auto grid max-w-[1500px] gap-12 px-5 md:px-12 lg:grid-cols-[.95fr_1.05fr] lg:items-center"><div><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">02 / ФИЛОСОФИЯ KODERA</p><h2 className="mt-7 text-4xl font-light leading-[1.06] tracking-[-.06em] md:text-6xl">Не просто красивый сайт.<br/><span className="text-[#d5b58f]">Полезная система.</span></h2><p className="mt-8 max-w-xl text-base leading-9 text-white/55">Визуальная выразительность важна, но сама по себе не приводит к результату. Поэтому проектируем маршрут пользователя, структуру содержания и точки принятия решения как единое целое.</p><Link href="/process" className="mt-9 inline-flex rounded-full border border-[#d5b58f]/45 px-7 py-4 text-sm text-[#d5b58f]">Принципы работы ↗</Link></div><div className="relative grid min-h-[400px] place-items-center overflow-hidden rounded-[36px] border border-white/10 bg-[radial-gradient(ellipse_at_65%_25%,#4b4036_0%,#292629_36%,#141518_75%)] p-6"><div className="absolute h-72 w-72 rotate-[28deg] rounded-[70px] border border-[#d5b58f]/25 bg-gradient-to-bl from-[#d5b58f]/20 to-transparent shadow-2xl sm:h-80 sm:w-80"/><div className="absolute h-56 w-56 -rotate-[20deg] rounded-[46px] border border-white/20 bg-[#1a1a1e]/60 shadow-2xl backdrop-blur-sm"/><div className="relative max-w-xs text-center"><p className="text-xs tracking-[.24em] text-[#d5b58f]">FORM × FUNCTION</p><p className="mt-6 text-4xl font-light leading-tight tracking-[-.05em]">Сильная форма.<br/>Ясная логика.</p><p className="mt-6 text-sm leading-8 text-white/50">Дизайн · Технологии · Смысл</p></div></div></div></section>
+ <InteractiveProcess/>
+ <InterfaceComparison/>
+ <section className="border-t border-white/10 py-20 md:py-28"><div className="mx-auto max-w-[1500px] px-5 md:px-12"><div className="flex flex-wrap items-end justify-between gap-8"><div><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">06 / ДВЕ СТРАНЫ — ДВА РЫНКА</p><h2 className="mt-7 max-w-4xl text-4xl font-light tracking-[-.06em] md:text-6xl">Ваш рынок. <span className="text-[#d5b58f]">Ваш контекст.</span></h2></div><p className="max-w-sm text-sm leading-8 text-white/55">Учитываем локальные условия и отдельную поисковую структуру для России и Беларуси. Цены публикуются только после согласования.</p></div><div className="mt-12 grid gap-4 md:grid-cols-2">{[["RU","Россия","Российский рынок, свои поисковые намерения, условия сотрудничества и коммерческие страницы.","/ru"],["BY","Беларусь","Отдельная подача для белорусской аудитории, локальные предложения и самостоятельная SEO-структура.","/by"]].map(([code,country,desc,href])=><Link href={href} key={code} className="group relative min-h-80 overflow-hidden rounded-[30px] border border-[#d5b58f]/20 bg-gradient-to-br from-[#27242a] to-[#151619] p-8 transition hover:border-[#d5b58f]/60 md:p-10"><div className="absolute -right-7 bottom-[-65px] text-[200px] font-light tracking-[-.1em] text-[#d5b58f]/[.07]">{code}</div><div className="relative flex h-full flex-col justify-between"><p className="text-xs tracking-[.3em] text-[#d5b58f]">{code} / MARKET ↗</p><div><h3 className="text-4xl font-light md:text-5xl">{country}</h3><p className="mt-5 max-w-lg text-sm leading-8 text-white/55">{desc}</p></div></div></Link>)}</div></div></section>
+ <section className="border-t border-white/10 bg-[#151619] py-20 md:py-28"><div className="mx-auto max-w-[1500px] px-5 md:px-12"><div className="flex flex-wrap items-end justify-between gap-8"><div><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">07 / ЭКСПЕРТИЗА В ДЕТАЛЯХ</p><h2 className="mt-7 text-4xl font-light tracking-[-.05em] md:text-6xl">Не обещания. <span className="text-[#d5b58f]">Практика.</span></h2></div><Link href="/blog" className="text-sm text-[#d5b58f]">Все материалы ↗</Link></div><div className="mt-12 grid gap-4 md:grid-cols-3">{featured.map((a,i)=><Link key={a.slug} href={`/blog/${a.slug}`} className="group flex min-h-80 flex-col justify-between rounded-[28px] border border-white/10 bg-[#1e1f24] p-8 transition hover:-translate-y-1 hover:border-[#d5b58f]/50"><p className="text-xs tracking-[.15em] text-[#d5b58f]">0{i+1} / {a.category}</p><div><h3 className="text-2xl font-light leading-tight md:text-3xl">{a.title}</h3><p className="mt-5 text-sm leading-8 text-white/55">{a.description}</p><p className="mt-8 text-xs text-[#d5b58f]">Читать / {a.readingMinutes} мин ↗</p></div></Link>)}</div></div></section>
+ <section id="faq" className="border-t border-white/10 py-20 md:py-28"><div className="mx-auto grid max-w-[1500px] gap-12 px-5 md:px-12 lg:grid-cols-[.8fr_1.2fr]"><div><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">08 / ПРЕЖДЕ ЧЕМ НАЧАТЬ</p><h2 className="mt-7 text-4xl font-light tracking-[-.05em] md:text-6xl">Частые <span className="text-[#d5b58f]">вопросы.</span></h2><p className="mt-7 max-w-sm text-sm leading-8 text-white/50">Остались детали, которые важно обсудить? Начните с описания вашей задачи.</p></div><div className="divide-y divide-white/10 border-t border-white/10">{questions.map(([q,a])=><details key={q} className="group py-6"><summary className="flex cursor-pointer list-none items-start justify-between gap-5 text-lg font-light leading-8 marker:hidden">{q}<span className="shrink-0 text-2xl text-[#d5b58f] transition group-open:rotate-45">+</span></summary><p className="mt-4 max-w-xl text-sm leading-8 text-white/55">{a}</p></details>)}</div></div></section>
+ <footer id="contact" className="scroll-mt-10 border-t border-white/10 bg-[#19191d]"><div className="mx-auto max-w-[1500px] px-5 py-20 md:px-12 md:py-28"><p className="text-xs uppercase tracking-[.25em] text-[#d5b58f]">09 / ВАШ ПРОЕКТ</p><h2 className="mt-7 max-w-5xl text-[clamp(3.1rem,7.8vw,7rem)] font-light leading-[1.02] tracking-[-.075em]">Сильная идея заслуживает <span className="text-[#d5b58f]">сильной реализации.</span></h2><p className="mt-8 max-w-2xl text-base leading-9 text-white/55">Расскажите, какой цифровой продукт хотите создать. Форма подготовлена, но до настройки сервера доставки заявок не будет сообщать об успешной отправке.</p><div className="mt-12 grid gap-12 lg:grid-cols-[.55fr_1fr]"><div><p className="text-xs tracking-[.22em] text-[#d5b58f]">НАЧАТЬ СОТРУДНИЧЕСТВО</p><h3 className="mt-8 text-3xl font-light leading-tight">От первого разговора — к понятному плану.</h3><p className="mt-6 text-sm leading-8 text-white/50">Ниже можно описать задачу. Если нужен ориентир по масштабу, сначала воспользуйтесь калькулятором.</p><Link href="/pricing" className="mt-8 inline-flex rounded-full border border-white/20 px-6 py-4 text-sm text-[#d5b58f]">Калькулятор проекта ↗</Link></div><LeadForm compact/></div><div className="mt-20 flex flex-wrap items-center justify-between gap-8 border-t border-white/10 pt-10"><div><p className="text-2xl font-light tracking-[.25em]">KODERA</p><p className="mt-2 text-[10px] tracking-[.3em] text-[#d5b58f]">DIGITAL STUDIO</p></div><nav aria-label="Ссылки в подвале" className="flex flex-wrap gap-x-6 gap-y-3 text-xs text-white/55"><Link href="/solutions" className="hover:text-[#d5b58f]">Решения</Link><Link href="/pricing" className="hover:text-[#d5b58f]">Стоимость</Link><Link href="/process" className="hover:text-[#d5b58f]">Подход</Link><Link href="/blog" className="hover:text-[#d5b58f]">Журнал</Link><Link href="/privacy" className="hover:text-[#d5b58f]">Обработка данных</Link></nav><a href="#" className="text-xs text-[#d5b58f]">Наверх ↑</a></div></div></footer>
+ </main>;
 }
