@@ -18,6 +18,47 @@ export default function PortfolioArtwork({work,scene=0,compact=false,mobile=fals
  const nav=<div className={`relative z-10 flex items-center justify-between gap-2 border-b ${tiny?"px-4 py-3":"px-6 py-4 md:px-9"}`} style={{borderColor:t.accent+"32"}}><span className={`max-w-[65%] truncate font-semibold tracking-[.07em] ${tiny?"text-[11px]":"text-[13px] md:text-base"}`}>{work.name}</span><span className={`whitespace-nowrap ${tiny?"text-[8px]":"text-[10px] md:text-xs"}`} style={{color:t.muted}}>{mobile?"☰":"ПРОЕКТЫ   •   О НАС   •   КОНТАКТЫ"}</span></div>;
  const textHead=<div className="relative z-10"><p className={`font-medium tracking-[.22em] ${tiny?"text-[8px]":"text-[10px] md:text-xs"}`} style={{color:t.accent}}>{label}</p><h3 className={`mt-3 max-w-[18ch] font-light leading-[1.03] tracking-[-.055em] ${tiny?"text-[clamp(23px,2.6vw,38px)]":"text-[clamp(35px,4vw,69px)]"}`}>{work.pitch}</h3><p className={`mt-4 max-w-[36ch] leading-relaxed ${tiny?"text-[10px]":"text-sm md:text-base"}`} style={{color:t.muted}}>{work.sector}</p><div className={`mt-6 inline-flex items-center rounded-full px-5 py-3 font-semibold ${tiny?"text-[9px]":"text-xs"}`} style={{background:t.accent,color:t.base}}>Исследовать проект ↗</div></div>;
  const shell=(inner:React.ReactNode)=> <div className={`relative isolate flex h-full w-full flex-col overflow-hidden ${mobile?"":"min-h-0"}`} style={{background:t.base,color:t.ink,fontFamily:work.category==="creative"||work.category==="media"?"Georgia,serif":"Arial,Helvetica,sans-serif"}}>{nav}<div className="relative min-h-0 flex-1 overflow-hidden">{inner}</div>{corner}</div>;
+
+ // Multiple deliberately different art directions make the catalogue more than a reused hero template.
+ const signature=[...work.slug].reduce((n,ch)=>(n*31+ch.charCodeAt(0))>>>0,13)%5;
+ if(scene===0&&signature===0&&!dashboard)return shell(
+  <div className="relative h-full w-full overflow-hidden">
+   <div className="absolute inset-0">{image(0,`Фото для ${work.sector}`)}</div>
+   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0b0e]/95 via-[#0a0b0e]/15 to-transparent"/>
+   <div className={`absolute inset-x-0 bottom-[8%] z-10 ${tiny?"px-5":"px-7 md:px-12"}`}>
+    <p className={tiny?"text-[8px] tracking-[.2em]":"text-xs tracking-[.28em]"} style={{color:t.accent}}>{work.sector.toUpperCase()} / {work.level.toUpperCase()}</p>
+    <h3 className={`mt-3 max-w-[20ch] font-light leading-[.97] tracking-[-.06em] ${tiny?"text-3xl":"text-5xl md:text-7xl"}`} style={{color:"#fff"}}>{work.pitch}</h3>
+    <div className="mt-5 flex items-center gap-4"><span className="rounded-full border border-white/70 px-4 py-2 text-xs text-white">Смотреть коллекцию ↗</span><span className="text-xs text-white/65">{work.name}</span></div>
+   </div>
+  </div>);
+ if(scene===0&&signature===1&&!dashboard)return shell(
+  <div className={`grid h-full ${mobile?"grid-rows-[1fr_1fr]":"grid-cols-[.82fr_1.18fr]"}`}>
+   <div className={`relative z-10 flex flex-col justify-between ${tiny?"p-5":"p-7 md:p-12"}`} style={{background:t.accent,color:t.base}}>
+    <p className={tiny?"text-[10px] tracking-widest":"text-sm tracking-[.25em]"}>KODERA / {work.category.toUpperCase()}</p>
+    <div><h3 className={`max-w-[15ch] font-black uppercase leading-[.9] tracking-[-.08em] ${tiny?"text-4xl":"text-6xl md:text-8xl"}`}>{work.name}</h3><p className={`mt-7 max-w-[30ch] leading-relaxed ${tiny?"text-xs":"text-base"}`}>{work.pitch}</p></div>
+    <p className={tiny?"text-xs":"text-sm"}>ОТКРЫТЬ ПРОЕКТ ↗</p>
+   </div>
+   <div className="relative min-h-0">{image(0,`Фотографический концепт ${work.name}`)}</div>
+  </div>);
+ if(scene===0&&signature===2&&!dashboard)return shell(
+  <div className="relative h-full overflow-hidden" style={{background:t.base}}>
+   <div className={`absolute overflow-hidden rounded-[5px] shadow-2xl ${mobile?"left-[12%] right-[12%] top-[21%] h-[44%]":"right-[8%] top-[12%] h-[79%] w-[49%]"}`}>{image(0,`Основная фотография ${work.name}`)}</div>
+   <div className={`absolute overflow-hidden rounded-[3px] border-[6px] shadow-2xl ${mobile?"bottom-[7%] left-[3%] h-[24%] w-[48%]":"bottom-[9%] right-[42%] h-[40%] w-[26%]"}`} style={{borderColor:t.base}}>{image(1,`Дополнительная фотография ${work.name}`)}</div>
+   <div className={`absolute z-10 ${mobile?"left-[6%] top-[5%]":"left-[6%] top-[21%]"}`}>
+    <p className="text-xs tracking-[.25em]" style={{color:t.accent}}>STUDIO EDITION / 0{scene+1}</p>
+    <h3 className={`mt-6 max-w-[13ch] font-light leading-[.96] tracking-[-.06em] ${tiny?"text-4xl":"text-5xl md:text-7xl"}`}>{work.pitch}</h3>
+   </div>
+  </div>);
+ if(scene===0&&signature===3&&!dashboard)return shell(
+  <div className={`relative grid h-full gap-2 p-3 ${mobile?"grid-cols-2 grid-rows-[1fr_1fr]":"grid-cols-[1.2fr_.8fr] grid-rows-2"}`}>
+   <div className="relative row-span-2 min-h-0 overflow-hidden rounded-xl">{image(0,`Главный визуальный материал ${work.name}`)}</div>
+   <div className="relative min-h-0 overflow-hidden rounded-xl">{image(1,`Деталь 1 ${work.name}`)}</div>
+   <div className="relative min-h-0 overflow-hidden rounded-xl">{image(2,`Деталь 2 ${work.name}`)}</div>
+   <div className={`absolute bottom-[7%] left-[7%] z-10 max-w-[70%] rounded-xl p-5 backdrop-blur-xl ${tiny?"":"md:p-8"}`} style={{background:t.base+"ed",color:t.ink,border:"1px solid "+t.accent+"50"}}>
+    <p className="text-[10px] tracking-widest" style={{color:t.accent}}>{work.sector.toUpperCase()}</p>
+    <h3 className={`mt-3 font-light leading-tight ${tiny?"text-xl":"text-3xl md:text-5xl"}`}>{work.pitch}</h3>
+   </div>
+  </div>);
  if(scene===0&&dashboard)return shell(<div className={`h-full p-4 ${tiny?"":"md:p-8"}`} style={{background:t.base}}><div className={`flex h-full gap-4 ${mobile?"flex-col":""}`}><aside className={`flex shrink-0 flex-col rounded-2xl p-3 ${mobile?"h-auto flex-row justify-around":"w-[21%]"}`} style={{background:t.panel}}>{["Обзор","Проекты","Аналитика","Команда"].map((x,i)=><span key={x} className={`rounded-lg py-3 text-center ${tiny?"text-[8px]":"text-xs"}`} style={{background:i===0?t.accent+"25":"transparent",color:i===0?t.accent:t.muted}}>{x}</span>)}</aside><div className="min-w-0 flex-1"><div className="mb-4 flex items-center justify-between"><h3 className={`font-light ${tiny?"text-base":"text-2xl"}`}>Обзор / {work.name}</h3><span style={{color:t.accent}} className="text-xs">● LIVE DATA</span></div><div className="grid grid-cols-3 gap-3">{["Проекты","События","Задачи"].map((x,i)=><div key={x} className="rounded-xl p-3" style={{background:t.panel}}><p className={tiny?"text-[8px]":"text-xs"} style={{color:t.muted}}>{x}</p><p className={`mt-2 font-light ${tiny?"text-2xl":"text-3xl"}`}>{[24,138,16][i]}</p></div>)}</div><div className="mt-3 grid h-[55%] grid-cols-[1.5fr_1fr] gap-3"><div className="relative overflow-hidden rounded-xl p-4" style={{background:t.panel}}><p className={tiny?"text-[8px]":"text-xs"}>Динамика проекта</p><svg viewBox="0 0 420 190" preserveAspectRatio="none" className="mt-5 h-[70%] w-full"><path d="M0 142 L57 106 L115 127 L168 50 L219 84 L274 34 L331 60 L390 10 L420 22" fill="none" stroke={t.accent} strokeWidth="5"/><path d="M0 142 L57 106 L115 127 L168 50 L219 84 L274 34 L331 60 L390 10 L420 22 L420 190 L0 190Z" fill={t.accent} opacity=".09"/></svg></div><div className="relative overflow-hidden rounded-xl" style={{background:t.panel}}>{image(0,"Фотографический контекст цифрового сервиса")}<div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"/><p className="absolute bottom-4 left-4 text-xs text-white">Ваш продукт. Под контролем.</p></div></div></div></div></div>);
  if(scene===0&&["healthcare","corporate","education","industrial"].includes(work.category))return shell(<div className={`grid h-full w-full ${mobile?"grid-rows-[.65fr_1fr]":"grid-cols-[1.05fr_.95fr]"}`}><div className={`z-10 flex flex-col justify-center ${tiny?"p-5":"p-7 md:p-12"}`} style={{background:t.base}}>{textHead}<div className="mt-7 flex flex-wrap gap-3 text-[10px]" style={{color:t.muted}}><span>✓ Индивидуальный подход</span><span>✓ Продуманная структура</span></div></div><div className="relative min-h-0 overflow-hidden">{image(0,`Фотография проекта ${work.sector}`)}<div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"/><div className="absolute bottom-5 left-5 rounded-xl border border-white/30 bg-[#13161a]/80 px-4 py-3 text-xs text-white backdrop-blur-md">{work.name} / 01</div></div></div>);
  if(scene===0&&["media","creative"].includes(work.category))return shell(<div className="relative h-full w-full overflow-hidden"><div className="absolute inset-x-0 top-0 h-[67%]">{image(0,`Редакционная фотография: ${work.sector}`)}</div><div className="absolute inset-x-0 top-[55%] h-[45%]" style={{background:t.base}}/><div className={`absolute inset-x-0 top-[49%] z-10 ${tiny?"px-5":"px-7 md:px-12"}`}><p className={tiny?"text-[8px] tracking-[.2em]":"text-xs tracking-[.25em]"} style={{color:t.accent}}>EDITORIAL / {work.sector.toUpperCase()}</p><h3 className={`mt-3 max-w-[21ch] font-light leading-[1.02] tracking-[-.06em] ${tiny?"text-2xl md:text-3xl":"text-4xl md:text-6xl"}`}>{work.pitch}</h3><p className={`mt-4 max-w-xl ${tiny?"text-[10px]":"text-sm"}`} style={{color:t.muted}}>{work.short}</p></div></div>);
