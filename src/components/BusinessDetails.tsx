@@ -1,3 +1,4 @@
+import Link from "next/link";
 type BusinessDetailsProps={compact?:boolean};
 
 const phones=[
@@ -26,5 +27,6 @@ export default function BusinessDetails({compact=false}:BusinessDetailsProps){
     </dl>
    </div>
   </div>
+  <nav aria-label="Правовая информация" className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[10px] leading-5 text-white/35"><Link href="/legal" className="transition hover:text-[#d5b58f]">Реквизиты</Link><Link href="/privacy" className="transition hover:text-[#d5b58f]">Персональные данные</Link><Link href="/consent" className="transition hover:text-[#d5b58f]">Согласие</Link><Link href="/cookies" className="transition hover:text-[#d5b58f]">Cookie</Link></nav>
  </section>;
 }
