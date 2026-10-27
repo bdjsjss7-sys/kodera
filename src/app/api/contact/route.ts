@@ -25,7 +25,7 @@ export async function POST(req:NextRequest){
  try{
   const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),8000);
   try{
-   const response=await fetch(endpoint.toString(),{method:"POST",headers:{"Content-Type":"application/json",...(process.env.KODERA_LEADS_WEBHOOK_TOKEN?{"Authorization":`Bearer ${process.env.KODERA_LEADS_WEBHOOK_TOKEN}`}:{})},body:JSON.stringify({event:"kodera.lead",receivedAt:new Date().toISOString(),name:lead.name,contact:lead.contact,market:lead.market,service:lead.service,budget:lead.budget,message:lead.message,source:lead.source}),signal:controller.signal,cache:"no-store"});
+   const response=await fetch(endpoint.toString(),{method:"POST",headers:{"Content-Type":"application/json",...(process.env.KODERA_LEADS_WEBHOOK_TOKEN?{"Authorization":`Bearer ${process.env.KODERA_LEADS_WEBHOOK_TOKEN}`}:{})},body:JSON.stringify({event:"kodera.lead",receivedAt:new Date().toISOString(),consent:true,consentVersion:"2026-10-27",name:lead.name,contact:lead.contact,market:lead.market,service:lead.service,budget:lead.budget,message:lead.message,source:lead.source}),signal:controller.signal,cache:"no-store"});
    if(!response.ok)throw Error("Webhook delivery failed");
   }finally{clearTimeout(timeout);}
   return json({ok:true},200);
