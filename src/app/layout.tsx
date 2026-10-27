@@ -3,8 +3,7 @@ import "./globals.css";
 import MobileSiteDock from "@/components/MobileSiteDock";
 import SiteSearchOverlay from "@/components/SiteSearchOverlay";
 import {siteEntries} from "@/lib/siteCatalog";
-const publicUrl=process.env.NEXT_PUBLIC_SITE_URL;
-const baseUrl=publicUrl&&/^https?:\/\//.test(publicUrl)?publicUrl.replace(/\/$/,""):"https://www.kodera.pro";
+const baseUrl="https://www.kodera.pro";
 export const metadata:Metadata={
  metadataBase:new URL(baseUrl),
  title:{default:"KODERA — разработка сайтов, SEO и цифровых продуктов",template:"%s"},
