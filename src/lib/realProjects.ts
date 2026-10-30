@@ -3,8 +3,6 @@ export type RealProject={
  name:string;
  label:string;
  market:string;
- url:string;
- domain:string;
  launched:string;
  summary:string;
  challenge:string;
@@ -19,8 +17,6 @@ export const realProjects:RealProject[]=[
   name:"KLARWERK",
   label:"Сервис премиальной техники",
   market:"Санкт-Петербург, Россия",
-  url:"https://www.premium-remont-miele.pro/",
-  domain:"premium-remont-miele.pro",
   launched:"Запущен и доступен онлайн",
   summary:"Многостраничный сайт выездного сервиса премиальной бытовой техники с отдельными направлениями по брендам, типам техники и неисправностям.",
   challenge:"Сформировать доверие к выездному ремонту дорогой техники и одновременно подготовить посадочную структуру для поискового продвижения и рекламы.",
@@ -34,8 +30,6 @@ export const realProjects:RealProject[]=[
   name:"РемБытТехника",
   label:"Мастерская бытовой техники",
   market:"Гродно, Беларусь",
-  url:"https://rembyttehnika.pro/",
-  domain:"rembyttehnika.pro",
   launched:"Запущен и доступен онлайн",
   summary:"Сервисный сайт мастерской в Гродно с каталогом направлений ремонта, прайсами, примерами работ и большим информационным разделом.",
   challenge:"Собрать разрозненные услуги мастерской в понятную систему и дать поисковым системам отдельные страницы под реальные запросы клиентов.",
