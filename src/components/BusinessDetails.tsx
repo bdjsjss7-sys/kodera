@@ -12,10 +12,11 @@ export default function BusinessDetails({compact=false}:BusinessDetailsProps){
   <div className={`grid gap-px overflow-hidden rounded-[24px] border border-white/10 bg-white/10${compact?"":" sm:grid-cols-2"}`}>
    <div className="bg-[#17181c] p-6 md:p-7">
     <p className="text-[10px] tracking-[.22em] text-[#d5b58f]">СВЯЗАТЬСЯ</p>
+    <a href="https://t.me/kodera_pro" target="_blank" rel="noreferrer" className="mt-5 flex items-center justify-between gap-4 rounded-2xl border border-[#d5b58f]/35 bg-[#d5b58f]/[.07] p-4 text-[#f5f2ed] transition hover:border-[#d5b58f]/70 hover:bg-[#d5b58f]/[.12]"><span><span className="block text-sm font-medium">Написать в Telegram</span><span className="mt-1 block text-xs text-white/45">@kodera_pro</span></span><span aria-hidden="true" className="text-xl text-[#d5b58f]">↗</span></a>
     <div className="mt-5 flex flex-col items-start gap-3">
      {phones.map(phone=><a key={phone.href} href={phone.href} className="text-base font-light tracking-[.01em] text-white/80 transition hover:text-[#d5b58f]">{phone.label}</a>)}
     </div>
-    <p className="mt-5 text-xs leading-6 text-white/35">Выберите любой удобный номер.</p>
+    <p className="mt-5 text-xs leading-6 text-white/35">Быстрее всего отвечаем в Telegram. Также можно позвонить по удобному номеру.</p>
    </div>
    <div className="bg-[#17181c] p-6 md:p-7">
     <p className="text-[10px] tracking-[.22em] text-[#d5b58f]">РЕКВИЗИТЫ</p>
