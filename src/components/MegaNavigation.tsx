@@ -24,6 +24,7 @@ const groups:{id:Group;name:string;eyebrow:string;description:string;links:{labe
  {label:"Россия",href:"/ru",detail:"Региональное предложение"},
  {label:"Беларусь",href:"/by",detail:"Региональное предложение"},
  {label:"Этапы работы",href:"/process",detail:"Исследование → запуск"},
+ {label:"Контакты",href:"/contacts",detail:"Телефоны, Telegram и реквизиты"},
  {label:"Обсудить проект",href:"/contact",detail:"Отправить запрос"},
  {label:"Портфолио концептов",href:"/works",detail:"Выбрать визуальный ориентир"}]}
 ];
@@ -49,6 +50,7 @@ export default function MegaNavigation(){
  const current=groups.find(x=>x.id===open);
  return <div className="hidden xl:flex items-center gap-4"><nav ref={triggerRef} aria-label="Главное меню" className="flex items-center gap-1">{groups.map(g=><button key={g.id} type="button" aria-expanded={open===g.id} aria-controls="kodera-mega-panel" aria-haspopup="true" onMouseEnter={()=>setOpen(g.id)} onFocus={()=>setOpen(g.id)} onClick={()=>setOpen(v=>v===g.id?null:g.id)} className={`rounded-full px-4 py-3 text-[13px] transition-colors ${open===g.id?"bg-[#d5b58f]/14 text-[#f0d1ab]":"text-white/70 hover:bg-white/5 hover:text-[#e6c39b]"}`}>{g.name}<span aria-hidden="true" className={`ml-2 inline-block text-[10px] transition-transform ${open===g.id?"rotate-180":""}`}>⌄</span></button>)}</nav>
  <Link href="/works" onMouseEnter={()=>setOpen(null)} className="rounded-full px-3 py-3 text-[13px] text-white/75 hover:text-[#e6c39b]">Работы</Link>
+ <Link href="/contacts" onMouseEnter={()=>setOpen(null)} className="rounded-full px-3 py-3 text-[13px] text-white/75 hover:text-[#e6c39b]">Контакты</Link>
  <Link href="/pricing#project-calculator" onMouseEnter={()=>setOpen(null)} className="rounded-full border border-[#d5b58f]/50 px-5 py-3 text-[13px] text-[#e6c39b] hover:bg-[#d5b58f]/10">Калькулятор ↗</Link>
  <Link href="/explore" onMouseEnter={()=>setOpen(null)} className="rounded-full px-3 py-3 text-[13px] text-white/75 hover:text-[#e6c39b]">⌕ Поиск</Link>
  {current&&<div ref={panelRef} id="kodera-mega-panel" role="region" aria-label={`Меню ${current.name}`} className="absolute inset-x-0 top-full z-[100] border-y border-[#d5b58f]/30 bg-[#111115] shadow-[0_40px_100px_rgba(0,0,0,.8)]">
