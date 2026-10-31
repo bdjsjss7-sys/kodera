@@ -4,6 +4,12 @@ type Lead={name:string;contact:string;market:"ru"|"by";service:string;budget:str
 const clean=(v:unknown,max:number)=>typeof v==="string"?v.trim().slice(0,max):"";
 const escapeHtml=(value:string)=>value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const buckets=new Map<string,{count:number;until:number}>();
+const duplicates=new Map<string,number>();
+async function fingerprint(lead:Lead){
+ const value=[lead.name,lead.contact,lead.market,lead.service,lead.budget,lead.message].map(x=>x.toLowerCase().replace(/\s+/g," ").trim()).join("\n");
+ const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));
+ return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");
+}
 export async function POST(req:NextRequest){
  const json=(data:object,status:number)=>NextResponse.json(data,{status,headers:{"Cache-Control":"no-store"}});
  const origin=req.headers.get("origin");
@@ -16,13 +22,18 @@ export async function POST(req:NextRequest){
  if(lead.website)return json({ok:true},200);
  if(lead.name.length<2||lead.contact.length<5||lead.message.length<15||!lead.consent)return json({error:"Укажите имя, контакт, описание от 15 символов и согласие."},422);
  if(!/^[^<>\r\n]{5,180}$/.test(lead.contact))return json({error:"Проверьте контактные данные."},422);
+ const now=Date.now();
+ if(duplicates.size>2000){for(const [key,until] of duplicates)if(until<now)duplicates.delete(key);}
+ const duplicateKey=await fingerprint(lead);
+ if((duplicates.get(duplicateKey)||0)>now)return json({error:"Такая заявка уже отправлена. Мы свяжемся с вами по указанному контакту."},409);
  const peer=req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()||"unknown";
- const now=Date.now();if(buckets.size>2000){for(const [key,value] of buckets)if(value.until<now)buckets.delete(key);}
+ if(buckets.size>2000){for(const [key,value] of buckets)if(value.until<now)buckets.delete(key);}
  const entry=buckets.get(peer);if(entry&&entry.until>now&&entry.count>=5)return json({error:"Слишком много запросов. Повторите позже."},429);
  buckets.set(peer,entry&&entry.until>now?{count:entry.count+1,until:entry.until}:{count:1,until:now+600000});
+ duplicates.set(duplicateKey,now+600000);
  const token=process.env.TELEGRAM_BOT_TOKEN;
  const chatId=process.env.TELEGRAM_CHAT_ID;
- if(!token||!chatId)return json({error:"Отправка пока не подключена. Попробуйте позже."},503);
+ if(!token||!chatId){duplicates.delete(duplicateKey);return json({error:"Отправка пока не подключена. Попробуйте позже."},503);}
  const sourcePath=lead.source.startsWith("/")?lead.source:"/";
  const siteUrl=(process.env.NEXT_PUBLIC_SITE_URL||"https://www.kodera.pro").replace(/\/$/,"");
  const receivedAt=new Intl.DateTimeFormat("ru-RU",{timeZone:"Europe/Moscow",dateStyle:"short",timeStyle:"short"}).format(new Date());
@@ -52,5 +63,5 @@ export async function POST(req:NextRequest){
    if(!response.ok)throw Error("Telegram delivery failed");
   }finally{clearTimeout(timeout);}
   return json({ok:true},200);
- }catch{return json({error:"Не удалось доставить заявку. Пожалуйста, попробуйте позже."},502);}
+ }catch{duplicates.delete(duplicateKey);return json({error:"Не удалось доставить заявку. Пожалуйста, попробуйте позже."},502);}
 }
