@@ -19,14 +19,27 @@ export async function POST(req:NextRequest){
  const now=Date.now();if(buckets.size>2000){for(const [key,value] of buckets)if(value.until<now)buckets.delete(key);}
  const entry=buckets.get(peer);if(entry&&entry.until>now&&entry.count>=5)return json({error:"Слишком много запросов. Повторите позже."},429);
  buckets.set(peer,entry&&entry.until>now?{count:entry.count+1,until:entry.until}:{count:1,until:now+600000});
- const url=process.env.KODERA_LEADS_WEBHOOK_URL;
- if(!url)return json({error:"Отправка пока не подключена. Попробуйте позже или сохраните описание проекта."},503);
- let endpoint:URL;try{endpoint=new URL(url);if(endpoint.protocol!=="https:")throw Error("https required");}catch{return json({error:"Настройка отправки недоступна."},503);}
+ const token=process.env.TELEGRAM_BOT_TOKEN;
+ const chatId=process.env.TELEGRAM_CHAT_ID;
+ if(!token||!chatId)return json({error:"Отправка пока не подключена. Попробуйте позже."},503);
+ const text=[
+  "Новая заявка с KODERA",
+  "",
+  `Имя: ${lead.name}`,
+  `Контакт: ${lead.contact}`,
+  `Регион: ${lead.market==="by"?"Беларусь":"Россия"}`,
+  `Услуга: ${lead.service||"Не указана"}`,
+  `Бюджет: ${lead.budget||"Не указан"}`,
+  `Страница: ${lead.source||"/"}`,
+  "",
+  "Описание:",
+  lead.message
+ ].join("\n");
  try{
   const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),8000);
   try{
-   const response=await fetch(endpoint.toString(),{method:"POST",headers:{"Content-Type":"application/json",...(process.env.KODERA_LEADS_WEBHOOK_TOKEN?{"Authorization":`Bearer ${process.env.KODERA_LEADS_WEBHOOK_TOKEN}`}:{})},body:JSON.stringify({event:"kodera.lead",receivedAt:new Date().toISOString(),consent:true,consentVersion:"2026-10-27",name:lead.name,contact:lead.contact,market:lead.market,service:lead.service,budget:lead.budget,message:lead.message,source:lead.source}),signal:controller.signal,cache:"no-store"});
-   if(!response.ok)throw Error("Webhook delivery failed");
+   const response=await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chatId,text,disable_web_page_preview:true}),signal:controller.signal,cache:"no-store"});
+   if(!response.ok)throw Error("Telegram delivery failed");
   }finally{clearTimeout(timeout);}
   return json({ok:true},200);
  }catch{return json({error:"Не удалось доставить заявку. Пожалуйста, попробуйте позже."},502);}
