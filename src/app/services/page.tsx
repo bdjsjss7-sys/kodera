@@ -3,6 +3,7 @@ import Link from 'next/link';
 import MegaNavigation from '@/components/MegaNavigation';
 import MobileNavigation from '@/components/MobileNavigation';
 import BrandLogo from '@/components/BrandLogo';
+import LeadForm from '@/components/LeadForm';
 import {services} from '@/lib/services';
 import s from './services.module.css';
 
@@ -42,7 +43,7 @@ const questions=[
  ['Можно начать с небольшой версии?','Да. Для сервисов и крупных сайтов можно выделить первую версию с ключевыми сценариями, проверить её и затем расширять без полной переделки архитектуры.'],
  ['Есть отдельные условия для России и Беларуси?','Да. Проект предусматривает разные региональные версии, коммерческие условия и дальнейшую SEO-структуру для России и Беларуси.']
 ];
-const schema={'@context':'https://schema.org','@type':'ItemList',name:'Услуги KODERA',itemListElement:services.map((service,index)=>({'@type':'ListItem',position:index+1,url:'/services/'+service.slug,name:service.title}))};
+const schema={'@context':'https://schema.org','@type':'ItemList',name:'Услуги KODERA',itemListElement:services.map((service,index)=>({'@type':'ListItem',position:index+1,url:'https://www.kodera.pro/services/'+service.slug,name:service.title}))};
 
 export default function ServicesPage(){
  return <main className={s.root}>
@@ -82,6 +83,8 @@ export default function ServicesPage(){
   <section className={s.faq}><div><p className={s.eyebrow}>06 / ВОПРОСЫ</p><h2>Перед началом.</h2><p>Если вашей ситуации нет среди вопросов, опишите её в форме обращения — разберём задачу без обязательства выбирать услугу заранее.</p></div><div>{questions.map(([q,a])=><details key={q}><summary>{q}<span>+</span></summary><p>{a}</p></details>)}</div></section>
 
   <section className={s.cta}><p className={s.eyebrow}>СЛЕДУЮЩИЙ ШАГ</p><h2>Соберём подходящий<br/><em>состав проекта.</em></h2><p>Расскажите, что нужно запустить, изменить или связать. Мы определим необходимые направления и последовательность работы.</p><div><Link href="/contact">Обсудить задачу ↗</Link><Link href="/pricing#project-calculator">Открыть калькулятор</Link></div></section>
+
+  <section aria-label="Форма заявки по услугам KODERA" className="border-t border-white/10 bg-[#111215]"><div className="mx-auto grid max-w-[1250px] gap-10 px-5 py-20 md:px-12 lg:grid-cols-[.65fr_1.35fr] lg:items-start"><div><p className="text-[10px] tracking-[.23em] text-[#d5b58f]">07 / ЗАЯВКА</p><h2 className="mt-6 text-4xl font-light leading-tight tracking-[-.055em] md:text-6xl">Расскажите,<br/><span className="text-[#d5b58f]">что нужно бизнесу.</span></h2><p className="mt-6 max-w-md text-sm leading-8 text-white/55">Необязательно заранее выбирать точное направление. Опишите задачу — мы предложим подходящий состав работ.</p></div><LeadForm/></div></section>
 
   <footer className={s.footer}><BrandLogo/><div><Link href="/works">Работы</Link><Link href="/solutions">Решения</Link><Link href="/process">Процесс</Link><Link href="/pricing">Стоимость</Link></div><span>Россия · Беларусь</span></footer>
  </main>
