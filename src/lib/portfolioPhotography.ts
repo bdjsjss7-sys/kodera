@@ -22,6 +22,6 @@ export function projectPhotos(category:string,slug:string):[string,string,string
  const original=originalCategoryArt[category]||originalCategoryArt.creative;
  const desktop=`/art/portfolio/${slug}-desktop.svg`;
  const mobile=`/art/portfolio/${slug}-mobile.svg`;
- return [original,desktop,mobile];
+ return [desktop,original,mobile];
 }
 export const portfolioPhotoCategories=Object.keys(originalCategoryArt);
