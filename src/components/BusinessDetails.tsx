@@ -15,7 +15,7 @@ export default function BusinessDetails({compact=false}:BusinessDetailsProps){
     <a href="https://t.me/kodera_pro" target="_blank" rel="noreferrer" className="mt-5 flex items-center justify-between gap-4 rounded-2xl border border-[#d5b58f]/35 bg-[#d5b58f]/[.07] p-4 text-[#f5f2ed] transition hover:border-[#d5b58f]/70 hover:bg-[#d5b58f]/[.12]"><span><span className="block text-sm font-medium">Написать в Telegram</span><span className="mt-1 block text-xs text-white/45">@kodera_pro</span></span><span aria-hidden="true" className="text-xl text-[#d5b58f]">↗</span></a>
     <div className="mt-3 flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/[.025] p-4 text-white/45" aria-label="Instagram появится позже"><span><span className="block text-sm text-white/65">Instagram</span><span className="mt-1 block text-xs">Аккаунт готовится</span></span><span className="rounded-full border border-white/10 px-2.5 py-1 text-[9px] tracking-[.16em] text-[#d5b58f]">СКОРО</span></div>
     <div className="mt-5 flex flex-col items-start gap-3">
-     {phones.map(phone=><a key={phone.href} href={phone.href} className="text-base font-light tracking-[.01em] text-white/80 transition hover:text-[#d5b58f]">{phone.label}</a>)}
+     {phones.map(phone=><a key={phone.href} href={phone.href} className="flex min-h-11 items-center text-base font-light tracking-[.01em] text-white/80 transition hover:text-[#d5b58f]">{phone.label}</a>)}
     </div>
     <p className="mt-5 text-xs leading-6 text-white/35">Быстрее всего отвечаем в Telegram. Также можно позвонить по удобному номеру.</p>
    </div>
@@ -29,6 +29,6 @@ export default function BusinessDetails({compact=false}:BusinessDetailsProps){
     </dl>
    </div>
   </div>
-  <nav aria-label="Правовая информация" className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[10px] leading-5 text-white/35"><Link href="/legal" className="transition hover:text-[#d5b58f]">Реквизиты</Link><Link href="/privacy" className="transition hover:text-[#d5b58f]">Персональные данные</Link><Link href="/consent" className="transition hover:text-[#d5b58f]">Согласие</Link><Link href="/cookies" className="transition hover:text-[#d5b58f]">Cookie</Link></nav>
+  <nav aria-label="Правовая информация" className="mt-4 flex flex-wrap items-center gap-x-4 text-[10px] leading-5 text-white/35 [&>a]:inline-flex [&>a]:min-h-11 [&>a]:items-center"><Link href="/legal" className="transition hover:text-[#d5b58f]">Реквизиты</Link><Link href="/privacy" className="transition hover:text-[#d5b58f]">Персональные данные</Link><Link href="/consent" className="transition hover:text-[#d5b58f]">Согласие</Link><Link href="/cookies" className="transition hover:text-[#d5b58f]">Cookie</Link></nav>
  </section>;
 }
