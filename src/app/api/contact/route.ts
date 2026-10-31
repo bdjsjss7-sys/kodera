@@ -2,6 +2,7 @@ import {NextRequest,NextResponse} from "next/server";
 export const runtime="nodejs";
 type Lead={name:string;contact:string;market:"ru"|"by";service:string;budget:string;message:string;source:string;consent:boolean;website:string};
 const clean=(v:unknown,max:number)=>typeof v==="string"?v.trim().slice(0,max):"";
+const escapeHtml=(value:string)=>value.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const buckets=new Map<string,{count:number;until:number}>();
 export async function POST(req:NextRequest){
  const json=(data:object,status:number)=>NextResponse.json(data,{status,headers:{"Cache-Control":"no-store"}});
@@ -22,23 +23,32 @@ export async function POST(req:NextRequest){
  const token=process.env.TELEGRAM_BOT_TOKEN;
  const chatId=process.env.TELEGRAM_CHAT_ID;
  if(!token||!chatId)return json({error:"Отправка пока не подключена. Попробуйте позже."},503);
+ const sourcePath=lead.source.startsWith("/")?lead.source:"/";
+ const siteUrl=(process.env.NEXT_PUBLIC_SITE_URL||"https://www.kodera.pro").replace(/\/$/,"");
+ const receivedAt=new Intl.DateTimeFormat("ru-RU",{timeZone:"Europe/Moscow",dateStyle:"short",timeStyle:"short"}).format(new Date());
  const text=[
-  "Новая заявка с KODERA",
+  "<b>Новая заявка — KODERA</b>",
+  `<i>${escapeHtml(receivedAt)} · Москва</i>`,
   "",
-  `Имя: ${lead.name}`,
-  `Контакт: ${lead.contact}`,
-  `Регион: ${lead.market==="by"?"Беларусь":"Россия"}`,
-  `Услуга: ${lead.service||"Не указана"}`,
-  `Бюджет: ${lead.budget||"Не указан"}`,
-  `Страница: ${lead.source||"/"}`,
+  `<b>Имя:</b> ${escapeHtml(lead.name)}`,
+  `<b>Контакт:</b> ${escapeHtml(lead.contact)}`,
+  `<b>Регион:</b> ${lead.market==="by"?"Беларусь":"Россия"}`,
+  `<b>Услуга:</b> ${escapeHtml(lead.service||"Не указана")}`,
+  `<b>Бюджет:</b> ${escapeHtml(lead.budget||"Не указан")}`,
+  `<b>Источник:</b> ${escapeHtml(sourcePath)}`,
   "",
-  "Описание:",
-  lead.message
+  "<b>Описание проекта:</b>",
+  escapeHtml(lead.message)
  ].join("\n");
+ const username=lead.contact.match(/^@([A-Za-z0-9_]{5,32})$/)?.[1];
+ const inline_keyboard=[
+  ...(username?[[{text:"Написать клиенту в Telegram",url:`https://t.me/${username}`}]]:[]),
+  [{text:"Открыть страницу-источник",url:`${siteUrl}${sourcePath}`}]
+ ];
  try{
   const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),8000);
   try{
-   const response=await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chatId,text,disable_web_page_preview:true}),signal:controller.signal,cache:"no-store"});
+   const response=await fetch(`https://api.telegram.org/bot${token}/sendMessage`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({chat_id:chatId,text,parse_mode:"HTML",disable_web_page_preview:true,reply_markup:{inline_keyboard}}),signal:controller.signal,cache:"no-store"});
    if(!response.ok)throw Error("Telegram delivery failed");
   }finally{clearTimeout(timeout);}
   return json({ok:true},200);
