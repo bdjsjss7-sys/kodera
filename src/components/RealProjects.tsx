@@ -1,18 +1,29 @@
+"use client";
 import Link from "next/link";
+import {useState} from "react";
 import {realProjects} from "@/lib/realProjects";
 
+const previewViews=[
+ {id:"desktop",label:"Главная",file:"desktop"},
+ {id:"services",label:"Услуги",file:"services"},
+ {id:"mobile",label:"Телефон",file:"mobile"}
+] as const;
+
 function ProjectPreview({slug,name}:{slug:string;name:string}){
+ const [active,setActive]=useState(0);
+ const view=previewViews[active];
+ const mobile=view.id==="mobile";
  return <div className="relative h-full min-h-[270px] overflow-hidden bg-[#101114] p-4 md:p-6">
-  <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(213,181,143,.18),transparent_44%)]"/>
-  <div className="relative h-full overflow-hidden rounded-[16px] border border-white/15 bg-[#17181c] shadow-2xl transition duration-700 group-hover:-translate-y-1 group-hover:rotate-[-.4deg]">
-   <div className="flex h-7 items-center gap-1.5 border-b border-white/10 bg-[#1f2024] px-3"><i className="h-1.5 w-1.5 rounded-full bg-white/25"/><i className="h-1.5 w-1.5 rounded-full bg-white/25"/><i className="h-1.5 w-1.5 rounded-full bg-[#d5b58f]"/><span className="ml-2 text-[7px] tracking-[.12em] text-white/30">{name} / LIVE WEBSITE</span></div>
-   <img src={`/projects/${slug}-desktop.webp`} alt={`Главная страница запущенного сайта ${name} на компьютере`} className="h-[calc(100%-1.75rem)] w-full object-cover object-top"/>
+  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_15%,rgba(213,181,143,.18),transparent_44%)]"/>
+  <div className={`relative mx-auto h-full overflow-hidden border border-white/15 bg-[#17181c] shadow-2xl transition-all duration-500 ${mobile?"max-w-[34%] rounded-[22px] border-[4px] border-[#292a2f]":"w-full rounded-[16px]"}`}>
+   {!mobile&&<div className="flex h-7 items-center gap-1.5 border-b border-white/10 bg-[#1f2024] px-3"><i className="h-1.5 w-1.5 rounded-full bg-white/25"/><i className="h-1.5 w-1.5 rounded-full bg-white/25"/><i className="h-1.5 w-1.5 rounded-full bg-[#d5b58f]"/><span className="ml-2 text-[7px] tracking-[.12em] text-white/30">{name} / {view.label.toUpperCase()}</span></div>}
+   {mobile&&<div className="absolute left-1/2 top-2 z-10 h-1.5 w-10 -translate-x-1/2 rounded-full bg-[#222]"/>}
+   <img key={view.id} src={`/projects/${slug}-${view.file}.webp`} alt={`${view.label}: обезличенный экран запущенного сайта ${name}`} className={`w-full animate-[fadeIn_.3s_ease] object-cover object-top ${mobile?"h-full":"h-[calc(100%-1.75rem)]"}`}/>
   </div>
-  <div className="absolute bottom-3 right-5 h-[58%] w-[24%] overflow-hidden rounded-[17px] border-[3px] border-[#28292e] bg-[#111] shadow-[0_18px_38px_#000b] transition duration-700 group-hover:-translate-y-2 group-hover:rotate-[1.5deg]">
-   <div className="absolute left-1/2 top-1 z-10 h-1.5 w-8 -translate-x-1/2 rounded-full bg-[#222]"/>
-   <img src={`/projects/${slug}-mobile.webp`} alt={`Мобильная версия сайта ${name}`} className="h-full w-full object-cover object-top"/>
+  <span className="pointer-events-none absolute bottom-4 left-5 rounded-full border border-emerald-300/30 bg-[#111]/85 px-3 py-2 text-[8px] tracking-[.14em] text-emerald-200 backdrop-blur">LIVE / 3 ЭКРАНА</span>
+  <div className="absolute bottom-3 right-4 z-30 flex items-center gap-1 rounded-full border border-white/15 bg-[#0d0e11]/90 p-1.5 shadow-xl backdrop-blur" role="tablist" aria-label={`Скриншоты проекта ${name}`}>
+   {previewViews.map((item,index)=><button key={item.id} type="button" role="tab" aria-selected={active===index} aria-label={`Показать: ${item.label}`} onClick={event=>{event.preventDefault();event.stopPropagation();setActive(index)}} className="flex h-9 min-w-9 touch-manipulation items-center justify-center rounded-full px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#d5b58f]"><span className={`block rounded-full transition-all duration-300 ${active===index?"h-2.5 w-7 bg-[#d5b58f]":"h-2.5 w-2.5 bg-white/35 hover:bg-white/70"}`}/></button>)}
   </div>
-  <span className="absolute bottom-4 left-5 rounded-full border border-emerald-300/30 bg-[#111]/85 px-3 py-2 text-[8px] tracking-[.14em] text-emerald-200 backdrop-blur">LIVE / DESKTOP + MOBILE</span>
  </div>
 }
 export default function RealProjects({compact=false}:{compact?:boolean}){
