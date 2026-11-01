@@ -147,7 +147,7 @@ const artworkComponent=readFileSync(join(root,"src/components/PortfolioArtwork.t
 const previewComponent=readFileSync(join(root,"src/components/ShowcasePreview.tsx"),"utf8");
 const photoBank=readFileSync(join(root,"src/lib/portfolioPhotography.ts"),"utf8");
 const explorerSource=readFileSync(join(root,"src/components/ShowcaseExplorer.tsx"),"utf8");
-if(!photoBank.includes("images.unsplash.com")||!photoBank.includes("featuredPhotos"))problems.push("Portfolio needs tailored photographic references.");
+if(!photoBank.includes("project-specific")||photoBank.includes("originalCategoryArt"))problems.push("Portfolio imagery must stay unique to each project slug.");
 if(!artworkComponent.includes("projectPhotos")||!explorerSource.includes("<PortfolioArtwork"))problems.push("Portfolio catalog still uses static repetitive artwork.");
 if(!previewComponent.includes("onMouseEnter={()=>setActive(i)}")||!previewComponent.includes("onClick={()=>setActive(i)}"))problems.push("Portfolio gallery thumbnails do not change selected scene on hover/click.");
 if(!previewComponent.includes("scene={active}")||!previewComponent.includes("scene={i}"))problems.push("Portfolio gallery missing three distinct linked screens.");
