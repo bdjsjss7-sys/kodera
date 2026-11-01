@@ -9,20 +9,13 @@ import s from './services.module.css';
 
 export const metadata:Metadata={
  title:'Услуги KODERA — сайты, UX/UI, SEO, веб-приложения и автоматизация',
- description:'Все направления KODERA: разработка сайтов, UX/UI-дизайн, SEO, веб-приложения, автоматизация, поддержка и развитие цифровых продуктов.',
+ description:'12 направлений KODERA: сайты, магазины, UX/UI, SEO, веб-приложения, кабинеты, интеграции, аналитика, автоматизация и поддержка.',
  alternates:{canonical:'/services'},
  openGraph:{title:'Услуги KODERA — цифровая система для бизнеса',description:'От структуры и дизайна до разработки, интеграций, SEO и развития.'}
 };
 
-const accents=['#d8b081','#9fbaa9','#8fa8cc','#bba2d5','#c98f76','#a8b28e'];
-const comparison=[
- ['Разработка сайтов','Нужен новый коммерческий сайт','Готовый адаптивный сайт','Структура, дизайн, разработка, запуск'],
- ['UX/UI-дизайн','Есть продукт или идея интерфейса','Прототипы и дизайн-система','Исследование, сценарии, макеты'],
- ['SEO и структура','Сайт не получает нужную видимость','Карта спроса и улучшенные страницы','Аудит, семантика, технические задачи'],
- ['Веб-приложения','Нужен личный кабинет или сервис','Работающий цифровой инструмент','Роли, логика, интерфейс, разработка'],
- ['Автоматизация','Данные теряются между системами','Связанный процесс без ручной рутины','CRM, API, уведомления, документация'],
- ['Поддержка и развитие','Сайт уже работает, но требует роста','Стабильный и развивающийся продукт','Аудит, исправления, новые функции']
-];
+const accents=['#d8b081','#9fbaa9','#8fa8cc','#bba2d5','#c98f76','#a8b28e','#d6a89f','#8eb6b5','#b7a6d8','#d3bd87','#86a6c6','#b4bd91'];
+const comparison=services.map(service=>[service.title,service.situations[0],service.outcomes[0],service.formats.slice(0,3).join(', ')]);
 const stages=[
  ['01','Диагностика','Разбираем задачу, аудиторию, ограничения и критерии результата.'],
  ['02','Архитектура','Формируем структуру страниц, сценарии и техническую основу.'],
@@ -57,9 +50,9 @@ export default function ServicesPage(){
   <section className={s.hero}>
    <div className={s.heroGrid}>
     <div className={s.heroCopy}><p className={s.eyebrow}>KODERA / SERVICES</p><h1>Одна команда.<br/><em>Вся цифровая система.</em></h1><p className={s.heroLead}>Соединяем стратегию, структуру, дизайн, разработку и развитие — чтобы каждый элемент продукта работал на общую задачу.</p><div className={s.heroActions}><Link href="/contact">Обсудить задачу ↗</Link><Link href="/pricing">Рассчитать проект</Link></div></div>
-    <div className={s.constellation} aria-label="Шесть направлений KODERA"><div className={s.orbitA}/><div className={s.orbitB}/><div className={s.core}><span>K</span><small>единая<br/>система</small></div>{services.map((service,index)=><Link key={service.slug} href={'/services/'+service.slug} className={s.node} style={{'--i':index,'--accent':accents[index]} as React.CSSProperties}><span>{service.number}</span><b>{service.title}</b></Link>)}</div>
+    <div className={s.constellation} aria-label="Двенадцать направлений KODERA"><div className={s.orbitA}/><div className={s.orbitB}/><div className={s.core}><span>K</span><small>единая<br/>система</small></div>{services.map((service,index)=><Link key={service.slug} href={'/services/'+service.slug} className={s.node} style={{'--i':index,'--accent':accents[index]} as React.CSSProperties}><span>{service.number}</span><b>{service.title}</b></Link>)}</div>
    </div>
-   <div className={s.heroFoot}><span>6 направлений</span><span>Россия · Беларусь</span><span>Desktop + Mobile</span><span>От идеи до развития</span></div>
+   <div className={s.heroFoot}><span>12 направлений</span><span>Россия · Беларусь</span><span>Desktop + Mobile</span><span>От идеи до развития</span></div>
   </section>
 
   <nav className={s.serviceIndex} aria-label="Направления услуг"><div>{services.map(service=><a href={'#'+service.slug} key={service.slug}><span>{service.number}</span>{service.title}</a>)}</div></nav>
@@ -67,7 +60,7 @@ export default function ServicesPage(){
   <section className={s.intro}><div><p className={s.eyebrow}>01 / НАПРАВЛЕНИЯ</p><h2>Выбирайте точку входа.<br/><em>Мы соберём целое.</em></h2></div><p>Проект может начаться с нового сайта, редизайна, SEO-аудита или одной интеграции. На диагностике мы определяем, какие направления нужны сейчас и что стоит предусмотреть на следующий этап.</p></section>
 
   <section className={s.services}>{services.map((service,index)=><article id={service.slug} className={s.service} key={service.slug} style={{'--accent':accents[index]} as React.CSSProperties}>
-   <div className={s.serviceTop}><span>{service.number} / 06</span><span>{index<3?'FOUNDATION':'SYSTEMS & GROWTH'}</span></div>
+   <div className={s.serviceTop}><span>{service.number} / 12</span><span>{index<6?'FOUNDATION':'SYSTEMS & GROWTH'}</span></div>
    <div className={s.serviceMain}><div><h2>{service.title}</h2><p>{service.intro}</p><Link href={'/services/'+service.slug}>Открыть направление ↗</Link></div><div className={s.deliverables}><small>В РЕЗУЛЬТАТЕ</small>{service.deliverables.map((item,i)=><div key={item}><span>{String(i+1).padStart(2,'0')}</span><b>{item}</b></div>)}</div></div>
    <div className={s.serviceFoot}><div>{service.formats.map(format=><span key={format}>{format}</span>)}</div><Link href={{pathname:'/contact',query:{service:service.title}}}>Обсудить {service.title.toLowerCase()} ↗</Link></div>
   </article>)}</section>
