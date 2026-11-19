@@ -46,7 +46,7 @@ export default function PricingPage(){
   <section className={s.hero}>
    <div className={s.heroCopy}>
     <p className={s.eyebrow}>KODERA / PROJECT ESTIMATE</p>
-    <h1>Цена следует<br/><em>за составом.</em></h1>
+    <h1>Рассчитайте стоимость<br/><em>вашего проекта.</em></h1>
     <p>Показываем не случайную цифру «от», а связь между форматом продукта, масштабом, функциями и уровнем проработки.</p>
     <div className={s.heroActions}><Link href="#project-calculator">Рассчитать проект ↓</Link><Link href="/process">Как строится работа ↗</Link></div>
    </div>
