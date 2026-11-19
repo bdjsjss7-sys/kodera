@@ -3527,4 +3527,4 @@ export const portfolioConcepts = [
     "visualVariant": 3,
     "conceptNumber": 84
   }
-];
+] as const;
