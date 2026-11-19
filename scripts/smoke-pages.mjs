@@ -11,7 +11,17 @@ if(unique.size!==urls.length)throw Error("Duplicate sitemap URLs: "+(urls.length
 let next=0;
 const issues=[];
 let passed=0;
-const examples=[];
+const references=new Set();
+const referring=new Map();
+function addReference(raw,source){
+ const value=raw.replaceAll("&amp;","&").trim();
+ if(!value||value.startsWith("#")||value.startsWith("mailto:")||value.startsWith("tel:")||value.startsWith("data:"))return;
+ let u;try{u=new URL(value,prod+source);}catch{return;}
+ if(u.origin!==prod||u.pathname.startsWith("/_next/")||u.pathname.startsWith("/api/"))return;
+ const target=u.pathname+u.search;
+ references.add(target);
+ if(!referring.has(target))referring.set(target,source);
+}
 async function check(){
  while(next<urls.length){
   const i=next++;
@@ -30,10 +40,25 @@ async function check(){
    const match=canonical.match(/href=["']([^"']+)/);
    if(!match||match[1]!==url){issues.push(path+" -> unexpected canonical "+(match?.[1]||"none"));continue;}
    if(html.includes("Application error: a server-side exception")){issues.push(path+" -> server exception");continue;}
+   for(const match of html.matchAll(/<(?:a|img)\b[^>]*(?:href|src)=["\x27]([^"\x27]+)["\x27][^>]*>/gi))addReference(match[1],path);
    passed++;
   }catch(e){issues.push(path+" -> "+(e instanceof Error?e.message:String(e)));}
  }
 }
 await Promise.all(Array.from({length:8},()=>check()));
 console.log("Sitemap route test: "+passed+"/"+urls.length+" OK");
+const extra=[...references].filter(x=>!unique.has(prod+x)&&x!=="/");
+let checked=0;let cursor=0;
+async function checkReference(){
+ while(cursor<extra.length){
+  const path=extra[cursor++];
+  try{
+   const res=await fetch(origin+path,{method:"HEAD",signal:AbortSignal.timeout(14000),redirect:"follow"});
+   if(!res.ok)issues.push("Broken local link from "+referring.get(path)+": "+path+" (HTTP "+res.status+")");
+   else checked++;
+  }catch(e){issues.push("Broken local link from "+referring.get(path)+": "+path+" ("+(e instanceof Error?e.message:String(e))+")");}
+ }
+}
+await Promise.all(Array.from({length:12},()=>checkReference()));
+console.log("Local link and image reference test: "+checked+"/"+extra.length+" OK");
 if(issues.length){console.error(issues.slice(0,70).join("\n"));process.exitCode=1;}
