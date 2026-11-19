@@ -727,4 +727,4 @@ export const newServicePages = [
     "category": "SEO и рост",
     "number": "56"
   }
-] as const;
+];
