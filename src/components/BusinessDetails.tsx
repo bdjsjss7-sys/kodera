@@ -3,8 +3,6 @@ type BusinessDetailsProps={compact?:boolean};
 
 const phones=[
  {href:"tel:+375295293644",label:"+375 29 529-36-44"},
- {href:"tel:+79196989493",label:"+7 919 698-94-93"},
- {href:"tel:+79868311588",label:"+7 986 831-15-88"},
 ] as const;
 
 export default function BusinessDetails({compact=false}:BusinessDetailsProps){
