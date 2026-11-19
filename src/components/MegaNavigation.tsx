@@ -4,11 +4,12 @@ import Link from "next/link";
 type Group="services"|"knowledge"|"studio";
 const groups:{id:Group;name:string;eyebrow:string;description:string;links:{label:string;href:string;detail:string}[]}[]=[
  {id:"services",name:"Услуги",eyebrow:"01 / РЕШЕНИЯ",description:"Все форматы сайтов, отраслевые предложения и сложные цифровые продукты — по понятным направлениям.",links:[
- {label:"Все услуги",href:"/services",detail:"6 основных направлений KODERA"},
+ {label:"Все услуги",href:"/services",detail:"Разработка, SEO, реклама и поддержка"},
  {label:"Виды сайтов",href:"/website-types",detail:"Лендинги, каталоги, магазины, порталы"},
  {label:"По отраслям",href:"/industries",detail:"20 направлений бизнеса"},
  {label:"Технологии",href:"/technologies",detail:"Next.js, React, SaaS, CRM"},
  {label:"SEO и развитие",href:"/seo",detail:"Поисковая архитектура и аналитика"},
+ {label:"Реклама и performance",href:"/advertising",detail:"Кампании, аналитика и сопровождение"},
  {label:"Все решения",href:"/solutions",detail:"Большой каталог экспертизы"},
  {label:"Рассчитать проект",href:"/pricing#project-calculator",detail:"Интерактивный калькулятор"}]},
  {id:"knowledge",name:"Экспертиза",eyebrow:"02 / ВДОХНОВЕНИЕ",description:"Посмотрите варианты дизайна, выберите подход и изучите конкретные сценарии.",links:[

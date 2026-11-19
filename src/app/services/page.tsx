@@ -8,13 +8,13 @@ import {services} from '@/lib/services';
 import s from './services.module.css';
 
 export const metadata:Metadata={
- title:'Услуги KODERA — сайты, UX/UI, SEO, веб-приложения и автоматизация',
- description:'12 направлений KODERA: сайты, магазины, UX/UI, SEO, веб-приложения, кабинеты, интеграции, аналитика, автоматизация и поддержка.',
+ title:'Услуги KODERA — сайты, UX/UI, SEO, реклама и автоматизация',
+ description:'Направления KODERA: сайты, магазины, UX/UI, SEO, веб-приложения, кабинеты, интеграции, аналитика, автоматизация и поддержка.',
  alternates:{canonical:'/services'},
  openGraph:{title:'Услуги KODERA — цифровая система для бизнеса',description:'От структуры и дизайна до разработки, интеграций, SEO и развития.'}
 };
 
-const accents=['#d8b081','#9fbaa9','#8fa8cc','#bba2d5','#c98f76','#a8b28e','#d6a89f','#8eb6b5','#b7a6d8','#d3bd87','#86a6c6','#b4bd91'];
+const accents=['#d8b081','#9fbaa9','#8fa8cc','#bba2d5','#c98f76','#a8b28e','#d6a89f','#8eb6b5','#b7a6d8','#d3bd87','#86a6c6','#b4bd91','#c3a6a4'];
 const comparison=services.map(service=>[service.title,service.situations[0],service.outcomes[0],service.formats.slice(0,3).join(', ')]);
 const stages=[
  ['01','Диагностика','Разбираем задачу, аудиторию, ограничения и критерии результата.'],

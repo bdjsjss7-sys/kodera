@@ -1,4 +1,5 @@
 import {services} from "@/lib/services";
+import {advertisingOffers} from "@/lib/advertising";
 import {solutions} from "@/lib/solutions";
 import {newServicePages} from "@/lib/newServicePages";
 import {expandedArticles} from "@/lib/expandedArticles";
@@ -7,6 +8,8 @@ export type SearchEntry={title:string;description:string;category:string;href:st
 export const siteEntries:SearchEntry[]=[
  {title:"О студии KODERA",description:"Подход, принципы, технологии и контроль качества",category:"О студии",href:"/studio",keywords:"студия команда подход принципы технологии качество о нас"},
  {title:"Все услуги KODERA",description:"Разработка сайтов, UX/UI, SEO, веб-приложения, автоматизация и поддержка",category:"Услуги",href:"/services",keywords:"услуги разработка дизайн seo приложение автоматизация поддержка"},
+ {title:"Реклама и performance-маркетинг",description:"Яндекс Директ, Google Ads и Meta Ads там, где доступны, аудит рекламы, аналитика и сопровождение",category:"Реклама",href:"/advertising",keywords:"реклама директ google ads meta ads таргетированная контекстная performance ведение аудит аналитика"},
+ ...advertisingOffers.map(a=>({title:a.title,description:a.subtitle,category:"Реклама",href:"/advertising/"+a.slug,keywords:a.who+" "+a.steps.join(" ")})),
  {title:"Калькулятор стоимости",description:"Оценить состав проекта и условную трудоёмкость",category:"Инструменты",href:"/pricing#project-calculator",keywords:"цена стоимость рассчитать бюджет калькулятор смета"},
  {title:"Подобрать тип сайта",description:"Интерактивный подбор решения по задаче",category:"Инструменты",href:"/#selector",keywords:"подбор какой сайт выбрать тип нужен"},
  {title:"Работы и примеры интерфейсов",description:"90 демонстрационных концептов, включая семь подробно проработанных работ",category:"Примеры",href:"/works",keywords:"работы кейсы портфолио примеры проекты дизайн"},

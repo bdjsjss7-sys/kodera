@@ -15,5 +15,5 @@ export const metadata:Metadata={
  formatDetection:{telephone:false,email:false,address:false}
 };
 export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#0d0e11"};
-const organization={"@context":"https://schema.org","@type":"ProfessionalService","@id":`${baseUrl}/#organization`,name:"KODERA",legalName:"ИП Петревич Диана Олеговна",url:baseUrl,taxID:"591963341",areaServed:[{"@type":"Country",name:"Беларусь"},{"@type":"Country",name:"Россия"}],telephone:["+375295293644","+79196989493","+79868311588"],knowsAbout:["Разработка сайтов","UX/UI-дизайн","SEO","Веб-сервисы"]};
+const organization={"@context":"https://schema.org","@type":"ProfessionalService","@id":`${baseUrl}/#organization`,name:"KODERA",legalName:"ИП Петревич Диана Олеговна",url:baseUrl,taxID:"591963341",areaServed:[{"@type":"Country",name:"Беларусь"},{"@type":"Country",name:"Россия"}],telephone:["+375295293644","+79196989493","+79868311588"],knowsAbout:["Разработка сайтов","UX/UI-дизайн","SEO","Веб-сервисы","Контекстная реклама","Рекламная аналитика"]};
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="ru"><body><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(organization)}}/>{children}<SiteSearchOverlay items={siteEntries}/><MobileSiteDock/></body></html>;}
