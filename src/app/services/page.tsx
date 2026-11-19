@@ -52,7 +52,7 @@ export default function ServicesPage(){
     <div className={s.heroCopy}><p className={s.eyebrow}>KODERA / SERVICES</p><h1>Одна команда.<br/><em>Вся цифровая система.</em></h1><p className={s.heroLead}>Соединяем стратегию, структуру, дизайн, разработку и развитие — чтобы каждый элемент продукта работал на общую задачу.</p><div className={s.heroActions}><Link href="/contact">Обсудить задачу ↗</Link><Link href="/pricing">Рассчитать проект</Link></div></div>
     <div className={s.constellation} aria-label="Двенадцать направлений KODERA"><div className={s.orbitA}/><div className={s.orbitB}/><div className={s.core}><span>K</span><small>единая<br/>система</small></div>{services.map((service,index)=><Link key={service.slug} href={'/services/'+service.slug} className={s.node} style={{'--i':index,'--accent':accents[index]} as React.CSSProperties}><span>{service.number}</span><b>{service.title}</b></Link>)}</div>
    </div>
-   <div className={s.heroFoot}><span>12 направлений</span><span>Россия · Беларусь</span><span>Desktop + Mobile</span><span>От идеи до развития</span></div>
+   <div className={s.heroFoot}><span>{services.length} направлений</span><span>Россия · Беларусь</span><span>Desktop + Mobile</span><span>От идеи до развития</span></div>
   </section>
 
   <nav className={s.serviceIndex} aria-label="Направления услуг"><div>{services.map(service=><a href={'#'+service.slug} key={service.slug}><span>{service.number}</span>{service.title}</a>)}</div></nav>
