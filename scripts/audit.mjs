@@ -141,6 +141,7 @@ for(const item of extendedConcepts){
   const filename="public/art/portfolio/"+item.slug+"-"+device+".svg";
   if(!existsSync(join(root,filename)))problems.push("Missing portfolio screenshot: "+filename);
  }
+ if(!existsSync(join(root,"public/art/concepts/"+item.slug+".svg")))problems.push("Missing individual concept artwork: "+item.slug);
  if(!item.problem||!item.idea||!item.short||!item.features?.length)problems.push("Incomplete portfolio presentation: "+item.slug);
 }
 const artworkComponent=readFileSync(join(root,"src/components/PortfolioArtwork.tsx"),"utf8");
