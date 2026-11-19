@@ -13,7 +13,7 @@ const groups:{id:Group;name:string;eyebrow:string;description:string;links:{labe
  {label:"Все решения",href:"/solutions",detail:"Большой каталог экспертизы"},
  {label:"Рассчитать проект",href:"/pricing#project-calculator",detail:"Интерактивный калькулятор"}]},
  {id:"knowledge",name:"Экспертиза",eyebrow:"02 / ВДОХНОВЕНИЕ",description:"Посмотрите варианты дизайна, выберите подход и изучите конкретные сценарии.",links:[
- {label:"Примеры работ",href:"/works",detail:"80+ концептов от простых до флагманских"},
+ {label:"Примеры работ",href:"/works",detail:"90 демонстрационных дизайн-концептов"},
  {label:"Журнал",href:"/blog",detail:"45 экспертных материалов"},
  {label:"Подобрать формат сайта",href:"/#selector",detail:"Интерактивный помощник"},
  {label:"Как мы работаем",href:"/process",detail:"Структура этапов разработки"},
