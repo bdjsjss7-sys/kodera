@@ -62,10 +62,10 @@ for(const a of newArticles){
  seenNewArticles.add(a.slug);
  const art="public/art/blog/"+a.slug+".svg";
  if(!existsSync(join(root,art)))problems.push("Missing new article cover: "+art);
- if(a.sections.length<6)problems.push("New article missing chapter depth: "+a.slug);
+ if(a.sections.length<8)problems.push("New article missing chapter depth: "+a.slug);
  if(!newFieldNotes[a.slug]?.length)problems.push("Missing unique article case study: "+a.slug);
  const words=countWords([a.title,...a.sections.flatMap(s=>[s.heading,...s.paragraphs]),...(newFieldNotes[a.slug]||[]).flatMap(s=>[s.heading,...s.paragraphs])].join(" "));
- if(words<300)problems.push("New article insufficient: "+a.slug+" / "+words+" words");
+ if(words<450)problems.push("New article insufficient: "+a.slug+" / "+words+" words");
 }
 for(const s of solutions)if(!existsSync(join(root,"public/art/legacy/solutions/"+s.slug+".svg")))problems.push("Missing original solution artwork: "+s.slug);
 for(const a of articles)if(!existsSync(join(root,"public/art/legacy/blog/"+a.slug+".svg")))problems.push("Missing original blog artwork: "+a.slug);
@@ -144,6 +144,27 @@ for(const item of extendedConcepts){
  if(!existsSync(join(root,"public/art/concepts/"+item.slug+".svg")))problems.push("Missing individual concept artwork: "+item.slug);
  if(!item.problem||!item.idea||!item.short||!item.features?.length)problems.push("Incomplete portfolio presentation: "+item.slug);
 }
+const portfolioProblems=new Set();const portfolioIdeas=new Set();const illustrationFingerprints=new Set();
+for(const item of extendedConcepts){
+ if(portfolioProblems.has(item.problem))problems.push("Repeated concept problem statement: "+item.slug);
+ if(portfolioIdeas.has(item.idea))problems.push("Repeated concept visual narrative: "+item.slug);
+ portfolioProblems.add(item.problem);portfolioIdeas.add(item.idea);
+ const pathname="public/art/concepts/"+item.slug+".svg";
+ if(!existsSync(join(root,pathname)))continue;
+ const svg=readFileSync(join(root,pathname),"utf8");
+ if(!svg.startsWith("<svg ")||!svg.includes("</svg>"))problems.push("Invalid individual concept illustration: "+item.slug);
+ if(svg.includes("${")||svg.includes("undefined")||svg.includes("null"))problems.push("Unexpanded illustration placeholder: "+item.slug);
+ if(!svg.includes(item.name))problems.push("Wrong concept illustration identity: "+item.slug);
+ if(illustrationFingerprints.has(svg))problems.push("Duplicate concept artwork: "+item.slug);
+ illustrationFingerprints.add(svg);
+}
+const publicPortfolio=readFileSync(join(root,"src/app/works/page.tsx"),"utf8");
+if(publicPortfolio.includes("RealProjects")||publicPortfolio.includes("realProjects"))problems.push("Removed client cases still rendered in portfolio.");
+const publicHomepage=readFileSync(join(root,"src/app/page.tsx"),"utf8");
+if(publicHomepage.includes("<RealProjects"))problems.push("Removed client cases still rendered on homepage.");
+const publishingMap=readFileSync(join(root,"src/app/sitemap.ts"),"utf8");
+if(publishingMap.includes("realProjects.map"))problems.push("Removed client cases still indexed.");
+
 const artworkComponent=readFileSync(join(root,"src/components/PortfolioArtwork.tsx"),"utf8");
 const previewComponent=readFileSync(join(root,"src/components/ShowcasePreview.tsx"),"utf8");
 const photoBank=readFileSync(join(root,"src/lib/portfolioPhotography.ts"),"utf8");
