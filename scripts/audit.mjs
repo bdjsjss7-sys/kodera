@@ -4,7 +4,7 @@ const root=process.cwd();
 const problems=[];
 function loadTsArray(rel,name){
  const src=readFileSync(join(root,rel),"utf8");
- const match=src.match(new RegExp("export const "+name+" = (\\[[\\s\\S]*?\\]) as const;"));
+ const match=src.match(new RegExp("export const "+name+" = (\\[[\\s\\S]*?\\])\\s*(?:as const)?;"));
  if(!match)throw Error("Could not parse "+name+" in "+rel);
  return JSON.parse(match[1]);
 }
